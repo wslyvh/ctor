@@ -6,9 +6,9 @@ class ContractSummary extends Component {
         return (
 
             <div>
-                <h2>ENS-Registry</h2>
-                <h3 className="text-muted">0x314159265dd8dbb310642f98f50c066173c1259b 
-                    <small><a href="https://etherscan.io/address/0x314159265dd8dbb310642f98f50c066173c1259b" className="text-secondary" target="_blank"><FaExternalLinkSquareAlt /></a></small>
+                <h2>The DAO</h2>
+                <h3 className="text-muted">0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413 
+                    <small><a href="https://etherscan.io/address/0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413" className="text-secondary" target="_blank"><FaExternalLinkSquareAlt /></a></small>
                 </h3>
             </div>
         );
