@@ -54,7 +54,10 @@ class ContractDefinition extends Component {
                     <h4>Events</h4>
                     <div className="alert alert-warning" role="alert">
                         <span className="badge badge-warning">event</span> &nbsp;
-                        <strong>AllowedRecipientChanged</strong> <small>_recipient (address), _allowed (bool)</small>
+                        <strong>AllowedRecipientChanged</strong> <small>_recipient (address), _allowed (bool)</small> &nbsp;
+                        <span className="badge badge-light float-right">
+                            <a href="#" className="text-muted">subscribe</a>
+                        </span>
                     </div>
                 </div>
                 <div hidden>
