@@ -14,7 +14,7 @@ class Header extends Component {
                         <div className="col">
                             <div className="float-right">
                                 <div className="searchBox form-inline">
-                                    <input type="text" className="form-control search" id="search" placeholder="Search for a contract address..." aria-label="Address" aria-describedBy="button-search" required />
+                                    <input type="text" className="form-control search" id="search" placeholder="Search for a contract address..." aria-label="Address" aria-describedby="button-search" required />
 
                                     <div className="icon-wrap">
                                         <svg version="1.1" xmlBase="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
