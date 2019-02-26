@@ -8,6 +8,7 @@ interface IContractFunctionProps {
 const ContractFunction: React.SFC<IContractFunctionProps> = (props) => {
     let classType = "alert alert-primary";
     let badgeType = "badge badge-primary";
+    
     switch (props.type) {
         case "function":
             classType = "alert alert-success";

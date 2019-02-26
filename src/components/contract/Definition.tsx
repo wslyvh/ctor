@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import ContractFunction from "./Function";
 
-class ContractDefinition extends Component {
+interface IContractRouterProps {
+    contractAddress: string;
+}
+
+class ContractDefinition extends Component<IContractRouterProps> {
 
     private apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY;
-    private contractAddress = "0xbb9bc244d798123fde783fcc1c72d3bb8c189413";
 
     public state = {
         address: "",
@@ -18,6 +21,7 @@ class ContractDefinition extends Component {
     };
 
     public async componentDidMount() {
+
         var result = await this.getContractFromEtherscan();
         var abi = JSON.parse(result.ABI);
 
@@ -48,7 +52,7 @@ class ContractDefinition extends Component {
         }
 
         this.setState({
-            address: this.contractAddress,
+            address: this.props.contractAddress,
             name: result.ContractName,
             abi: abi,
             constructor: ctor,
@@ -61,7 +65,7 @@ class ContractDefinition extends Component {
 
     public getContractFromEtherscan = async () => {
 
-        const response = await fetch("https://api.etherscan.io/api?module=contract&action=getsourcecode&address=" + this.contractAddress + "&apikey=" + this.apiKey)
+        const response = await fetch("https://api.etherscan.io/api?module=contract&action=getsourcecode&address=" + this.props.contractAddress + "&apikey=" + this.apiKey)
         const body = await response.json();
 
         if (response.status !== 200) {
