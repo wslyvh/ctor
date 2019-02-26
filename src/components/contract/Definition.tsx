@@ -1,18 +1,83 @@
 import React, { Component } from "react";
-import daoContract from "../../data/contract.json";
+import ContractFunction from "./Function";
 
 class ContractDefinition extends Component {
 
-    private contract = {};
+    private apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY;
+    private contractAddress = "0xbb9bc244d798123fde783fcc1c72d3bb8c189413";
+
+    public state = {
+        address: "",
+        name: "",
+        abi: {},
+        constructor: {},
+        constants: [],
+        functions: [],
+        events: [],
+        contractRaw: {},
+    };
+
+    public async componentDidMount() {
+        var result = await this.getContractFromEtherscan();
+        var abi = JSON.parse(result.ABI);
+
+        var ctor = {};
+        var constants = [];
+        var functions = [];
+        var events = [];
+
+        for (let i = 0; i < abi.length; i++) {
+            const element = abi[i];
+
+            if (element.type === "constructor") {
+                ctor = element;
+            }
+
+            if (element.type === "event") {
+                events.push(element);
+            }
+
+            if (element.type === "function") {
+
+                if (element.constant) {
+                    constants.push(element);
+                } else {
+                    functions.push(element)
+                }
+            }
+        }
+
+        this.setState({
+            address: this.contractAddress,
+            name: result.ContractName,
+            abi: abi,
+            constructor: ctor,
+            constants: constants,
+            functions: functions,
+            events: events,
+            contractRaw: result,
+        });
+    }
+
+    public getContractFromEtherscan = async () => {
+
+        const response = await fetch("https://api.etherscan.io/api?module=contract&action=getsourcecode&address=" + this.contractAddress + "&apikey=" + this.apiKey)
+        const body = await response.json();
+
+        if (response.status !== 200) {
+            console.log(response);
+            throw Error(body.message);
+        }
+
+        return body.result[0];
+    }
 
     public render() {
-        var abi = JSON.parse(daoContract.result[0].ABI);
-        console.log(abi);
 
         return (
 
             <div className="panel">
-                <h3>{daoContract.result[0].ContractName}</h3>
+                <h3>{this.state.name}</h3>
 
                 <div className="alert alert-secondary" role="alert">
                     <span hidden className="badge badge-primary">constructor</span> &nbsp;
@@ -24,44 +89,19 @@ class ContractDefinition extends Component {
 
                 <div>
                     <h4>Constants</h4>
-                    <div className="alert alert-primary" role="alert">
-                        <span className="badge badge-primary">constant</span> &nbsp;
-                        <strong>rewardAccount</strong> <small>(address)</small>
-                    </div>
-                    <div className="alert alert-primary" role="alert">
-                        <span className="badge badge-primary">constant</span> &nbsp;
-                        <strong>minTokensToCreate</strong> <small>(uint256)</small>
-                    </div>
-                    <div className="alert alert-primary" role="alert">
-                        <span className="badge badge-primary">constant</span> &nbsp;
-                        <strong>proposals</strong> <small>(uint256)</small>
-                    </div>
-                    <div className="alert alert-primary" role="alert">
-                        <span className="badge badge-primary">constant</span> &nbsp;
-                        <strong>checkProposalCode</strong> <small>_proposalID (uint256), _recipient (address), _amount (uint256), _transactionData (bytes)</small>
-                    </div>
+                    {this.state.constants.map(function (constant: any, index: any) {
+                        return <ContractFunction key={index} functionObject={constant} type="constant" />
+                    })}
 
                     <h4>Functions</h4>
-                    <div className="alert alert-success" role="alert">
-                        <span className="badge badge-success">function</span> &nbsp;
-                        <strong>transfer</strong> <small>_to, (address), _value (uint256)</small>
-                    </div>
-                    <div className="alert alert-success" role="alert">
-                        <span className="badge badge-success">function</span> &nbsp;
-                        <strong>newProposal</strong> <small>_recipient (address), _amount (uint256), _description (string), _transactionData (bytes), _debatingPeriod (uint256), _newCurator (bool)</small>
-                    </div>
+                    {this.state.functions.map(function (func: any, index: any) {
+                        return <ContractFunction key={index} functionObject={func} type="function" />
+                    })}
 
                     <h4>Events</h4>
-                    <div className="alert alert-warning" role="alert">
-                        <span className="badge badge-warning">event</span> &nbsp;
-                        <strong>AllowedRecipientChanged</strong> <small>_recipient (address), _allowed (bool)</small> &nbsp;
-                        <span className="badge badge-light float-right">
-                            <a href="#" className="text-muted">subscribe</a>
-                        </span>
-                    </div>
-                </div>
-                <div hidden>
-                    {daoContract.result[0].ABI}
+                    {this.state.events.map(function (event: any, index: any) {
+                        return <ContractFunction key={index} functionObject={event} type="event" />
+                    })}
                 </div>
             </div>
         );
