@@ -8,7 +8,7 @@ interface IContractFunctionProps {
 const ContractFunction: React.SFC<IContractFunctionProps> = (props) => {
     let classType = "alert alert-primary";
     let badgeType = "badge badge-primary";
-    
+
     switch (props.type) {
         case "function":
             classType = "alert alert-success";
@@ -29,13 +29,13 @@ const ContractFunction: React.SFC<IContractFunctionProps> = (props) => {
             <span className={badgeType}>{props.type}</span> &nbsp;
             <strong>{props.functionObject.name}</strong> &nbsp;
 
-            {props.functionObject.inputs.map(function (input: any, index: any) {
+            {props.functionObject.inputs.map((input: any, index: any) => {
                 return (
                     <small key={index}>{input.name} ({input.type}) &nbsp;</small>
-                )
+                );
             })}
         </div>
     );
-}
+};
 
 export default ContractFunction;

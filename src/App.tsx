@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Redirect, Route, Switch } from "react-router";
 import Contract from "./layouts/Contract";
 import Default from "./layouts/Default";
 
 class App extends Component {
-  
+
   public render() {
     return (
       <Switch>

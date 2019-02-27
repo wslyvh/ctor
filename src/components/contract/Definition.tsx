@@ -1,16 +1,14 @@
 import React, { Component } from "react";
-import ContractFunction from "./Function";
 import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { EtherscanClient } from "../../data/Etherscan/EtherscanClient";
 import { IEtherscanClient } from "../../data/Etherscan/IEtherscanClient";
+import ContractFunction from "./Function";
 
 interface IContractRouterProps {
     contractAddress: string;
 }
 
 class ContractDefinition extends Component<IContractRouterProps> {
-
-    private client: IEtherscanClient = new EtherscanClient();
 
     public state = {
         address: "",
@@ -23,22 +21,25 @@ class ContractDefinition extends Component<IContractRouterProps> {
         contractRaw: {},
     };
 
+    private client: IEtherscanClient = new EtherscanClient();
+
     public async componentDidMount() {
 
-        var result = await this.client.getContractSourceCode(this.props.contractAddress); 
+        const result = await this.client.getContractSourceCode(this.props.contractAddress);
+        console.log("Result..");
+        console.log(result);
+        
         if (result.ABI === "Contract source code not verified") {
             return;
         }
 
-        var abi = JSON.parse(result.ABI);
-        var ctor = {};
-        var constants = [];
-        var functions = [];
-        var events = [];
+        const abi = JSON.parse(result.ABI);
+        let ctor = {};
+        const constants = [];
+        const functions = [];
+        const events = [];
 
-        for (let i = 0; i < abi.length; i++) {
-            const element = abi[i];
-
+        for (const element of abi) {
             if (element.type === "constructor") {
                 ctor = element;
             }
@@ -52,7 +53,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
                 if (element.constant) {
                     constants.push(element);
                 } else {
-                    functions.push(element)
+                    functions.push(element);
                 }
             }
         }
@@ -60,11 +61,11 @@ class ContractDefinition extends Component<IContractRouterProps> {
         this.setState({
             address: this.props.contractAddress,
             name: result.ContractName,
-            abi: abi,
+            abi,
             constructor: ctor,
-            constants: constants,
-            functions: functions,
-            events: events,
+            constants,
+            functions,
+            events,
             contractRaw: result,
         });
     }
@@ -94,18 +95,18 @@ class ContractDefinition extends Component<IContractRouterProps> {
 
                     <div>
                         <h4>Constants</h4>
-                        {this.state.constants.map(function (constant: any, index: any) {
-                            return <ContractFunction key={index} functionObject={constant} type="constant" />
+                        {this.state.constants.map((constant: any, index: any) => {
+                            return <ContractFunction key={index} functionObject={constant} type="constant" />;
                         })}
 
                         <h4>Functions</h4>
-                        {this.state.functions.map(function (func: any, index: any) {
-                            return <ContractFunction key={index} functionObject={func} type="function" />
+                        {this.state.functions.map((func: any, index: any) => {
+                            return <ContractFunction key={index} functionObject={func} type="function" />;
                         })}
 
                         <h4>Events</h4>
-                        {this.state.events.map(function (event: any, index: any) {
-                            return <ContractFunction key={index} functionObject={event} type="event" />
+                        {this.state.events.map((event: any, index: any) => {
+                            return <ContractFunction key={index} functionObject={event} type="event" />;
                         })}
                     </div>
                 </div>

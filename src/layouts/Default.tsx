@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { RouteComponentProps } from "react-router";
-import '../styles/main.scss';
+import "../styles/main.scss";
 
 interface IState {
     searchValue: string;
@@ -14,7 +14,7 @@ class Home extends Component<RouteComponentProps, IState> {
         super(props);
 
         this.state = {
-            searchValue: ""
+            searchValue: "",
         };
 
         this.recentItems = this.getRecentItems();
@@ -30,8 +30,8 @@ class Home extends Component<RouteComponentProps, IState> {
                             <div className="input-field">
                                 <input id="search" type="text"
                                     value={this.state.searchValue}
-                                    onChange={event => { this.setState({ searchValue: event.target.value }) }}
-                                    onKeyPress={event => {
+                                    onChange={(event) => { this.setState({ searchValue: event.target.value }); }}
+                                    onKeyPress={(event) => {
                                         if (event.key === "Enter") {
                                             this.search();
                                         }
@@ -61,10 +61,10 @@ class Home extends Component<RouteComponentProps, IState> {
                             <div className="row">
                                 <ul className="results">
 
-                                    {this.recentItems.map(function (address: any, index: any) {
+                                    {this.recentItems.map((address: any, index: any) => {
                                         return <li key={index}>
                                             <a href="/contract/">{address}</a>
-                                        </li>
+                                        </li>;
                                     })}
                                 </ul>
                             </div>
@@ -76,16 +76,16 @@ class Home extends Component<RouteComponentProps, IState> {
     }
 
     public getRecentItems() {
-        var recent = localStorage.getItem("recent");
+        const recent = localStorage.getItem("recent");
         if (recent) {
             return JSON.parse(recent);
         }
-        
+
         return [];
     }
 
     public search() {
-        var recent = localStorage.getItem("recent");
+        const recent = localStorage.getItem("recent");
         let recentItems = [];
 
         if (recent) {

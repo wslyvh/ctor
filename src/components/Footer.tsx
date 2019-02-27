@@ -11,7 +11,7 @@ class Footer extends Component {
                         A blockchain development toolkit.
                     </small>
                     <p>
-                        <small className="text-muted"><FaGithub />&nbsp; <FaTwitter />&nbsp; @wslyvh</small> 
+                        <small className="text-muted"><FaGithub />&nbsp; <FaTwitter />&nbsp; @wslyvh</small>
                     </p>
                 </div>
             </footer>
