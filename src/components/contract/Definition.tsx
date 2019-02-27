@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ContractFunction from "./Function";
 import { FaExternalLinkSquareAlt } from "react-icons/fa";
+import { EtherscanClient } from "../../data/Etherscan/EtherscanClient";
+import { IEtherscanClient } from "../../data/Etherscan/IEtherscanClient";
 
 interface IContractRouterProps {
     contractAddress: string;
@@ -8,7 +10,7 @@ interface IContractRouterProps {
 
 class ContractDefinition extends Component<IContractRouterProps> {
 
-    private apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY;
+    private client: IEtherscanClient = new EtherscanClient();
 
     public state = {
         address: "",
@@ -23,7 +25,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
 
     public async componentDidMount() {
 
-        var result = await this.getContractFromEtherscan();
+        var result = await this.client.getContractSourceCode(this.props.contractAddress); 
         if (result.ABI === "Contract source code not verified") {
             return;
         }
@@ -67,19 +69,6 @@ class ContractDefinition extends Component<IContractRouterProps> {
         });
     }
 
-    public getContractFromEtherscan = async () => {
-
-        const response = await fetch("https://api.etherscan.io/api?module=contract&action=getsourcecode&address=" + this.props.contractAddress + "&apikey=" + this.apiKey)
-        const body = await response.json();
-
-        if (response.status !== 200) {
-            console.log(response);
-            throw Error(body.message);
-        }
-
-        return body.result[0];
-    }
-
     public render() {
 
         return (
@@ -88,7 +77,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
                 <div className="contract-summary">
                     <h2>{this.state.name}</h2>
                     <h3>{this.state.address}
-                    <small><a href={"https://etherscan.io/address/" + this.state.address} className="text-secondary" target="_blank"><FaExternalLinkSquareAlt /></a></small>
+                        <small><a href={"https://etherscan.io/address/" + this.state.address} className="text-secondary" target="_blank"><FaExternalLinkSquareAlt /></a></small>
                     </h3>
                 </div>
 
