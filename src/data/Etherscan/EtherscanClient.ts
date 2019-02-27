@@ -25,12 +25,11 @@ export class EtherscanClient implements IEtherscanClient {
         if (response.status !== 200) {
             console.log(response);
             throw Error(body.message);
-        }
-        else if (body.status === "0") {
+        } else if (body.status === "0") {
             console.log(body.message);
             return null;
         }
-        
+
         return body.result[0];
     }
 }

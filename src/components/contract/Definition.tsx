@@ -28,7 +28,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
         const result = await this.client.getContractSourceCode(this.props.contractAddress);
         console.log("Result..");
         console.log(result);
-        
+
         if (result.ABI === "Contract source code not verified") {
             return;
         }
