@@ -8,12 +8,16 @@ interface IState {
 
 class Home extends Component<RouteComponentProps, IState> {
 
+    private recentItems = [];
+
     constructor(props: any) {
         super(props);
 
         this.state = {
             searchValue: ""
         };
+
+        this.recentItems = this.getRecentItems();
     }
 
     public render() {
@@ -29,7 +33,7 @@ class Home extends Component<RouteComponentProps, IState> {
                                     onChange={event => { this.setState({ searchValue: event.target.value }) }}
                                     onKeyPress={event => {
                                         if (event.key === "Enter") {
-                                            this.props.history.push("/contract/" + this.state.searchValue);
+                                            this.search();
                                         }
                                     }}
                                     placeholder="Search for a contract address..." />
@@ -53,11 +57,46 @@ class Home extends Component<RouteComponentProps, IState> {
                                     <li><a href="/contract/0x2a0c0dbecc7e4d658f48e01e3fa353f44050c208">0x2a0c0dbecc7e4d658f48e01e3fa353f44050c208</a> <small>Idex Exchange</small></li>
                                 </ul>
                             </div>
+
+                            <div className="row">
+                                <ul className="results">
+
+                                    {this.recentItems.map(function (address: any, index: any) {
+                                        return <li key={index}>
+                                            <a href="/contract/">{address}</a>
+                                        </li>
+                                    })}
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div >
         );
+    }
+
+    public getRecentItems() {
+        var recent = localStorage.getItem("recent");
+        if (recent) {
+            return JSON.parse(recent);
+        }
+        
+        return [];
+    }
+
+    public search() {
+        var recent = localStorage.getItem("recent");
+        let recentItems = [];
+
+        if (recent) {
+            recentItems = JSON.parse(recent);
+        }
+
+        recentItems.push(this.state.searchValue);
+        localStorage.setItem("recent", JSON.stringify(recentItems));
+
+        this.props.history.push("/contract/" + this.state.searchValue);
+        return false;
     }
 }
 
