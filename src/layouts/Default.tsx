@@ -25,6 +25,11 @@ class Home extends Component {
                             <div className="row">
                                 <ul className="results">
                                     <li><a href="/contract/0xbb9bc244d798123fde783fcc1c72d3bb8c189413">0xbb9bc244d798123fde783fcc1c72d3bb8c189413</a> <small>The DAO</small></li>
+                                    <li><a href="/contract/0x06012c8cf97bead5deae237070f9587f8e7a266d">0x06012c8cf97bead5deae237070f9587f8e7a266d</a> <small>Crypto KittyCore</small></li>
+                                    <li><a href="/contract/0x851b7f3ab81bd8df354f0d7640efcd7288553419">0x851b7f3ab81bd8df354f0d7640efcd7288553419</a> <small>Gnosis Multisig wallet</small></li>
+                                    <li><a href="/contract/0x06A981Bd291C6BFaaB9954dDcEEb782dE805b4b3">0x06A981Bd291C6BFaaB9954dDcEEb782dE805b4b3</a> <small>Vyper Contract</small></li>
+                                    <li><a href="/contract/0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2">0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2</a> <small>Maker (MKR) Token</small></li>
+                                    <li><a href="/contract/0x2a0c0dbecc7e4d658f48e01e3fa353f44050c208">0x2a0c0dbecc7e4d658f48e01e3fa353f44050c208</a> <small>Idex Exchange</small></li>
                                 </ul>
                             </div>
                         </div>
