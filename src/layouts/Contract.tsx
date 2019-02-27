@@ -4,16 +4,15 @@ import Footer from "../components/Footer";
 import ContractDefinition from "../components/contract/Definition";
 import { RouteComponentProps } from "react-router";
 
-interface IContractRouterProps {
+interface IRouterProps {
     address: string;
 }
 
-interface IContractProps extends RouteComponentProps<IContractRouterProps> {
+interface IProps extends RouteComponentProps<IRouterProps> {
+
 }
 
-// get contract from ES
-
-class Home extends Component<IContractProps> {
+class Home extends Component<IProps> {
 
     public render() {
         return (
