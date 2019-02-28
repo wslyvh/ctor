@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import "./styles/custom.scss";
+import "./assets/styles/custom.scss";
 
 ReactDOM.render(
     <BrowserRouter>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { RouteComponentProps } from "react-router";
-import "../styles/main.scss";
+import logo from "../assets/logo/logo.png"
+import "../assets/styles/main.scss";
 
 interface IState {
     searchValue: string;
@@ -25,6 +26,11 @@ class Home extends Component<RouteComponentProps, IState> {
 
             <div className="home">
                 <form>
+
+                    <div className="main-logo text-center">
+                        <img alt="Ctor" src={logo} />
+                    </div>
+
                     <div className="inner-form">
                         <div className="basic-search">
                             <div className="input-field">
