@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { RouteComponentProps } from "react-router";
-import logo from "../assets/logo/logo.png"
+import logo from "../assets/logo/logo.png";
 import "../assets/styles/main.scss";
 
 interface IState {
