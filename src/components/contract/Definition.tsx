@@ -83,13 +83,13 @@ class ContractDefinition extends Component<IContractRouterProps> {
                 <div className="panel">
                     <h3>{this.state.name}</h3>
                     {this.state.constructors.map((ctor: any, index: any) => {
-                        return <ContractFunction key={index} functionObject={ctor} type="constructor" />
+                        return <ContractFunction key={index} functionObject={ctor} type="constructor" />;
                     })}
 
                     <div>
                         <h4>Constants</h4>
                         {this.state.constants.map((constant: any, index: any) => {
-                            return <ContractFunction key={index} functionObject={constant} type="constant" />
+                            return <ContractFunction key={index} functionObject={constant} type="constant" />;
                         })}
 
                         <h4>Functions</h4>

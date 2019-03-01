@@ -11,7 +11,7 @@ const ContractFunction: React.SFC<IContractFunctionProps> = (props) => {
     let showBadge = true;
 
     let name = props.functionObject.name;
-    let properties = props.functionObject.inputs;
+    const properties = props.functionObject.inputs;
 
     switch (props.type) {
         case "constructor":
