@@ -14,7 +14,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
         address: "",
         name: "",
         abi: {},
-        constructor: {},
+        constructors: [],
         constants: [],
         functions: [],
         events: [],
@@ -26,22 +26,20 @@ class ContractDefinition extends Component<IContractRouterProps> {
     public async componentDidMount() {
 
         const result = await this.client.getContractSourceCode(this.props.contractAddress);
-        console.log("Result..");
-        console.log(result);
 
         if (result.ABI === "Contract source code not verified") {
             return;
         }
 
         const abi = JSON.parse(result.ABI);
-        let ctor = {};
+        const ctors = [];
         const constants = [];
         const functions = [];
         const events = [];
 
         for (const element of abi) {
             if (element.type === "constructor") {
-                ctor = element;
+                ctors.push(element);
             }
 
             if (element.type === "event") {
@@ -62,7 +60,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
             address: this.props.contractAddress,
             name: result.ContractName,
             abi,
-            constructor: ctor,
+            constructors: ctors,
             constants,
             functions,
             events,
@@ -84,19 +82,14 @@ class ContractDefinition extends Component<IContractRouterProps> {
 
                 <div className="panel">
                     <h3>{this.state.name}</h3>
-
-                    <div className="alert alert-secondary" role="alert">
-                        <span hidden className="badge badge-primary">constructor</span> &nbsp;
-                    <strong>constructor</strong> &nbsp;
-                    <small>
-                            _curator (address), _daoCreator (address), _proposalDeposit (uint256), _minTokensToCreate (uint256), _closingTime (uint256), _privateCreation (address)
-                    </small>
-                    </div>
+                    {this.state.constructors.map((ctor: any, index: any) => {
+                        return <ContractFunction key={index} functionObject={ctor} type="constructor" />
+                    })}
 
                     <div>
                         <h4>Constants</h4>
                         {this.state.constants.map((constant: any, index: any) => {
-                            return <ContractFunction key={index} functionObject={constant} type="constant" />;
+                            return <ContractFunction key={index} functionObject={constant} type="constant" />
                         })}
 
                         <h4>Functions</h4>
