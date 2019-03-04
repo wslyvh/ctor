@@ -5,10 +5,7 @@ interface IState {
     searchValue: string;
 }
 
-interface IRouterProps {
-}
-
-interface IProps extends RouteComponentProps<IRouterProps> {
+interface IProps extends RouteComponentProps {
     containerClass: string;
 }
 
@@ -29,7 +26,7 @@ class SearchBar extends Component<IProps, IState> {
                     </svg>
                 </div>
             </div>
-        )
+        );
 
     }
 
