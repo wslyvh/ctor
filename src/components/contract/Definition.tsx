@@ -76,15 +76,14 @@ class ContractDefinition extends Component<IContractRouterProps> {
 
     public render() {
 
-        var notFound;
-        var contractDetails = <div><br /></div>
+        let notFound;
+        let contractDetails = <div><br /></div>;
 
         if (this.state.name === "") {
             notFound = <div className="contract-summary text-center">
                 <h3>Contract not found.</h3>
-            </div>
-        }
-        else {
+            </div>;
+        } else {
             contractDetails = <div>
                 <div className="contract-summary">
                     <h2>{this.state.name}</h2>
@@ -116,9 +115,8 @@ class ContractDefinition extends Component<IContractRouterProps> {
                         })}
                     </div>
                 </div>
-            </div>
+            </div>;
         }
-
 
         return (
 
