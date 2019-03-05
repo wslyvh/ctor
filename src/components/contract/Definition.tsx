@@ -20,7 +20,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
         functions: [],
         events: [],
         contractRaw: {},
-        showMembers: ["constants", "functions", "events"]
+        showMembers: ["constants", "functions", "events"],
     };
 
     private client: IEtherscanClient = new EtherscanClient();
@@ -77,7 +77,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
                 functions,
                 events,
                 contractRaw: contract,
-                showMembers: ["constants", "functions", "events"]
+                showMembers: ["constants", "functions", "events"],
             });
         }
     }
@@ -91,7 +91,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
         }
 
         this.setState({
-            showMembers: currentShowMembers
+            showMembers: currentShowMembers,
         });
     }
 
@@ -104,26 +104,32 @@ class ContractDefinition extends Component<IContractRouterProps> {
         let eventMembers;
 
         if (this.state.showMembers.includes("constants")) {
-            <h4>Constants</h4>
-            constantMembers = this.state.constants.map((constant: any, index: any) => {
-                return <ContractFunction key={index} functionObject={constant} type="constant" />;
-            })
+            constantMembers = <div>
+                <h4>Constants</h4>
+                {this.state.constants.map((constant: any, index: any) => {
+                    return <ContractFunction key={index} functionObject={constant} type="constant" />;
+                })}
+            </div>;
         }
 
         if (this.state.showMembers.includes("functions")) {
-            <h4>Functions</h4>
-            functionMembers = this.state.functions.map((func: any, index: any) => {
-                return <ContractFunction key={index} functionObject={func} type="function" />;
-            })
+
+            functionMembers = <div>
+                <h4>Functions</h4>
+                {this.state.functions.map((func: any, index: any) => {
+                    return <ContractFunction key={index} functionObject={func} type="function" />;
+                })}
+            </div>;
         }
 
-        <h4>Events</h4>
         if (this.state.showMembers.includes("events")) {
-            eventMembers = this.state.events.map((event: any, index: any) => {
-                return <ContractFunction key={index} functionObject={event} type="event" />;
-            })
+            eventMembers = <div>
+                <h4>Events</h4>
+                {this.state.events.map((event: any, index: any) => {
+                    return <ContractFunction key={index} functionObject={event} type="event" />;
+                })};
+            </div>;
         }
-
 
         if (this.state.name === "") {
             notFound = <div className="contract-summary text-center">
