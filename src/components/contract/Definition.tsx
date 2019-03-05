@@ -29,8 +29,12 @@ class ContractDefinition extends Component<IContractRouterProps> {
         let contract: IEtherscanSourceCodeResult;
         const etherscanResult = await this.client.getContractSourceCode(this.props.contractAddress);
 
-        if (etherscanResult) {
+        if (etherscanResult && etherscanResult.length > 0) {
             contract = etherscanResult[0];
+            if (contract.ABI === "Contract source code not verified") {
+                return;
+            }
+
             const abi: ABIResult = JSON.parse(contract.ABI);
 
             const ctors = [];
@@ -67,17 +71,21 @@ class ContractDefinition extends Component<IContractRouterProps> {
                 events,
                 contractRaw: contract,
             });
-        } else {
-            console.log("ERROR!");
-            console.log(etherscanResult);
         }
     }
 
     public render() {
 
-        return (
+        var notFound;
+        var contractDetails = <div><br /></div>
 
-            <div>
+        if (this.state.name === "") {
+            notFound = <div className="contract-summary text-center">
+                <h3>Contract not found.</h3>
+            </div>
+        }
+        else {
+            contractDetails = <div>
                 <div className="contract-summary">
                     <h2>{this.state.name}</h2>
                     <h3>{this.state.address}
@@ -108,6 +116,15 @@ class ContractDefinition extends Component<IContractRouterProps> {
                         })}
                     </div>
                 </div>
+            </div>
+        }
+
+
+        return (
+
+            <div>
+                {notFound}
+                {contractDetails}
             </div>
         );
     }

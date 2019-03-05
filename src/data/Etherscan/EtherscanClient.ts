@@ -32,11 +32,13 @@ export class EtherscanClient implements IEtherscanClient {
         try {
             etherscanResponse = JSON.parse(body);
 
-            if (etherscanResponse.message === "NOTOK" &&
-                etherscanResponse.status === "0" &&
-                etherscanResponse.result === "") {
+            if (etherscanResponse.message === "NOTOK" && etherscanResponse.status === "0") {
+                if (etherscanResponse.result.length === 1) {
+                    console.log("NOTOK - " + etherscanResponse.result[0].ABI);
+                } else {
+                    console.log("NOTOK - " + etherscanResponse.result);
+                }
 
-                console.log("Response is Null or Empty");
                 return null;
             }
 
