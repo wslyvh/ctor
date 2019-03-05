@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { EtherscanClient } from "../../data/Etherscan/EtherscanClient";
 import { IEtherscanClient } from "../../data/Etherscan/IEtherscanClient";
+import { ABIResult, IEtherscanSourceCodeResult } from "../../data/Etherscan/IEtherscanTypes";
 import ContractFunction from "./Function";
-import { IEtherscanSourceCodeResult, ABIResult } from "../../data/Etherscan/IEtherscanTypes";
 
 interface IContractRouterProps {
     contractAddress: string;
@@ -31,9 +31,9 @@ class ContractDefinition extends Component<IContractRouterProps> {
 
         if (etherscanResult) {
             contract = etherscanResult[0];
-            let abi: ABIResult = JSON.parse(contract.ABI);
+            const abi: ABIResult = JSON.parse(contract.ABI);
             console.log(abi);
-            
+
             const ctors = [];
             const constants = [];
             const functions = [];
@@ -68,8 +68,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
                 events,
                 contractRaw: contract,
             });
-        }
-        else {
+        } else {
             console.log("ERROR!");
             console.log(etherscanResult);
         }

@@ -27,7 +27,6 @@ export class EtherscanClient implements IEtherscanClient {
         }
 
         const body = await response.text();
-        let result: SourceCodeResult;
         let etherscanResponse: IEtherscanAPIResponse;
 
         try {
