@@ -32,7 +32,6 @@ class ContractDefinition extends Component<IContractRouterProps> {
         if (etherscanResult) {
             contract = etherscanResult[0];
             const abi: ABIResult = JSON.parse(contract.ABI);
-            console.log(abi);
 
             const ctors = [];
             const constants = [];
