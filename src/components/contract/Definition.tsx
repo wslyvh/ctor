@@ -20,9 +20,16 @@ class ContractDefinition extends Component<IContractRouterProps> {
         functions: [],
         events: [],
         contractRaw: {},
+        showMembers: ["constants", "functions", "events"]
     };
 
     private client: IEtherscanClient = new EtherscanClient();
+
+    constructor(props: any) {
+        super(props);
+
+        this.onFilterChecked = this.onFilterChecked.bind(this);
+    }
 
     public async componentDidMount() {
 
@@ -70,14 +77,53 @@ class ContractDefinition extends Component<IContractRouterProps> {
                 functions,
                 events,
                 contractRaw: contract,
+                showMembers: ["constants", "functions", "events"]
             });
         }
+    }
+
+    public onFilterChecked(e: any) {
+        const currentShowMembers = this.state.showMembers;
+        if (currentShowMembers.includes(e.target.value)) {
+            currentShowMembers.splice(currentShowMembers.indexOf(e.target.value), 1);
+        } else {
+            currentShowMembers.push(e.target.value);
+        }
+
+        this.setState({
+            showMembers: currentShowMembers
+        });
     }
 
     public render() {
 
         let notFound;
         let contractDetails = <div><br /></div>;
+        let constantMembers;
+        let functionMembers;
+        let eventMembers;
+
+        if (this.state.showMembers.includes("constants")) {
+            <h4>Constants</h4>
+            constantMembers = this.state.constants.map((constant: any, index: any) => {
+                return <ContractFunction key={index} functionObject={constant} type="constant" />;
+            })
+        }
+
+        if (this.state.showMembers.includes("functions")) {
+            <h4>Functions</h4>
+            functionMembers = this.state.functions.map((func: any, index: any) => {
+                return <ContractFunction key={index} functionObject={func} type="function" />;
+            })
+        }
+
+        <h4>Events</h4>
+        if (this.state.showMembers.includes("events")) {
+            eventMembers = this.state.events.map((event: any, index: any) => {
+                return <ContractFunction key={index} functionObject={event} type="event" />;
+            })
+        }
+
 
         if (this.state.name === "") {
             notFound = <div className="contract-summary text-center">
@@ -85,6 +131,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
             </div>;
         } else {
             contractDetails = <div>
+
                 <div className="contract-summary">
                     <h2>{this.state.name}</h2>
                     <h3>{this.state.address}
@@ -94,25 +141,42 @@ class ContractDefinition extends Component<IContractRouterProps> {
 
                 <div className="panel">
                     <h3>{this.state.name}</h3>
-                    {this.state.constructors.map((ctor: any, index: any) => {
-                        return <ContractFunction key={index} functionObject={ctor} type="constructor" />;
-                    })}
+                    <br />
+
+                    <div className="text-center">
+                        <div className="form-check form-check-inline badge badge-primary checked-badge">
+                            <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="constants"
+                                onChange={this.onFilterChecked}
+                                checked={this.state.showMembers.includes("constants")} />
+                            <label className="form-check-label" htmlFor="inlineCheckbox1">constants</label>
+                        </div>
+                        <div className="form-check form-check-inline badge badge-success checked-badge">
+                            <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="functions"
+                                onChange={this.onFilterChecked}
+                                checked={this.state.showMembers.includes("functions")} />
+                            <label className="form-check-label" htmlFor="inlineCheckbox2">functions</label>
+                        </div>
+                        <div className="form-check form-check-inline badge badge-warning checked-badge">
+                            <input className="form-check-input" type="checkbox" id="inlineCheckbox3" value="events"
+                                onChange={this.onFilterChecked}
+                                checked={this.state.showMembers.includes("events")} />
+                            <label className="form-check-label" htmlFor="inlineCheckbox3">events</label>
+                        </div>
+                        <br /><br />
+                    </div>
+
+                    {
+                        this.state.constructors.map((ctor: any, index: any) => {
+                            return <ContractFunction key={index} functionObject={ctor} type="constructor" />;
+                        })
+                    }
 
                     <div>
-                        <h4>Constants</h4>
-                        {this.state.constants.map((constant: any, index: any) => {
-                            return <ContractFunction key={index} functionObject={constant} type="constant" />;
-                        })}
+                        {constantMembers}
 
-                        <h4>Functions</h4>
-                        {this.state.functions.map((func: any, index: any) => {
-                            return <ContractFunction key={index} functionObject={func} type="function" />;
-                        })}
+                        {functionMembers}
 
-                        <h4>Events</h4>
-                        {this.state.events.map((event: any, index: any) => {
-                            return <ContractFunction key={index} functionObject={event} type="event" />;
-                        })}
+                        {eventMembers}
                     </div>
                 </div>
             </div>;
