@@ -4,6 +4,18 @@ export interface IEtherscanAPIResponse {
     readonly status: "1" | "0";
 }
 
+export interface IEtherscanSourceCodeResult {
+    readonly SourceCode: string;
+    readonly ABI: string;
+    readonly ContractName: string;
+    readonly CompilerVersion: string;
+    readonly OptimizationUsed: string;
+    readonly Runs: string;
+    readonly ConstructorArguments: string;
+    readonly Library: string;
+    readonly SwarmSource: string;
+}
+
 export interface IInput {
     readonly name: string;
     readonly type: string;
@@ -31,4 +43,6 @@ export interface IContractMember {
     readonly anonymous?: boolean;
 }
 
-export type ContractABI = ReadonlyArray<IContractMember>;
+export type ABIResult = ReadonlyArray<IContractMember>;
+
+export type SourceCodeResult = ReadonlyArray<IEtherscanSourceCodeResult>;

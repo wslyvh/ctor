@@ -3,6 +3,7 @@ import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { EtherscanClient } from "../../data/Etherscan/EtherscanClient";
 import { IEtherscanClient } from "../../data/Etherscan/IEtherscanClient";
 import ContractFunction from "./Function";
+import { IEtherscanSourceCodeResult, ABIResult } from "../../data/Etherscan/IEtherscanTypes";
 
 interface IContractRouterProps {
     contractAddress: string;
@@ -25,47 +26,53 @@ class ContractDefinition extends Component<IContractRouterProps> {
 
     public async componentDidMount() {
 
-        const result = await this.client.getContractSourceCode(this.props.contractAddress);
+        let contract: IEtherscanSourceCodeResult;
+        const etherscanResult = await this.client.getContractSourceCode(this.props.contractAddress);
 
-        if (result.ABI === "Contract source code not verified") {
-            return;
-        }
+        if (etherscanResult) {
+            contract = etherscanResult[0];
+            let abi: ABIResult = JSON.parse(contract.ABI);
+            console.log(abi);
+            
+            const ctors = [];
+            const constants = [];
+            const functions = [];
+            const events = [];
 
-        const abi = JSON.parse(result.ABI);
-        const ctors = [];
-        const constants = [];
-        const functions = [];
-        const events = [];
+            for (const element of abi) {
+                if (element.type === "constructor") {
+                    ctors.push(element);
+                }
 
-        for (const element of abi) {
-            if (element.type === "constructor") {
-                ctors.push(element);
-            }
+                if (element.type === "event") {
+                    events.push(element);
+                }
 
-            if (element.type === "event") {
-                events.push(element);
-            }
+                if (element.type === "function") {
 
-            if (element.type === "function") {
-
-                if (element.constant) {
-                    constants.push(element);
-                } else {
-                    functions.push(element);
+                    if (element.constant) {
+                        constants.push(element);
+                    } else {
+                        functions.push(element);
+                    }
                 }
             }
-        }
 
-        this.setState({
-            address: this.props.contractAddress,
-            name: result.ContractName,
-            abi,
-            constructors: ctors,
-            constants,
-            functions,
-            events,
-            contractRaw: result,
-        });
+            this.setState({
+                address: this.props.contractAddress,
+                name: contract.ContractName,
+                abi,
+                constructors: ctors,
+                constants,
+                functions,
+                events,
+                contractRaw: contract,
+            });
+        }
+        else {
+            console.log("ERROR!");
+            console.log(etherscanResult);
+        }
     }
 
     public render() {

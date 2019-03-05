@@ -1,10 +1,11 @@
 import { IEtherscanClient } from "./IEtherscanClient";
+import { ABIResult, IEtherscanAPIResponse, SourceCodeResult } from "./IEtherscanTypes";
 
 export class EtherscanClient implements IEtherscanClient {
 
     private apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY;
 
-    public async getContractAbi(contractAddress: string): Promise<any> {
+    public async getContractAbi(contractAddress: string): Promise<ABIResult | null> {
         const uri = "https://api.etherscan.io/api?module=contract&action=getabi&address=" + contractAddress + "&apikey=" + this.apiKey;
         const response = await fetch(uri);
         const body = await response.json();
@@ -17,19 +18,34 @@ export class EtherscanClient implements IEtherscanClient {
         return body.result[0];
     }
 
-    public async getContractSourceCode(contractAddress: string): Promise<any> {
+    public async getContractSourceCode(contractAddress: string): Promise<SourceCodeResult | null> {
         const uri = "https://api.etherscan.io/api?module=contract&action=getsourcecode&address=" + contractAddress + "&apikey=" + this.apiKey;
         const response = await fetch(uri);
-        const body = await response.json();
 
         if (response.status !== 200) {
-            console.log(response);
-            throw Error(body.message);
-        } else if (body.status === "0") {
-            console.log(body.message);
-            return null;
+            throw new Error(`Error has occurred. ${response.status}`);
         }
 
-        return body.result[0];
+        const body = await response.text();
+        let result: SourceCodeResult;
+        let etherscanResponse: IEtherscanAPIResponse;
+
+        try {
+            etherscanResponse = JSON.parse(body);
+
+            if (etherscanResponse.message === "NOTOK" &&
+                etherscanResponse.status === "0" &&
+                etherscanResponse.result === "") {
+
+                console.log("Response is Null or Empty");
+                return null;
+            }
+
+            return etherscanResponse.result;
+
+        } catch (err) {
+            console.log(err);
+            throw new Error(`Failed to parse json in response body: ${err.message}`);
+        }
     }
 }
