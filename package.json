@@ -1,41 +1,11 @@
 {
-  "name": "ctor",
+  "name": "Ctor mono",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --coverage --verbose --detectOpenHandles --forceExit",
-    "eject": "react-scripts eject",
-    "lint": "tslint -c tslint.json -p tsconfig.json",
-    "lint-fix": "tslint --fix -c tslint.json -p tsconfig.json"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "dependencies": {
-    "bootstrap": "^4.3.1",
-    "node-sass": "^4.11.0",
-    "react": "^16.8.2",
-    "react-bootstrap": "^1.0.0-beta.5",
-    "react-dom": "^16.8.2",
-    "react-icons": "^3.4.0",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.5"
-  },
-  "devDependencies": {
-    "@types/jest": "^24.0.6",
-    "@types/node": "^11.9.4",
-    "@types/react": "^16.8.4",
-    "@types/react-dom": "^16.8.2",
-    "@types/react-router-dom": "^4.3.1",
-    "tslint": "^5.13.0",
-    "typescript": "^3.3.3"
+    "server": "nodemon --exec ts-node -- index.ts",
+    "client": "cd client && npm run start",    
+    "dev": "concurrently --kill-others-on-fail \"npm run client\"",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   }
 }
