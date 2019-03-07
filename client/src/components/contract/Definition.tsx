@@ -4,6 +4,7 @@ import { EtherscanClient } from "../../data/Etherscan/EtherscanClient";
 import { IEtherscanClient } from "../../data/Etherscan/IEtherscanClient";
 import { ABIResult, IEtherscanSourceCodeResult } from "../../data/Etherscan/IEtherscanTypes";
 import ContractFunction from "./Function";
+import { ethers } from 'ethers';
 
 interface IContractRouterProps {
     contractAddress: string;
@@ -23,6 +24,8 @@ class ContractDefinition extends Component<IContractRouterProps> {
         showMembers: ["constants", "functions", "events"],
     };
 
+    
+    private provider = ethers.getDefaultProvider();
     private client: IEtherscanClient = new EtherscanClient();
 
     constructor(props: any) {
@@ -43,7 +46,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
             }
 
             const abi: ABIResult = JSON.parse(contract.ABI);
-
+            
             const ctors = [];
             const constants = [];
             const functions = [];
