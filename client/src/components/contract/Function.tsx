@@ -13,7 +13,6 @@ const ContractFunction: React.SFC<IContractFunctionProps> = (props) => {
         case "constructor":
             classType = "alert alert-secondary";
             badgeType = "badge badge-secondary";
-
             break;
 
         case "function":

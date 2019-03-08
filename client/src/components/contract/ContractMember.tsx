@@ -4,6 +4,7 @@ import { Button, Collapse } from "react-bootstrap";
 interface IProps {
     name: string;
     type: string;
+    member: any; // TODO: ContractMember type
     classType: string;
     badgeType: string;
 }
@@ -14,7 +15,7 @@ class ContractMember extends Component<IProps> {
         open: false
     };
 
-    static defaultProps = {
+    public static defaultProps = {
         classType: "alert property-alert alert-primary",
         badgeType: "badge badge-primary"
     }
@@ -40,12 +41,20 @@ class ContractMember extends Component<IProps> {
                                 <strong>Parameters</strong>
                                 <hr />
 
-                                <div className="form-group row">
-                                    <label htmlFor="amount" className="col-sm-2 col-form-label">amount</label>
-                                    <div className="col-sm-10">
-                                        <input type="text" className="form-control-plaintext" id="amount" />
-                                    </div>
-                                </div>
+                                {this.props.member.inputs && this.props.member.inputs.length === 0 &&
+                                    <small>No parameters</small>
+                                }
+
+                                {this.props.member.inputs.map((input: any, index: any) => {
+                                    return (
+                                        <div key={index} className="form-group row">
+                                            <label htmlFor="amount" className="col-sm-2 col-form-label">{input.name} <small>({input.type})</small></label>
+                                            <div className="col-sm-10">
+                                                <input type="text" className="form-control" id="amount" />
+                                            </div>
+                                        </div>
+                                    );
+                                })}
 
                                 <div className="form-group row">
                                     <label className="col-sm-2 col-form-label"></label>
@@ -55,7 +64,7 @@ class ContractMember extends Component<IProps> {
                                 </div>
                             </div>
 
-                            <div className="alert alert-light" role="alert">
+                            <div className="alert alert-light" role="alert" hidden>
                                 <strong>Outputs</strong>
                                 <hr />
 
