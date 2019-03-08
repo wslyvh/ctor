@@ -1,8 +1,10 @@
+import { ethers } from "ethers";
 import React, { Component } from "react";
 import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { EtherscanClient } from "../../data/Etherscan/EtherscanClient";
 import { IEtherscanClient } from "../../data/Etherscan/IEtherscanClient";
 import { ABIResult, IEtherscanSourceCodeResult } from "../../data/Etherscan/IEtherscanTypes";
+import ContractMember from "./ContractMember";
 import ContractFunction from "./Function";
 
 interface IContractRouterProps {
@@ -23,6 +25,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
         showMembers: ["constants", "functions", "events"],
     };
 
+    private provider = ethers.getDefaultProvider();
     private client: IEtherscanClient = new EtherscanClient();
 
     constructor(props: any) {
@@ -106,8 +109,8 @@ class ContractDefinition extends Component<IContractRouterProps> {
         if (this.state.showMembers.includes("constants")) {
             constantMembers = <div>
                 <h4>Constants</h4>
-                {this.state.constants.map((constant: any, index: any) => {
-                    return <ContractFunction key={index} functionObject={constant} type="constant" />;
+                {this.state.constants.map((member: any, index: any) => {
+                    return <ContractMember key={index} member={member} name={member.name} type="constant" classType="alert alert-primary" badgeType="badge badge-primary" />;
                 })}
             </div>;
         }
@@ -116,8 +119,8 @@ class ContractDefinition extends Component<IContractRouterProps> {
 
             functionMembers = <div>
                 <h4>Functions</h4>
-                {this.state.functions.map((func: any, index: any) => {
-                    return <ContractFunction key={index} functionObject={func} type="function" />;
+                {this.state.functions.map((member: any, index: any) => {
+                    return <ContractMember key={index} member={member} name={member.name} type={member.type} classType="alert alert-success" badgeType="badge badge-success" />;
                 })}
             </div>;
         }
@@ -125,9 +128,9 @@ class ContractDefinition extends Component<IContractRouterProps> {
         if (this.state.showMembers.includes("events")) {
             eventMembers = <div>
                 <h4>Events</h4>
-                {this.state.events.map((event: any, index: any) => {
-                    return <ContractFunction key={index} functionObject={event} type="event" />;
-                })};
+                {this.state.events.map((member: any, index: any) => {
+                    return <ContractMember key={index} member={member} name={member.name} type={member.type} classType="alert alert-warning" badgeType="badge badge-warning" />;
+                })}
             </div>;
         }
 
