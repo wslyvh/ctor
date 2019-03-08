@@ -11,16 +11,16 @@ interface IProps {
 
 class ContractMember extends Component<IProps> {
 
-    public state = {
-        open: false
-    };
-
     public static defaultProps = {
         classType: "alert property-alert alert-primary",
-        badgeType: "badge badge-primary"
-    }
+        badgeType: "badge badge-primary",
+    };
 
-    render() {
+    public state = {
+        open: false,
+    };
+
+    public render() {
         const { open } = this.state;
         const id = "collapse-" + this.props.name;
 

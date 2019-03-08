@@ -4,8 +4,8 @@ import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { EtherscanClient } from "../../data/Etherscan/EtherscanClient";
 import { IEtherscanClient } from "../../data/Etherscan/IEtherscanClient";
 import { ABIResult, IEtherscanSourceCodeResult } from "../../data/Etherscan/IEtherscanTypes";
-import ContractFunction from "./Function";
 import ContractMember from "./ContractMember";
+import ContractFunction from "./Function";
 
 interface IContractRouterProps {
     contractAddress: string;
@@ -112,7 +112,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
                 {this.state.constants.map((member: any, index: any) => {
                     return <ContractMember key={index} member={member} name={member.name} type="constant" classType="alert alert-primary" badgeType="badge badge-primary" />;
                 })}
-            </div>
+            </div>;
         }
 
         if (this.state.showMembers.includes("functions")) {
@@ -122,7 +122,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
                 {this.state.functions.map((member: any, index: any) => {
                     return <ContractMember key={index} member={member} name={member.name} type={member.type} classType="alert alert-success" badgeType="badge badge-success" />;
                 })}
-            </div>
+            </div>;
         }
 
         if (this.state.showMembers.includes("events")) {
@@ -131,7 +131,7 @@ class ContractDefinition extends Component<IContractRouterProps> {
                 {this.state.events.map((member: any, index: any) => {
                     return <ContractMember key={index} member={member} name={member.name} type={member.type} classType="alert alert-warning" badgeType="badge badge-warning" />;
                 })}
-            </div>
+            </div>;
         }
 
         if (this.state.name === "") {
