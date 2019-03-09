@@ -1,17 +1,17 @@
+import Contracts from "../data/Contracts.json";
 import { IContract } from "../model/IContract";
 import { IContractService } from "./IContractService";
-import Contracts from "../data/Contracts.json";
 
 class StaticContractService implements IContractService {
 	public async GetContract(address: string): Promise<IContract | null> {
-		var contract = Contracts.filter(c => c.Address === address)[0];
+		const contract = Contracts.filter(c => c.Address === address)[0];
 		let result: IContract | null = null;
 
 		if (contract) {
-			result = <IContract>{
+			result = {
 				Name: contract.ContractName,
 				Address: contract.Address
-			};
+			} as IContract;
 		}
 
 		return result;
@@ -19,10 +19,10 @@ class StaticContractService implements IContractService {
 
 	public async GetContracts(limit: number = 10): Promise<IContract[]> {
 		return Contracts.slice(0, limit).map((contract: any) => {
-			return <IContract>{
+			return {
 				Name: contract.ContractName,
 				Address: contract.Address
-			};
+			} as IContract;
 		});
 	}
 }
