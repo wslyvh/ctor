@@ -3,23 +3,11 @@ import { RouteComponentProps } from "react-router";
 import logo from "../assets/logo/logo.png";
 import "../assets/styles/main.scss";
 
-interface IState {
-    searchValue: string;
-}
+class Home extends Component<RouteComponentProps> {
 
-class Home extends Component<RouteComponentProps, IState> {
-
-    private recentItems = [];
-
-    constructor(props: any) {
-        super(props);
-
-        this.state = {
-            searchValue: "",
-        };
-
-        this.recentItems = this.getRecentItems();
-    }
+    public state = {
+        searchValue: "",
+    };
 
     public render() {
         return (
@@ -64,47 +52,13 @@ class Home extends Component<RouteComponentProps, IState> {
                                 </ul>
                             </div>
                         </div>
-
-                        <div className="advance-search" hidden>
-                            <h2>Recently searched</h2>
-
-                            <div className="row">
-                                <ul className="results">
-
-                                    {this.recentItems.map((address: any, index: any) => {
-                                        return <li key={index}>
-                                            <a href={"/contract/" + address}>{address}</a>
-                                        </li>;
-                                    })}
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </form>
             </div >
         );
     }
 
-    public getRecentItems() {
-        const recent = localStorage.getItem("recent");
-        if (recent) {
-            return JSON.parse(recent);
-        }
-
-        return [];
-    }
-
     public search() {
-        const recent = localStorage.getItem("recent");
-        let recentItems = [];
-
-        if (recent) {
-            recentItems = JSON.parse(recent);
-        }
-
-        recentItems.push(this.state.searchValue);
-        localStorage.setItem("recent", JSON.stringify(recentItems));
-
         this.props.history.push("/contract/" + this.state.searchValue);
         return false;
     }
