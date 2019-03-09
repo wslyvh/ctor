@@ -5,30 +5,25 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 interface IRouterProps {
-    address: string;
+	address: string;
 }
 
-interface IProps extends RouteComponentProps<IRouterProps> {
-
-}
+interface IProps extends RouteComponentProps<IRouterProps> {}
 
 class Home extends Component<IProps> {
+	public render() {
+		return (
+			<div className="App">
+				<Header />
 
-    public render() {
-        return (
-            <div className="App">
+				<div className="container">
+					<ContractDefinition contractAddress={this.props.match.params.address} />
+				</div>
 
-                <Header />
-
-                <div className="container">
-                    <ContractDefinition contractAddress={this.props.match.params.address} />
-                </div>
-
-                <Footer />
-
-            </div>
-        );
-    }
+				<Footer />
+			</div>
+		);
+	}
 }
 
 export default Home;
