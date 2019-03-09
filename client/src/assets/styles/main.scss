@@ -1,169 +1,169 @@
-@import './colors.scss';
+@import "./colors.scss";
 
 .home {
-    min-height: 100vh;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: center;
-        justify-content: center;
-    -ms-flex-align: center;
-        align-items: center;
-    background: #f2f3fa;
-    background-size: cover;
-    padding: 15px;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .home form {
-    width: 100%;
-    max-width: 790px;
-    margin: 0;
-  }
-  
-  .home h1 { 
-    color: #fff;
-    font-size: 2.0em;
-    margin: 40px 0;
-  }
-  
-  .home h2 {
-    color: #fff;
-    font-size: 1.4em;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .main-logo img {
-    max-width: 140px;
-    margin-bottom: 70px;
-  }
-  
-  .home form .inner-form {
-    width: 100%;
-  }
-  
-  .home form .inner-form .input-field {
-    position: relative;
-  }
-  
-  .home form .inner-form .input-field input {
-    height: 100%;
-    border: 0;
-    background: #fff;
-    display: block;
-    width: 100%;
-    padding: 10px 32px 10px 70px;
-    font-size: 18px;
-    color: #666;
-    border-radius: 3px;
-    height: 70px;
-    color: #555;
-  }
-  
-  .home form .inner-form .input-field input.placeholder {
-    color: #999;
-    font-size: 18px;
-  }
-  
-  .home form .inner-form .input-field input:-moz-placeholder {
-    color: #999;
-    font-size: 18px;
-  }
-  
-  .home form .inner-form .input-field input::-webkit-input-placeholder {
-    color: #999;
-    font-size: 18px;
-  }
-  
-  .home form .inner-form .input-field input:hover, .home form .inner-form .input-field input:focus {
-    box-shadow: none;
-    outline: 0;
-  }
-  
-  .home form .inner-form .basic-search {
-    text-align: center;
-    margin-bottom: 5px;
-    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  }
-  
-  .home form .inner-form .basic-search .input-field {
-    width: 100%;
-  }
-  
+  min-height: 100vh;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #f2f3fa;
+  background-size: cover;
+  padding: 15px;
+  font-family: "Roboto", sans-serif;
+}
+
+.home form {
+  width: 100%;
+  max-width: 790px;
+  margin: 0;
+}
+
+.home h1 {
+  color: #fff;
+  font-size: 2em;
+  margin: 40px 0;
+}
+
+.home h2 {
+  color: #fff;
+  font-size: 1.4em;
+  padding: 0;
+  margin: 0;
+}
+
+.main-logo img {
+  max-width: 140px;
+  margin-bottom: 70px;
+}
+
+.home form .inner-form {
+  width: 100%;
+}
+
+.home form .inner-form .input-field {
+  position: relative;
+}
+
+.home form .inner-form .input-field input {
+  height: 100%;
+  border: 0;
+  background: #fff;
+  display: block;
+  width: 100%;
+  padding: 10px 32px 10px 70px;
+  font-size: 18px;
+  color: #666;
+  border-radius: 3px;
+  height: 70px;
+  color: #555;
+}
+
+.home form .inner-form .input-field input.placeholder {
+  color: #999;
+  font-size: 18px;
+}
+
+.home form .inner-form .input-field input:-moz-placeholder {
+  color: #999;
+  font-size: 18px;
+}
+
+.home form .inner-form .input-field input::-webkit-input-placeholder {
+  color: #999;
+  font-size: 18px;
+}
+
+.home form .inner-form .input-field input:hover,
+.home form .inner-form .input-field input:focus {
+  box-shadow: none;
+  outline: 0;
+}
+
+.home form .inner-form .basic-search {
+  text-align: center;
+  margin-bottom: 5px;
+  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+.home form .inner-form .basic-search .input-field {
+  width: 100%;
+}
+
+.home form .inner-form .basic-search .input-field input {
+  padding: 10px 80px 10px 40px;
+}
+
+.home form .inner-form .basic-search .input-field .icon-wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 60px;
+  height: 100%;
+}
+
+.home form .inner-form .basic-search .input-field .icon-wrap svg {
+  width: 34px;
+  height: 34px;
+  fill: #ccc;
+}
+
+.home .advance-search {
+  background: #3640ca;
+  padding: 40px;
+  border-radius: 3px;
+  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  margin: 40px 0;
+}
+
+.home .advance-search .row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.home .advance-search .results {
+  list-style-type: none;
+  margin: 20px 0 0 0;
+  padding: 0;
+  color: #fff;
+}
+
+.home .advance-search .results li {
+  padding: 5px 0 0 0;
+}
+
+.home .advance-search .results small {
+  margin: 0 0 0 10px;
+}
+
+.home .advance-search .results a {
+  color: #9aa3ad;
+}
+.home .advance-search .results a:hover {
+  color: #fff;
+}
+
+@media screen and (max-width: 767px) {
   .home form .inner-form .basic-search .input-field input {
-    padding: 10px 80px 10px 40px;
+    padding: 10px 60px 10px 40px;
   }
-  
   .home form .inner-form .basic-search .input-field .icon-wrap {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-        align-items: center;
     width: 60px;
-    height: 100%;
+    -ms-flex-pack: center;
+    justify-content: center;
   }
-  
   .home form .inner-form .basic-search .input-field .icon-wrap svg {
-    width: 34px;
-    height: 34px;
-    fill: #ccc;
+    width: 26px;
+    height: 26px;
   }
-  
-  .home .advance-search {
-    background: #3640ca;
-    padding: 40px;
-    border-radius: 3px;
-    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-    margin: 40px 0;
-  }
-  
-  .home .advance-search .row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: justify;
-        justify-content: space-between;
-    -ms-flex-align: center;
-        align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .home .advance-search .results {
-    list-style-type: none;
-    margin: 20px 0 0 0;
-    padding: 0;
-    color: #fff;
-  }
-  
-  .home .advance-search .results li {
-    padding: 5px 0 0 0;
-  }
-  
-  .home .advance-search .results small {
-    margin: 0 0 0 10px;
-  }
-  
-  .home .advance-search .results a {
-    color: #9aa3ad;
-  }
-  .home .advance-search .results a:hover {
-    color: #fff;
-  }
-  
-  
-  @media screen and (max-width: 767px) {
-    .home form .inner-form .basic-search .input-field input {
-      padding: 10px 60px 10px 40px;
-    }
-    .home form .inner-form .basic-search .input-field .icon-wrap {
-      width: 60px;
-      -ms-flex-pack: center;
-          justify-content: center;
-    }
-    .home form .inner-form .basic-search .input-field .icon-wrap svg {
-      width: 26px;
-      height: 26px;
-    }
-  }
+}
