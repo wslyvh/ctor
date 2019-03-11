@@ -1,4 +1,4 @@
-import { ethers, Contract } from "ethers";
+import { Contract, ethers } from "ethers";
 import React, { Component } from "react";
 import { Collapse } from "react-bootstrap";
 
@@ -12,7 +12,6 @@ interface IProps {
 }
 
 class ContractMember extends Component<IProps> {
-	private provider = ethers.getDefaultProvider();
 
 	public static defaultProps = {
 		classType: "alert property-alert alert-primary",
@@ -22,6 +21,7 @@ class ContractMember extends Component<IProps> {
 	public state = {
 		open: false
 	};
+	private provider = ethers.getDefaultProvider();
 
 	constructor(props: any) {
 		super(props);

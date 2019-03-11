@@ -1,10 +1,10 @@
 import { ethers } from "ethers";
+import { BaseProvider } from "ethers/providers";
 import React, { Component } from "react";
 import { EtherscanClient } from "../../data/Etherscan/EtherscanClient";
 import { IEtherscanClient } from "../../data/Etherscan/IEtherscanClient";
-import { IContract } from "../../model/IContract";
-import { BaseProvider } from "ethers/providers";
 import { IEtherscanSourceCodeResult } from "../../data/Etherscan/IEtherscanTypes";
+import { IContract } from "../../model/IContract";
 import ContractView from "./ContractView";
 
 interface IProps {
@@ -12,15 +12,14 @@ interface IProps {
 }
 
 class ContractContainer extends Component<IProps> {
-	private provider: BaseProvider;
-	private client: IEtherscanClient;
-
 	public state = {
 		error: false,
 		contract: {
 			Address: this.props.address
 		}
 	};
+	private provider: BaseProvider;
+	private client: IEtherscanClient;
 
 	constructor(props: IProps) {
 		super(props);
@@ -33,7 +32,9 @@ class ContractContainer extends Component<IProps> {
 		const address = this.props.address;
 		const validAddress = this.validateAddressFormat(address);
 
-		if (!validAddress) return;
+		if (!validAddress) {
+			return;
+		}
 
 		let contract: IEtherscanSourceCodeResult;
 		const etherscanResult = await this.client.getContractSourceCode(address);
@@ -56,7 +57,7 @@ class ContractContainer extends Component<IProps> {
 			}
 
 			const etherContract = new ethers.Contract(address, contract.ABI, this.provider);
-			var ctr: IContract = {
+			const ctr: IContract = {
 				Name: contract.ContractName,
 				Address: address,
 				SourceCode: contract.SourceCode,
