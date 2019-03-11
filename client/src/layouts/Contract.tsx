@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { RouteComponentProps } from "react-router";
 import ContractDefinition from "../components/contract/Definition";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import ContractContainer from "../components/contract/ContractContainer";
+import Footer from "../components/layoutComponents/Footer";
+import Header from "../components/layoutComponents/Header";
 
 interface IRouterProps {
 	address: string;

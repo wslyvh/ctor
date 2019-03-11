@@ -1,4 +1,4 @@
-import { ethers, Contract } from "ethers";
+import { ethers } from "ethers";
 import React, { Component } from "react";
 import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { EtherscanClient } from "../../data/Etherscan/EtherscanClient";
