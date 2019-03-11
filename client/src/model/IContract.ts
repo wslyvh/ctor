@@ -1,6 +1,6 @@
 export interface IContract {
-	Name: string;
 	Address: string;
+	Name?: string;
 	SourceCode?: string;
 	ABI?: string;
 	Compiler?: ICompiler;
