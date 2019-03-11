@@ -1,15 +1,19 @@
+import { ethers, Contract } from "ethers";
 import React, { Component } from "react";
-import { Button, Collapse } from "react-bootstrap";
+import { Collapse } from "react-bootstrap";
 
 interface IProps {
 	name: string;
 	type: string;
 	member: any; // TODO: ContractMember type
+	contract: Contract;
 	classType: string;
 	badgeType: string;
 }
 
 class ContractMember extends Component<IProps> {
+	private provider = ethers.getDefaultProvider();
+
 	public static defaultProps = {
 		classType: "alert property-alert alert-primary",
 		badgeType: "badge badge-primary"
@@ -18,6 +22,16 @@ class ContractMember extends Component<IProps> {
 	public state = {
 		open: false
 	};
+
+	constructor(props: any) {
+		super(props);
+
+		this.onExecuteMember = this.onExecuteMember.bind(this);
+	}
+
+	public async componentDidMount() {
+		// console.log(this.props.member);
+	}
 
 	public render() {
 		const { open } = this.state;
@@ -45,11 +59,11 @@ class ContractMember extends Component<IProps> {
 								{this.props.member.inputs.map((input: any, index: any) => {
 									return (
 										<div key={index} className="form-group row">
-											<label htmlFor="amount" className="col-sm-2 col-form-label">
+											<label htmlFor={"input-" + index} className="col-sm-2 col-form-label">
 												{input.name} <small>({input.type})</small>
 											</label>
 											<div className="col-sm-10">
-												<input type="text" className="form-control" id="amount" />
+												<input type="text" className="form-control" id={"input-" + index} />
 											</div>
 										</div>
 									);
@@ -58,7 +72,7 @@ class ContractMember extends Component<IProps> {
 								<div className="form-group row">
 									<label className="col-sm-2 col-form-label" />
 									<div className="col-sm-10">
-										<button type="button" className="btn btn-primary btn-sm">
+										<button type="button" className="btn btn-primary btn-sm" onClick={this.onExecuteMember}>
 											execute
 										</button>
 									</div>
@@ -80,6 +94,11 @@ class ContractMember extends Component<IProps> {
 				</div>
 			</>
 		);
+	}
+
+	public onExecuteMember(e: any) {
+		console.log("Executing: " + this.props.name);
+		return false;
 	}
 }
 
