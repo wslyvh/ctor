@@ -1,6 +1,8 @@
+import { Contract, ethers } from "ethers";
 import React, { Component } from "react";
 import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { IContract } from "../../model/IContract";
+import ContractMember from "./ContractMember";
 
 interface IProps {
 	contract: IContract;
@@ -8,8 +10,13 @@ interface IProps {
 
 class ContractView extends Component<IProps> {
 	public state = {
-		showMembers: ["constants", "functions", "events"]
+		showMembers: ["constants", "functions", "events"],
+		contract: Contract,
+		constants: [],
+		functions: [],
+		events: []
 	};
+	private etherContract!: ethers.Contract;
 
 	constructor(props: any) {
 		super(props);
@@ -17,18 +24,30 @@ class ContractView extends Component<IProps> {
 		this.onFilterChecked = this.onFilterChecked.bind(this);
 	}
 
-	public async componentDidMount() {
-		this.setState({
-			showMembers: ["constants", "functions", "events"]
-		});
+	public async componentWillReceiveProps(props: any) {
+		this.setContractMembers(props);
+	}
+
+	public async setContractMembers(nextProps: any) {
+		if (nextProps.contract.ABI) {
+			this.etherContract = new Contract(this.props.contract.Address, nextProps.contract.ABI, ethers.getDefaultProvider());
+			const constants = this.etherContract.interface.abi.filter((member: any) => member.constant === true);
+			const functions = this.etherContract.interface.abi.filter((member: any) => member.constant === false);
+			const events = this.etherContract.interface.abi.filter((member: any) => member.constant === false);
+
+			this.setState({
+				contract: this.etherContract,
+				constants,
+				functions,
+				events
+			});
+		}
 	}
 
 	public render() {
-		if (!this.props.contract.ABI) {
+		if (!this.props.contract.Name && !this.props.contract.ABI) {
 			return <br />;
 		}
-
-		console.log("Contract found!");
 
 		return (
 			<>
@@ -48,19 +67,19 @@ class ContractView extends Component<IProps> {
 					<div className="panel">
 						<div className="text-center">
 							<div className="form-check form-check-inline badge badge-primary checked-badge">
-								<input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="constants" />
+								<input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="constants" onChange={this.onFilterChecked} checked={this.state.showMembers.includes("constants")} />
 								<label className="form-check-label" htmlFor="inlineCheckbox1">
 									constants
 								</label>
 							</div>
 							<div className="form-check form-check-inline badge badge-success checked-badge">
-								<input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="functions" />
+								<input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="functions" onChange={this.onFilterChecked} checked={this.state.showMembers.includes("functions")} />
 								<label className="form-check-label" htmlFor="inlineCheckbox2">
 									functions
 								</label>
 							</div>
 							<div className="form-check form-check-inline badge badge-warning checked-badge">
-								<input className="form-check-input" type="checkbox" id="inlineCheckbox3" value="events" />
+								<input className="form-check-input" type="checkbox" id="inlineCheckbox3" value="events" onChange={this.onFilterChecked} checked={this.state.showMembers.includes("events")} />
 								<label className="form-check-label" htmlFor="inlineCheckbox3">
 									events
 								</label>
@@ -69,19 +88,32 @@ class ContractView extends Component<IProps> {
 							<br />
 						</div>
 
-						{/* 
-                                {this.state.constructors.map((ctor: any, index: any) => {
-                                    return <ContractFunction key={index} functionObject={ctor} type="constructor" />;
-                                })}
+						{this.state.showMembers.includes("constants") && (
+							<div>
+								<h4>Constants</h4>
+								{this.state.constants.map((member: any, index: any) => {
+									return <ContractMember key={index} member={member} name={member.name} type="constant" contract={this.etherContract} classType="alert alert-primary" badgeType="badge badge-primary" />;
+								})}
+							</div>
+						)}
 
-                                <div>
-                                    {constantMembers}
+						{this.state.showMembers.includes("functions") && (
+							<div>
+								<h4>Functions</h4>
+								{this.state.functions.map((member: any, index: any) => {
+									return <ContractMember key={index} member={member} name={member.name} type={member.type} contract={this.etherContract} classType="alert alert-success" badgeType="badge badge-success" />;
+								})}
+							</div>
+						)}
 
-                                    {functionMembers}
-
-                                    {eventMembers}
-                                </div>
-                            */}
+						{this.state.showMembers.includes("events") && (
+							<div>
+								<h4>Events</h4>
+								{this.state.events.map((member: any, index: any) => {
+									return <ContractMember key={index} member={member} name={member.name} type={member.type} contract={this.etherContract} classType="alert alert-warning" badgeType="badge badge-warning" />;
+								})}
+							</div>
+						)}
 					</div>
 				</div>
 			</>
