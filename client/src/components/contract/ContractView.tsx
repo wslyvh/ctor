@@ -33,7 +33,7 @@ class ContractView extends Component<IProps> {
 			this.etherContract = new Contract(this.props.contract.Address, nextProps.contract.ABI, ethers.getDefaultProvider());
 			const constants = this.etherContract.interface.abi.filter((member: any) => member.constant === true);
 			const functions = this.etherContract.interface.abi.filter((member: any) => member.constant === false);
-			const events = this.etherContract.interface.abi.filter((member: any) => member.constant === false);
+			const events = this.etherContract.interface.abi.filter((member: any) => member.type === "event");
 
 			this.setState({
 				contract: this.etherContract,
