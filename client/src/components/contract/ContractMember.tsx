@@ -73,12 +73,12 @@ class ContractMember extends Component<IProps> {
 								</div>
 							</div>
 
-							{this.state.output && (
+							{output && (
 								<div className="alert alert-light" role="alert">
 									<strong>Outputs</strong>
 									<hr />
 
-									<span>{this.state.output}</span>
+									<span>{output}</span>
 								</div>
 							)}
 						</div>
@@ -89,12 +89,18 @@ class ContractMember extends Component<IProps> {
 	}
 
 	public async onExecuteMember(e: any) {
+		let result;
 		const func = this.props.contract.functions[this.props.name];
-		const response = await func.call({}); // Add Parameters
-		let result = response;
 
-		if (response._ethersType === "BigNumber") {
-			result = response.toString();
+		try {
+			const response = await func.call({}); // Add Parameters
+			result = response;
+
+			if (response._ethersType === "BigNumber") {
+				result = response.toString();
+			}
+		} catch {
+			result = "Error executing " + this.props.name;
 		}
 
 		this.setState({
