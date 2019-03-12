@@ -1,10 +1,6 @@
-import { ethers } from "ethers";
-import { BaseProvider } from "ethers/providers";
 import React, { Component } from "react";
-import { EtherscanClient } from "../../data/Etherscan/EtherscanClient";
-import { IEtherscanClient } from "../../data/Etherscan/IEtherscanClient";
-import { IEtherscanSourceCodeResult } from "../../data/Etherscan/IEtherscanTypes";
-import { IContract } from "../../model/IContract";
+import { IContractService } from "../../services/IContractService";
+import StaticContractService from "../../services/StaticContractService";
 import ContractView from "./ContractView";
 
 interface IProps {
@@ -18,59 +14,23 @@ class ContractContainer extends Component<IProps> {
 			Address: this.props.address
 		}
 	};
-	private provider: BaseProvider;
-	private client: IEtherscanClient;
+
+	private contractService: IContractService;
 
 	constructor(props: IProps) {
 		super(props);
 
-		this.provider = ethers.getDefaultProvider();
-		this.client = new EtherscanClient();
+		this.contractService = new StaticContractService();
 	}
 
 	public async componentDidMount() {
 		const address = this.props.address;
-		const validAddress = this.validateAddressFormat(address);
+		const contract = await this.contractService.GetContract(address);
 
-		if (!validAddress) {
-			return;
-		}
-
-		let contract: IEtherscanSourceCodeResult;
-		const etherscanResult = await this.client.getContractSourceCode(address);
-		if (!etherscanResult) {
-			this.setState({
-				error: true
-			});
-
-			return;
-		}
-
-		if (etherscanResult && etherscanResult.length > 0) {
-			contract = etherscanResult[0];
-			if (contract.ABI === "Contract source code not verified") {
-				this.setState({
-					error: true
-				});
-
-				return;
-			}
-
-			const etherContract = new ethers.Contract(address, contract.ABI, this.provider);
-			const ctr: IContract = {
-				Name: contract.ContractName,
-				Address: address,
-				SourceCode: contract.SourceCode,
-				ABI: contract.ABI,
-				ConstructorArguments: contract.ConstructorArguments,
-				SwarmSource: contract.SwarmSource
-			};
-
-			this.setState({
-				error: false,
-				contract: ctr
-			});
-		}
+		this.setState({
+			error: false,
+			contract
+		});
 	}
 
 	public render() {
@@ -83,20 +43,6 @@ class ContractContainer extends Component<IProps> {
 				</div>
 			</>
 		);
-	}
-
-	private validateAddressFormat(address: string): boolean {
-		try {
-			ethers.utils.getAddress(address);
-			return true;
-		} catch (ex) {
-			console.log("Error: invalid address");
-
-			this.setState({
-				error: true
-			});
-			return false;
-		}
 	}
 }
 
