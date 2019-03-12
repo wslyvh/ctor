@@ -1,11 +1,11 @@
 import { ethers } from "ethers";
 import { BaseProvider } from "ethers/providers";
 import Contracts from "../data/Contracts.json";
-import { EtherscanClient } from "../data/Etherscan/EtherscanClient.js";
-import { IEtherscanClient } from "../data/Etherscan/IEtherscanClient.js";
-import { IEtherscanSourceCodeResult } from "../data/Etherscan/IEtherscanTypes.js";
+import { EtherscanClient } from "../data/Etherscan/EtherscanClient";
+import { IEtherscanClient } from "../data/Etherscan/IEtherscanClient";
+import { IEtherscanSourceCodeResult } from "../data/Etherscan/IEtherscanTypes";
 import { IContract } from "../model/IContract";
-import Web3Utils from "../utils/Web3Utils.js";
+import Web3Utils from "../utils/Web3Utils";
 import { IContractService } from "./IContractService";
 
 class EtherscanContractService implements IContractService {
