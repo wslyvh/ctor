@@ -51,13 +51,15 @@ class ContractMember extends Component<IProps> {
 								{this.props.member.inputs && this.props.member.inputs.length === 0 && <small>No parameters</small>}
 
 								{this.props.member.inputs.map((input: any, index: any) => {
+									const id = this.props.name + "-input-" + index;
+
 									return (
 										<div key={index} className="form-group row">
-											<label htmlFor={"input-" + index} className="col-sm-2 col-form-label">
+											<label htmlFor={id} className="col-sm-2 col-form-label">
 												{input.name} <small>({input.type})</small>
 											</label>
 											<div className="col-sm-10">
-												<input type="text" className="form-control" id={"input-" + index} />
+												<input type="text" className="form-control" id={id} ref={id} />
 											</div>
 										</div>
 									);
@@ -90,10 +92,19 @@ class ContractMember extends Component<IProps> {
 
 	public async onExecuteMember(e: any) {
 		let result;
-		const func = this.props.contract.functions[this.props.name];
+		var args = {};
+		const argus = [];
+
+		for (let i = 0; i < this.props.member.inputs.length; i++) {
+			const element = this.refs[this.props.name + "-input-" + i] as HTMLInputElement;
+			argus.push(element.value);
+		}
+		if (argus.length > 0) {
+			args = argus.toString();
+		}
 
 		try {
-			const response = await func.call({}); // Add Parameters
+			const response = await this.props.contract.functions[this.props.name](args);
 			result = response;
 
 			if (response._ethersType === "BigNumber") {
