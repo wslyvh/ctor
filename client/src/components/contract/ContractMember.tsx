@@ -12,16 +12,15 @@ interface IProps {
 }
 
 class ContractMember extends Component<IProps> {
-
 	public static defaultProps = {
 		classType: "alert property-alert alert-primary",
 		badgeType: "badge badge-primary"
 	};
 
 	public state = {
-		open: false
+		open: false,
+		output: ""
 	};
-	private provider = ethers.getDefaultProvider();
 
 	constructor(props: any) {
 		super(props);
@@ -29,14 +28,9 @@ class ContractMember extends Component<IProps> {
 		this.onExecuteMember = this.onExecuteMember.bind(this);
 	}
 
-	public async componentDidMount() {
-		// console.log(this.props.member);
-	}
-
 	public render() {
-		const { open } = this.state;
+		const { open, output } = this.state;
 		const id = "collapse-" + this.props.name;
-		const noParameters = this.props.member.inputs && this.props.member.inputs.length === 0 && <small>No parameters</small>;
 
 		return (
 			<>
@@ -54,7 +48,7 @@ class ContractMember extends Component<IProps> {
 								<strong>Parameters</strong>
 								<hr />
 
-								{noParameters}
+								{this.props.member.inputs && this.props.member.inputs.length === 0 && <small>No parameters</small>}
 
 								{this.props.member.inputs.map((input: any, index: any) => {
 									return (
@@ -79,16 +73,14 @@ class ContractMember extends Component<IProps> {
 								</div>
 							</div>
 
-							<div className="alert alert-light" role="alert" hidden>
-								<strong>Outputs</strong>
-								<hr />
+							{this.state.output && (
+								<div className="alert alert-light" role="alert">
+									<strong>Outputs</strong>
+									<hr />
 
-								<div className="form-group row">
-									<label htmlFor="amount" className="col-sm-2 col-form-label">
-										amount
-									</label>
+									<span>{this.state.output}</span>
 								</div>
-							</div>
+							)}
 						</div>
 					</Collapse>
 				</div>
@@ -96,8 +88,19 @@ class ContractMember extends Component<IProps> {
 		);
 	}
 
-	public onExecuteMember(e: any) {
-		console.log("Executing: " + this.props.name);
+	public async onExecuteMember(e: any) {
+		const func = this.props.contract.functions[this.props.name];
+		const response = await func.call({}); // Add Parameters
+		let result = response;
+
+		if (response._ethersType === "BigNumber") {
+			result = response.toString();
+		}
+
+		this.setState({
+			output: result
+		});
+
 		return false;
 	}
 }
