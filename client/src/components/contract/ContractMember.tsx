@@ -51,15 +51,15 @@ class ContractMember extends Component<IProps> {
 								{this.props.member.inputs && this.props.member.inputs.length === 0 && <small>No parameters</small>}
 
 								{this.props.member.inputs.map((input: any, index: any) => {
-									const id = this.props.name + "-input-" + index;
+									const inputId = this.props.name + "-input-" + index;
 
 									return (
 										<div key={index} className="form-group row">
-											<label htmlFor={id} className="col-sm-2 col-form-label">
+											<label htmlFor={inputId} className="col-sm-2 col-form-label">
 												{input.name} <small>({input.type})</small>
 											</label>
 											<div className="col-sm-10">
-												<input type="text" className="form-control" id={id} ref={id} />
+												<input type="text" className="form-control" id={inputId} ref={inputId} />
 											</div>
 										</div>
 									);
@@ -92,7 +92,7 @@ class ContractMember extends Component<IProps> {
 
 	public async onExecuteMember(e: any) {
 		let result;
-		var args = {};
+		let args = {};
 		const argus = [];
 
 		for (let i = 0; i < this.props.member.inputs.length; i++) {
