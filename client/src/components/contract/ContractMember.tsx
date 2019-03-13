@@ -1,4 +1,4 @@
-import { Contract, ethers } from "ethers";
+import { Contract } from "ethers";
 import React, { Component } from "react";
 import { Collapse } from "react-bootstrap";
 
@@ -107,10 +107,11 @@ class ContractMember extends Component<IProps> {
 			const response = await this.props.contract.functions[this.props.name](args);
 			result = response;
 
-			if (response._ethersType === "BigNumber") {
+			if (response._ethersType === "BigNumber" || response.length) {
 				result = response.toString();
 			}
-		} catch {
+		} catch (ex) {
+			console.log(ex);
 			result = "Error executing " + this.props.name;
 		}
 
