@@ -12,8 +12,8 @@ class FileUtils {
 
 		// Get files from directory
 		if (stat.isDirectory()) {
-			fs.readdirSync(path).forEach((file: string) => {
-				const filePath = path.endsWith("/") ? path + file : path + "/" + file;
+			fs.readdirSync(path).forEach((filename: string) => {
+				const filePath = path.endsWith("/") ? path + filename : path + "/" + filename;
 
 				if (filePath.endsWith(".json")) {
 					const file = this.getFile(filePath);
