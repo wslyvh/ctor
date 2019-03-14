@@ -6,7 +6,7 @@ class Footer extends Component {
 		return (
 			<footer className="footer">
 				<div className="container">
-					<small>A blockchain development toolkit.</small>
+					<small>A smart contract management toolkit.</small>
 					<p>
 						<small className="text-muted">
 							<FaGithub /> &nbsp;
