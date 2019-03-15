@@ -2,13 +2,14 @@ import { ethers } from "ethers";
 import { BaseProvider } from "ethers/providers";
 import Contracts from "../data/Contracts.json";
 import { IContract } from "../model/IContract";
+import FileUtils from "../utils/FileUtils.js";
 import Web3Utils from "../utils/Web3Utils";
 import { IContractService } from "./IContractService";
-import FileUtils from "../utils/FileUtils.js";
 
 class TruffleContractService implements IContractService {
 	private provider: BaseProvider;
 	private contractsFolder: string = "./tests/contracts/";
+	// private networkId = "1";
 
 	constructor() {
 		this.provider = ethers.getDefaultProvider();
@@ -21,7 +22,7 @@ class TruffleContractService implements IContractService {
 			return null;
 		}
 
-		const contract = Contracts.filter(c => c.Address === address)[0];
+		const contract = FileUtils.getFile(this.contractsFolder + address); // rename address to name/id?
 		let result: IContract | null = null;
 
 		if (contract) {
@@ -37,7 +38,7 @@ class TruffleContractService implements IContractService {
 	}
 
 	public async GetContracts(limit: number = 10): Promise<IContract[]> {
-		var files = FileUtils.GetJsonFiles(this.contractsFolder);
+		const files = FileUtils.GetJsonFiles(this.contractsFolder);
 
 		return Contracts.slice(0, limit).map((contract: any) => {
 			return {
