@@ -1,84 +1,126 @@
+import { Contract } from "ethers";
 import React, { Component } from "react";
-import { Button, Collapse } from "react-bootstrap";
+import { Collapse } from "react-bootstrap";
 
 interface IProps {
-    name: string;
-    type: string;
-    member: any; // TODO: ContractMember type
-    classType: string;
-    badgeType: string;
+	name: string;
+	type: string;
+	member: any; // TODO: ContractMember type
+	contract: Contract;
+	classType: string;
+	badgeType: string;
 }
 
 class ContractMember extends Component<IProps> {
+	public static defaultProps = {
+		classType: "alert property-alert alert-primary",
+		badgeType: "badge badge-primary"
+	};
 
-    public static defaultProps = {
-        classType: "alert property-alert alert-primary",
-        badgeType: "badge badge-primary",
-    };
+	public state = {
+		open: false,
+		output: ""
+	};
 
-    public state = {
-        open: false,
-    };
+	constructor(props: any) {
+		super(props);
 
-    public render() {
-        const { open } = this.state;
-        const id = "collapse-" + this.props.name;
+		this.onExecuteMember = this.onExecuteMember.bind(this);
+	}
 
-        return (
-            <>
-                <div className={this.props.classType} role="alert">
+	public render() {
+		const { open, output } = this.state;
+		const id = "collapse-" + this.props.name;
 
-                    <div onClick={() => this.setState({ open: !open })} aria-controls={id} aria-expanded={open}>
-                        <span className={this.props.badgeType}>{this.props.type}</span> &nbsp;
-                        <strong>{this.props.name}</strong>
-                    </div>
+		return (
+			<>
+				<div className={this.props.classType} role="alert">
+					<div onClick={() => this.setState({ open: !open })} aria-controls={id} aria-expanded={open}>
+						<span className={this.props.badgeType}>{this.props.type}</span> &nbsp;
+						<strong>{this.props.name}</strong>
+					</div>
 
-                    <Collapse in={this.state.open}>
-                        <div>
-                            <br />
+					<Collapse in={this.state.open}>
+						<div>
+							<br />
 
-                            <div className="alert alert-light" role="alert">
-                                <strong>Parameters</strong>
-                                <hr />
+							<div className="alert alert-light" role="alert">
+								<strong>Parameters</strong>
+								<hr />
 
-                                {this.props.member.inputs && this.props.member.inputs.length === 0 &&
-                                    <small>No parameters</small>
-                                }
+								{this.props.member.inputs && this.props.member.inputs.length === 0 && <small>No parameters</small>}
 
-                                {this.props.member.inputs.map((input: any, index: any) => {
-                                    return (
-                                        <div key={index} className="form-group row">
-                                            <label htmlFor="amount" className="col-sm-2 col-form-label">{input.name} <small>({input.type})</small></label>
-                                            <div className="col-sm-10">
-                                                <input type="text" className="form-control" id="amount" />
-                                            </div>
-                                        </div>
-                                    );
-                                })}
+								{this.props.member.inputs.map((input: any, index: any) => {
+									const inputId = this.props.name + "-input-" + index;
 
-                                <div className="form-group row">
-                                    <label className="col-sm-2 col-form-label"></label>
-                                    <div className="col-sm-10">
-                                        <button type="button" className="btn btn-primary btn-sm">execute</button>
-                                    </div>
-                                </div>
-                            </div>
+									return (
+										<div key={index} className="form-group row">
+											<label htmlFor={inputId} className="col-sm-2 col-form-label">
+												{input.name} <small>({input.type})</small>
+											</label>
+											<div className="col-sm-10">
+												<input type="text" className="form-control" id={inputId} ref={inputId} />
+											</div>
+										</div>
+									);
+								})}
 
-                            <div className="alert alert-light" role="alert" hidden>
-                                <strong>Outputs</strong>
-                                <hr />
+								<div className="form-group row">
+									<label className="col-sm-2 col-form-label" />
+									<div className="col-sm-10">
+										<button type="button" className="btn btn-primary btn-sm" onClick={this.onExecuteMember}>
+											execute
+										</button>
+									</div>
+								</div>
+							</div>
 
-                                <div className="form-group row">
-                                    <label htmlFor="amount" className="col-sm-2 col-form-label">amount</label>
-                                </div>
-                            </div>
-                        </div>
-                    </Collapse>
-                </div>
+							{output && (
+								<div className="alert alert-light" role="alert">
+									<strong>Outputs</strong>
+									<hr />
 
-            </>
-        );
-    }
+									<span>{output}</span>
+								</div>
+							)}
+						</div>
+					</Collapse>
+				</div>
+			</>
+		);
+	}
+
+	public async onExecuteMember(e: any) {
+		let result;
+		let args = {};
+		const argus = [];
+
+		for (let i = 0; i < this.props.member.inputs.length; i++) {
+			const element = this.refs[this.props.name + "-input-" + i] as HTMLInputElement;
+			argus.push(element.value);
+		}
+		if (argus.length > 0) {
+			args = argus.toString();
+		}
+
+		try {
+			const response = await this.props.contract.functions[this.props.name](args);
+			result = response;
+
+			if (response._ethersType === "BigNumber" || response.length) {
+				result = response.toString();
+			}
+		} catch (ex) {
+			console.log(ex);
+			result = "Error executing " + this.props.name;
+		}
+
+		this.setState({
+			output: result
+		});
+
+		return false;
+	}
 }
 
 export default ContractMember;

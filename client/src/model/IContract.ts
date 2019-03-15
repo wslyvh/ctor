@@ -1,14 +1,8 @@
-
 export interface IContract {
-    Name: string;
-    SourceCode: string;
-    ABI: string;
-    Compiler: ICompiler;
-    ConstructorArguments: string;
-    SwarmSource: string;
-}
-
-export interface ICompiler {
-    Name: string;
-    Version: string;
+	Address: string;
+	Name?: string;
+	SourceCode?: string;
+	ABI?: string;
+	ConstructorArguments?: string;
+	SwarmSource?: string;
 }
