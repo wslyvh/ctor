@@ -8,3 +8,4 @@ A Smart contract management toolkit
 ## Project structure
 
 [Client](client/)
+[Smart Contracts - Example](truffle/)

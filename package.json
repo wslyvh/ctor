@@ -1,12 +1,14 @@
 {
-  "name": "ctor-mono",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "client": "cd client && npm run start",
-    "dev": "concurrently --kill-others-on-fail \"npm run client\""
-  },
-  "devDependencies": {
-    "concurrently": "^4.1.0"
-  }
+	"name": "ctor-mono",
+	"version": "0.1.0",
+	"private": true,
+	"author": "wslyvh",
+	"license": "GPL-3.0",
+	"scripts": {
+		"client": "cd client && npm run start",
+		"dev": "concurrently --kill-others-on-fail \"npm run client\""
+	},
+	"devDependencies": {
+		"concurrently": "^4.1.0"
+	}
 }
