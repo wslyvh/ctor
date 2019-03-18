@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { BaseProvider } from "ethers/providers";
-import Contracts from "../data/Contracts.json";
+import Contracts from "../data/Etherscan/Contracts.json";
 import { IContract } from "../model/IContract";
 import Web3Utils from "../utils/Web3Utils";
 import { IContractService } from "./IContractService";

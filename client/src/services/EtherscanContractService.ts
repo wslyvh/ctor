@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { BaseProvider } from "ethers/providers";
-import Contracts from "../data/Contracts.json";
+import Contracts from "../data/Etherscan/Contracts.json";
 import { EtherscanClient } from "../data/Etherscan/EtherscanClient";
 import { IEtherscanClient } from "../data/Etherscan/IEtherscanClient";
 import { IEtherscanSourceCodeResult } from "../data/Etherscan/IEtherscanTypes";

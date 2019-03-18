@@ -1,11 +1,10 @@
 import { ethers } from "ethers";
 import { BaseProvider } from "ethers/providers";
-import Contracts from "../data/Contracts.json";
+import { ITruffleContract } from "../data/Truffle/ITruffleTypes.js";
 import { IContract } from "../model/IContract";
 import FileUtils from "../utils/FileUtils.js";
 import Web3Utils from "../utils/Web3Utils";
 import { IContractService } from "./IContractService";
-import { ITruffleContract } from "../data/Truffle/ITruffleTypes.js";
 
 class TruffleContractService implements IContractService {
 	private provider: BaseProvider;
@@ -23,7 +22,7 @@ class TruffleContractService implements IContractService {
 		}
 
 		const contract = FileUtils.getFile(this.contractsFolder + address); // rename address to name/id?
-		let result: IContract | null = null;
+		const result: IContract | null = null;
 
 		if (contract) {
 			return this.MapContract(contract);
@@ -43,16 +42,16 @@ class TruffleContractService implements IContractService {
 	private MapContract(contract: ITruffleContract): IContract {
 		let address = "";
 		if (contract.networks["1"]) {
-			contract.networks["1"].address;
+			address = contract.networks["1"].address;
 		}
 		if (contract.networks["3"]) {
-			contract.networks["3"].address;
+			address = contract.networks["3"].address;
 		}
 		if (contract.networks["4"]) {
-			contract.networks["4"].address;
+			address = contract.networks["4"].address;
 		}
 		if (contract.networks["5777"]) {
-			contract.networks["5777"].address;
+			address = contract.networks["5777"].address;
 		}
 
 		return {

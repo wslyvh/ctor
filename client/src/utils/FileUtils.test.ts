@@ -1,6 +1,6 @@
 import FileUtils from "./FileUtils";
 
-const filesInDefaultDirectory = 1;
+const filesInDefaultDirectory = 3;
 
 describe("FileUtils", () => {
 	it("should initialize a new instance", () => {
@@ -13,13 +13,13 @@ describe("FileUtils", () => {
 
 describe("Directories", () => {
 	it("should get all files, from directory path, with trailing slash", () => {
-		const files = FileUtils.GetJsonFiles("./tests/contracts/");
+		const files = FileUtils.GetJsonFiles("./src/data/Truffle/");
 
 		expect(files.length).toEqual(filesInDefaultDirectory);
 	});
 
 	it("should get all files, from directory path, without trailing slash", () => {
-		const files = FileUtils.GetJsonFiles("./tests/contracts");
+		const files = FileUtils.GetJsonFiles("./src/data/Truffle");
 
 		expect(files.length).toEqual(filesInDefaultDirectory);
 	});
@@ -31,14 +31,14 @@ describe("Directories", () => {
 
 describe("Files", () => {
 	it("should get a single file", () => {
-		const files = FileUtils.GetJsonFiles("./tests/contracts/MetaCoin.json");
+		const files = FileUtils.GetJsonFiles("./src/data/Truffle/MetaCoin.json");
 
 		expect(files).toBeDefined();
 		expect(files.length).toEqual(1);
 	});
 
 	it("should ignore non-json files", () => {
-		const files = FileUtils.GetJsonFiles("./tests/contracts/InvalidFile.contract");
+		const files = FileUtils.GetJsonFiles("./src/data/Truffle/InvalidFile.contract");
 
 		expect(files).toBeDefined();
 		expect(files.length).toEqual(0);
