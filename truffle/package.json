@@ -1,0 +1,16 @@
+{
+	"name": "ctor-truffle",
+	"version": "0.1.0",
+	"private": true,
+	"author": "wslyvh",
+	"license": "GPL-3.0",
+	"scripts": {
+		"build": "truffle compile",
+		"test": "truffle test"
+	},
+	"devDependencies": {
+		"dotenv": "^6.2.0",
+		"truffle": "^5.0.0",
+		"truffle-hdwallet-provider": "^1.0.1"
+	}
+}
