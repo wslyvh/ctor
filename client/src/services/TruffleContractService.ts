@@ -1,8 +1,8 @@
 import { ethers } from "ethers";
 import { BaseProvider } from "ethers/providers";
-import { ITruffleContract } from "../data/Truffle/ITruffleTypes.js";
+import { ITruffleContract } from "../data/Truffle/ITruffleTypes";
 import { IContract } from "../model/IContract";
-import FileUtils from "../utils/FileUtils.js";
+import FileUtils from "../utils/FileUtils";
 import Web3Utils from "../utils/Web3Utils";
 import { IContractService } from "./IContractService";
 
