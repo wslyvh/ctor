@@ -5,11 +5,11 @@ import { IContract } from "../model/IContract";
 import FileUtils from "../utils/FileUtils.js";
 import Web3Utils from "../utils/Web3Utils";
 import { IContractService } from "./IContractService";
+import { ITruffleContract } from "../data/Truffle/ITruffleTypes.js";
 
 class TruffleContractService implements IContractService {
 	private provider: BaseProvider;
 	private contractsFolder: string = "./tests/contracts/";
-	// private networkId = "1";
 
 	constructor() {
 		this.provider = ethers.getDefaultProvider();
@@ -26,12 +26,7 @@ class TruffleContractService implements IContractService {
 		let result: IContract | null = null;
 
 		if (contract) {
-			result = {
-				Address: contract.Address, // TODO: Check network Ids
-				Name: contract.ContractName,
-				SourceCode: contract.SourceCode,
-				ABI: contract.ABI
-			} as IContract;
+			return this.MapContract(contract);
 		}
 
 		return result;
@@ -40,14 +35,32 @@ class TruffleContractService implements IContractService {
 	public async GetContracts(limit: number = 10): Promise<IContract[]> {
 		const files = FileUtils.GetJsonFiles(this.contractsFolder);
 
-		return Contracts.slice(0, limit).map((contract: any) => {
-			return {
-				Address: contract.Address, // TODO: Check network Ids
-				Name: contract.contractName,
-				SourceCode: contract.source,
-				ABI: contract.abi
-			} as IContract;
+		return files.slice(0, limit).map((contract: ITruffleContract) => {
+			return this.MapContract(contract);
 		});
+	}
+
+	private MapContract(contract: ITruffleContract): IContract {
+		let address = "";
+		if (contract.networks["1"]) {
+			contract.networks["1"].address;
+		}
+		if (contract.networks["3"]) {
+			contract.networks["3"].address;
+		}
+		if (contract.networks["4"]) {
+			contract.networks["4"].address;
+		}
+		if (contract.networks["5777"]) {
+			contract.networks["5777"].address;
+		}
+
+		return {
+			Address: address,
+			Name: contract.contractName,
+			SourceCode: contract.source,
+			ABI: contract.abi
+		} as IContract;
 	}
 }
 
