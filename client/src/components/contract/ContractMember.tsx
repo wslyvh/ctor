@@ -92,19 +92,15 @@ class ContractMember extends Component<IProps> {
 
 	public async onExecuteMember(e: any) {
 		let result;
-		let args = {};
 		const argus = [];
 
 		for (let i = 0; i < this.props.member.inputs.length; i++) {
 			const element = this.refs[this.props.name + "-input-" + i] as HTMLInputElement;
 			argus.push(element.value);
 		}
-		if (argus.length > 0) {
-			args = argus.toString();
-		}
 
 		try {
-			const response = await this.props.contract.functions[this.props.name](args);
+			const response = await this.props.contract.functions[this.props.name](...argus);
 			result = response;
 
 			if (response._ethersType === "BigNumber" || response.length) {
