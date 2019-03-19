@@ -37,54 +37,63 @@ class ContractMember extends Component<IProps> {
 				<div className={this.props.classType} role="alert">
 					<div onClick={() => this.setState({ open: !open })} aria-controls={id} aria-expanded={open}>
 						<span className={this.props.badgeType}>{this.props.type}</span> &nbsp;
-						<strong>{this.props.name}</strong>
+						<strong>{this.props.name}</strong>&nbsp;
+						{this.props.member.inputs.map((input: any, index: any) => {
+							return (
+								<small key={index}>
+									{input.name} ({input.type}) &nbsp;
+								</small>
+							);
+						})}
 					</div>
 
-					<Collapse in={this.state.open}>
-						<div>
-							<br />
+					{this.props.type !== "event" && (
+						<Collapse in={this.state.open}>
+							<div>
+								<br />
 
-							<div className="alert alert-light" role="alert">
-								<strong>Parameters</strong>
-								<hr />
-
-								{this.props.member.inputs && this.props.member.inputs.length === 0 && <small>No parameters</small>}
-
-								{this.props.member.inputs.map((input: any, index: any) => {
-									const inputId = this.props.name + "-input-" + index;
-
-									return (
-										<div key={index} className="form-group row">
-											<label htmlFor={inputId} className="col-sm-2 col-form-label">
-												{input.name} <small>({input.type})</small>
-											</label>
-											<div className="col-sm-10">
-												<input type="text" className="form-control" id={inputId} ref={inputId} />
-											</div>
-										</div>
-									);
-								})}
-
-								<div className="form-group row">
-									<label className="col-sm-2 col-form-label" />
-									<div className="col-sm-10">
-										<button type="button" className="btn btn-primary btn-sm" onClick={this.onExecuteMember}>
-											execute
-										</button>
-									</div>
-								</div>
-							</div>
-
-							{output && (
 								<div className="alert alert-light" role="alert">
-									<strong>Outputs</strong>
+									<strong>Parameters</strong>
 									<hr />
 
-									<span>{output}</span>
+									{this.props.member.inputs && this.props.member.inputs.length === 0 && <small>No parameters</small>}
+
+									{this.props.member.inputs.map((input: any, index: any) => {
+										const inputId = this.props.name + "-input-" + index;
+
+										return (
+											<div key={index} className="form-group row">
+												<label htmlFor={inputId} className="col-sm-2 col-form-label">
+													{input.name} <small>({input.type})</small>
+												</label>
+												<div className="col-sm-10">
+													<input type="text" className="form-control" id={inputId} ref={inputId} />
+												</div>
+											</div>
+										);
+									})}
+
+									<div className="form-group row">
+										<label className="col-sm-2 col-form-label" />
+										<div className="col-sm-10">
+											<button type="button" className="btn btn-primary btn-sm" onClick={this.onExecuteMember}>
+												execute
+											</button>
+										</div>
+									</div>
 								</div>
-							)}
-						</div>
-					</Collapse>
+
+								{output && (
+									<div className="alert alert-light" role="alert">
+										<strong>Outputs</strong>
+										<hr />
+
+										<span>{output}</span>
+									</div>
+								)}
+							</div>
+						</Collapse>
+					)}
 				</div>
 			</>
 		);

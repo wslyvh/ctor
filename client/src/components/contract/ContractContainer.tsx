@@ -21,8 +21,8 @@ class ContractContainer extends Component<IProps> {
 	constructor(props: IProps) {
 		super(props);
 
-		this.contractService = new StaticContractService();
-		// this.contractService = new TruffleContractService();
+		// this.contractService = new StaticContractService();
+		this.contractService = new TruffleContractService();
 	}
 
 	public async componentDidMount() {
