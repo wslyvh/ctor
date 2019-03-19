@@ -1,4 +1,4 @@
-import { ethers, Contract } from "ethers";
+import { Contract, ethers } from "ethers";
 import { BaseProvider } from "ethers/providers";
 import Contracts from "../data/Etherscan/Contracts.json";
 import { EtherscanClient } from "../data/Etherscan/EtherscanClient";

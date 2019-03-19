@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { IContractService } from "../../services/IContractService";
 import StaticContractService from "../../services/StaticContractService";
-import ContractView from "./ContractView";
 import TruffleContractService from "../../services/TruffleContractService";
+import ContractView from "./ContractView";
 
 interface IProps {
 	address: string;
