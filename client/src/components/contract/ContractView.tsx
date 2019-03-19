@@ -29,8 +29,9 @@ class ContractView extends Component<IProps> {
 	}
 
 	public async setContractMembers(nextProps: any) {
-		if (nextProps.contract.ABI) {
-			this.etherContract = new Contract(this.props.contract.Address, nextProps.contract.ABI, ethers.getDefaultProvider());
+		if (nextProps.contract && nextProps.contract.RawContract) {
+			this.etherContract = nextProps.contract.RawContract;
+
 			const constants = this.etherContract.interface.abi.filter((member: any) => member.constant === true);
 			const functions = this.etherContract.interface.abi.filter((member: any) => member.constant === false);
 			const events = this.etherContract.interface.abi.filter((member: any) => member.type === "event");
@@ -45,7 +46,7 @@ class ContractView extends Component<IProps> {
 	}
 
 	public render() {
-		if (!this.props.contract.Name && !this.props.contract.ABI) {
+		if (this.props.contract && !this.props.contract.ABI) {
 			return <br />;
 		}
 

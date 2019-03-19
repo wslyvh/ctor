@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers, Contract } from "ethers";
 import { BaseProvider } from "ethers/providers";
 import Contracts from "../data/Etherscan/Contracts.json";
 import { IContract } from "../model/IContract";
@@ -27,7 +27,8 @@ class StaticContractService implements IContractService {
 				Address: contract.Address,
 				Name: contract.ContractName,
 				SourceCode: contract.SourceCode,
-				ABI: contract.ABI
+				ABI: contract.ABI,
+				RawContract: new Contract(address, contract.ABI, this.provider)
 			} as IContract;
 		}
 
@@ -40,7 +41,8 @@ class StaticContractService implements IContractService {
 				Address: contract.Address,
 				Name: contract.ContractName,
 				SourceCode: contract.SourceCode,
-				ABI: contract.ABI
+				ABI: contract.ABI,
+				RawContract: new Contract(contract.Address, contract.ABI, this.provider)
 			} as IContract;
 		});
 	}

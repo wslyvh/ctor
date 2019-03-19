@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers, Contract } from "ethers";
 import { BaseProvider } from "ethers/providers";
 import Contracts from "../data/Etherscan/Contracts.json";
 import { EtherscanClient } from "../data/Etherscan/EtherscanClient";
@@ -37,7 +37,8 @@ class EtherscanContractService implements IContractService {
 				SourceCode: contract.SourceCode,
 				ABI: contract.ABI,
 				ConstructorArguments: contract.ConstructorArguments,
-				SwarmSource: contract.SwarmSource
+				SwarmSource: contract.SwarmSource,
+				RawContract: new Contract(address, contract.ABI, this.provider)
 			};
 		}
 
