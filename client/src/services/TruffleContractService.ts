@@ -2,13 +2,12 @@ import { ethers } from "ethers";
 import { BaseProvider } from "ethers/providers";
 import { ITruffleContract } from "../data/Truffle/ITruffleTypes";
 import { IContract } from "../model/IContract";
-import FileUtils from "../utils/FileUtils";
+import Contracts from "../data/Truffle/Contracts.json";
 import Web3Utils from "../utils/Web3Utils";
 import { IContractService } from "./IContractService";
 
 class TruffleContractService implements IContractService {
 	private provider: BaseProvider;
-	private contractsFolder: string = "./tests/contracts/";
 
 	constructor() {
 		this.provider = ethers.getDefaultProvider();
@@ -21,7 +20,7 @@ class TruffleContractService implements IContractService {
 			return null;
 		}
 
-		const contract = FileUtils.getFile(this.contractsFolder + address); // rename address to name/id?
+		const contract = Contracts.filter(c => c.networks["5777"].address === address)[0];
 		const result: IContract | null = null;
 
 		if (contract) {
@@ -32,9 +31,7 @@ class TruffleContractService implements IContractService {
 	}
 
 	public async GetContracts(limit: number = 10): Promise<IContract[]> {
-		const files = FileUtils.GetJsonFiles(this.contractsFolder);
-
-		return files.slice(0, limit).map((contract: ITruffleContract) => {
+		return Contracts.slice(0, limit).map((contract: ITruffleContract) => {
 			return this.MapContract(contract);
 		});
 	}
@@ -58,7 +55,7 @@ class TruffleContractService implements IContractService {
 			Address: address,
 			Name: contract.contractName,
 			SourceCode: contract.source,
-			ABI: contract.abi
+			ABI: JSON.stringify(contract.abi)
 		} as IContract;
 	}
 }

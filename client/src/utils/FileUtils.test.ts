@@ -1,6 +1,6 @@
 import FileUtils from "./FileUtils";
 
-const filesInDefaultDirectory = 3;
+const filesInDefaultDirectory = 4;
 
 describe("FileUtils", () => {
 	it("should initialize a new instance", () => {
