@@ -31,15 +31,7 @@ class EtherscanContractService implements IContractService {
 				return null;
 			}
 
-			return {
-				Name: contract.ContractName,
-				Address: address,
-				SourceCode: contract.SourceCode,
-				ABI: contract.ABI,
-				ConstructorArguments: contract.ConstructorArguments,
-				SwarmSource: contract.SwarmSource,
-				RawContract: new Contract(address, contract.ABI, this.provider)
-			};
+			return this.MapContract(contract);
 		}
 
 		return null;
@@ -47,11 +39,18 @@ class EtherscanContractService implements IContractService {
 
 	public async GetContracts(limit: number = 10): Promise<IContract[]> {
 		return Contracts.slice(0, limit).map((contract: any) => {
-			return {
-				Name: contract.ContractName,
-				Address: contract.Address
-			} as IContract;
+			return this.MapContract(contract);
 		});
+	}
+
+	private MapContract(contract: any): IContract {
+		return {
+			Address: contract.Address,
+			Name: contract.ContractName,
+			SourceCode: contract.SourceCode,
+			ABI: contract.ABI,
+			RawContract: new Contract(contract.Address, contract.ABI, this.provider)
+		} as IContract;
 	}
 }
 

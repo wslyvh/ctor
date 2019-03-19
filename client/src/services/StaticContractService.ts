@@ -13,7 +13,7 @@ class StaticContractService implements IContractService {
 	}
 
 	public async GetContract(address: string): Promise<IContract | null> {
-		const validContractAddress = await Web3Utils.isContractAddress(this.provider, address);
+		const validContractAddress = await Web3Utils.isContractAddress(this.provider, address); // TODO: Add Wallet/Signer
 
 		if (!validContractAddress) {
 			return null;
@@ -23,13 +23,7 @@ class StaticContractService implements IContractService {
 		let result: IContract | null = null;
 
 		if (contract) {
-			result = {
-				Address: contract.Address,
-				Name: contract.ContractName,
-				SourceCode: contract.SourceCode,
-				ABI: contract.ABI,
-				RawContract: new Contract(address, contract.ABI, this.provider)
-			} as IContract;
+			result = this.MapContract(contract);
 		}
 
 		return result;
@@ -37,14 +31,18 @@ class StaticContractService implements IContractService {
 
 	public async GetContracts(limit: number = 10): Promise<IContract[]> {
 		return Contracts.slice(0, limit).map((contract: any) => {
-			return {
-				Address: contract.Address,
-				Name: contract.ContractName,
-				SourceCode: contract.SourceCode,
-				ABI: contract.ABI,
-				RawContract: new Contract(contract.Address, contract.ABI, this.provider)
-			} as IContract;
+			return this.MapContract(contract);
 		});
+	}
+
+	private MapContract(contract: any): IContract {
+		return {
+			Address: contract.Address,
+			Name: contract.ContractName,
+			SourceCode: contract.SourceCode,
+			ABI: contract.ABI,
+			RawContract: new Contract(contract.Address, contract.ABI, this.provider)
+		} as IContract;
 	}
 }
 
