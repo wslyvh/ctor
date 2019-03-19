@@ -1,4 +1,4 @@
-import { Contract, ethers } from "ethers";
+import { Contract, ethers, Signer } from "ethers";
 import { BaseProvider } from "ethers/providers";
 import Contracts from "../data/Truffle/Contracts.json";
 import { ITruffleContract } from "../data/Truffle/ITruffleTypes";
@@ -9,9 +9,13 @@ import { IContractService } from "./IContractService";
 class TruffleContractService implements IContractService {
 	private networkUrl: string = "http://localhost:8545";
 	private provider: BaseProvider;
+	private signer: Signer;
 
 	constructor() {
-		this.provider = new ethers.providers.JsonRpcProvider(this.networkUrl);
+		const provider = new ethers.providers.JsonRpcProvider(this.networkUrl);
+
+		this.provider = provider;
+		this.signer = provider.getSigner(0);
 	}
 
 	public async GetContract(address: string): Promise<IContract | null> {
@@ -53,7 +57,7 @@ class TruffleContractService implements IContractService {
 		}
 
 		const abi = JSON.stringify(contract.abi);
-		const raw = new Contract(address, abi, this.provider);
+		const raw = new Contract(address, abi, this.signer);
 
 		return {
 			Address: address,
