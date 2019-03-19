@@ -10,7 +10,7 @@ module.exports = {
 		},
 		ropsten: {
 			provider: function() {
-				return new HDWalletProvider(process.env.DEPLOYER_MNENOMIC, process.env.INFURA_ROPSTEN);
+				return new HDWalletProvider(process.env.DEPLOYER_MNEMONIC, process.env.INFURA_ROPSTEN);
 			},
 			network_id: "3"
 		}
