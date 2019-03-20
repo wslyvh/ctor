@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { IContract } from "../../model/IContract";
+import ContractServiceFactory from "../../services/ContractServiceFactory";
 import { IContractService } from "../../services/IContractService";
-import StaticContractService from "../../services/StaticContractService";
-import TruffleContractService from "../../services/TruffleContractService";
 
 interface IProps {
 	limit: number;
@@ -22,8 +21,7 @@ class ContractOverview extends Component<IProps> {
 	constructor(props: IProps) {
 		super(props);
 
-		// this.contractService = new StaticContractService();
-		this.contractService = new TruffleContractService();
+		this.contractService = ContractServiceFactory.Create();
 	}
 
 	public async componentDidMount() {

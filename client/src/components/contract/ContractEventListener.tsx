@@ -72,7 +72,7 @@ class ContractEventListener extends Component<IProps> {
 					const element = args[i];
 					result += element.toString();
 
-					if (i < args.length - 2) result += ", ";
+					if (i < args.length - 2) { result += ", "; }
 				}
 
 				const eventLog = {
@@ -85,7 +85,7 @@ class ContractEventListener extends Component<IProps> {
 				const logs = this.state.logs;
 				logs.push(eventLog);
 				this.setState({
-					logs: logs
+					logs
 				});
 			});
 		});
