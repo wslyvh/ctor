@@ -112,8 +112,8 @@ class ContractMember extends Component<IProps> {
 			const response = await this.props.contract.functions[this.props.name](...args);
 			result = response;
 
-			console.log(this.props.type);
 			if (this.props.type === "function") {
+				console.log(response); // TODO: Handle TX
 				result = "Transaction successfully sent.";
 			} else {
 				if (response._ethersType === "BigNumber" || response.length) {

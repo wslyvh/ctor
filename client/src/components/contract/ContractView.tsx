@@ -2,6 +2,7 @@ import { Contract, ethers } from "ethers";
 import React, { Component } from "react";
 import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { IContract } from "../../model/IContract";
+import ContractEventListener from "./ContractEventListener";
 import ContractMember from "./ContractMember";
 
 interface IProps {
@@ -85,6 +86,12 @@ class ContractView extends Component<IProps> {
 									events
 								</label>
 							</div>
+							<div className="form-check form-check-inline badge badge-dark checked-badge">
+								<input className="form-check-input" type="checkbox" id="inlineCheckbox4" value="logs" onChange={this.onFilterChecked} checked={this.state.showMembers.includes("logs")} />
+								<label className="form-check-label" htmlFor="inlineCheckbox4">
+									logs
+								</label>
+							</div>
 							<br />
 							<br />
 						</div>
@@ -115,6 +122,8 @@ class ContractView extends Component<IProps> {
 								})}
 							</div>
 						)}
+
+						{this.state.showMembers.includes("logs") && <ContractEventListener contract={this.etherContract} />}
 					</div>
 				</div>
 			</>
