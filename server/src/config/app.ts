@@ -10,4 +10,4 @@ const appConfig = {
 	LOG_LEVEL: process.env.LOG_LEVEL === "production" ? "error" : "debug"
 };
 
-export default appConfig;
+export = appConfig;

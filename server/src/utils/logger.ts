@@ -24,4 +24,4 @@ const logger = winston.createLogger({
 
 logger.debug(`Logging initialized at '${level}' level`);
 
-export default logger;
+export = logger;
