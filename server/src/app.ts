@@ -5,6 +5,7 @@ import compression from "compression";
 import express from "express";
 import expressValidator from "express-validator";
 import { Routes } from "./config/routes";
+import config from "./config/app";
 
 class App {
 	public app: express.Application;
@@ -23,7 +24,7 @@ class App {
 		this.app.use(compression());
 		this.app.use(expressValidator());
 
-		if (process.env.NODE_ENV === "production") {
+		if (config.NODE_ENV === "production") {
 			// Serve any static files
 			this.app.use(express.static(path.join(__dirname, "..", "client/build")));
 
