@@ -7,10 +7,10 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test --coverage --verbose --detectOpenHandles --forceExit",
 		"eject": "react-scripts eject",
-		"dev": "npm run start",
 		"lint": "tslint -c tslint.json -p tsconfig.json",
 		"lint-fix": "tslint --fix -c tslint.json -p tsconfig.json"
 	},
+	"proxy": "http://localhost:5000/",
 	"eslintConfig": {
 		"extends": "react-app"
 	},

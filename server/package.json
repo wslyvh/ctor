@@ -3,12 +3,11 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"start": "node ./build/index.js",
+		"start": "nodemon --exec ts-node -- src/index.ts",
 		"build": "tsc",
 		"test": "jest --coverage --verbose --detectOpenHandles --forceExit",
 		"lint": "tslint -c tslint.json -p tsconfig.json",
-		"lint-fix": "tslint --fix -c tslint.json -p tsconfig.json",
-		"dev": "nodemon --exec ts-node -- src/index.ts"
+		"lint-fix": "tslint --fix -c tslint.json -p tsconfig.json"
 	},
 	"jest": {
 		"preset": "ts-jest",
