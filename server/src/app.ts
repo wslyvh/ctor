@@ -1,11 +1,11 @@
 import bodyParser from "body-parser";
-import cors from "cors";
-import path from "path";
 import compression from "compression";
+import cors from "cors";
 import express from "express";
 import expressValidator from "express-validator";
-import { Routes } from "./config/routes";
+import path from "path";
 import config from "./config/app";
+import { Routes } from "./config/routes";
 
 class App {
 	public app: express.Application;

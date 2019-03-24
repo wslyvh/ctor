@@ -1,12 +1,12 @@
+import ContractService from "./ContractService";
 import { IContractService } from "./IContractService";
 import StaticContractService from "./StaticContractService";
 import TruffleContractService from "./TruffleContractService";
 
 class ContractServiceFactory {
-
 	public static Create(): IContractService {
 		if (this.local) {
-			return new TruffleContractService();
+			return new ContractService();
 		}
 
 		return new StaticContractService();

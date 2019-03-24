@@ -4,7 +4,7 @@ import app from "./app";
 describe("Express Application", () => {
 	it("should return 200 on default GET", done => {
 		request(app)
-			.get("/")
+			.get("/api")
 			.expect(200, done);
 	});
 
