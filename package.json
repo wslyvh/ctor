@@ -5,9 +5,15 @@
 	"author": "wslyvh",
 	"license": "GPL-3.0",
 	"scripts": {
-		"client": "cd client && npm run start",
-		"server": "cd server && npm run start",
-		"dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+		"client:run": "cd client && npm run start",
+		"client:test": "cd client && npm run test",
+		"client:lint-fix": "cd client && npm run lint-fix",
+		"server:run": "cd server && npm run start",
+		"server:test": "cd server && npm run test",
+		"server:lint-fix": "cd server && npm run lint-fix",
+		"dev": "concurrently --kill-others-on-fail \"npm run server:run\" \"npm run client:run\"",
+		"test": "concurrently --kill-others-on-fail \"npm run client:test\" \"npm run server:test\"",
+		"lint": "concurrently --kill-others-on-fail \"npm run client:lint-fix\" \"npm run server:lint-fix\""
 	},
 	"devDependencies": {
 		"concurrently": "^4.1.0"
