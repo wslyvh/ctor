@@ -5,7 +5,7 @@ import logger from "../utils/logger";
 
 class FileController {
 	public async getFiles(request: Request, response: Response) {
-		const dir = process.env.contracts_build_directory ? process.env.contracts_build_directory : ".build/contracts";
+		const dir = process.env.contracts_build_directory ? process.env.contracts_build_directory : "./build/contracts";
 
 		logger.info("Fetching files from: " + dir);
 		const exists = fs.existsSync(dir);
