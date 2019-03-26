@@ -26,11 +26,11 @@ class App {
 
 		if (config.NODE_ENV === "production") {
 			// Serve any static files
-			this.app.use(express.static(path.join(__dirname, "..", "client/build")));
+			this.app.use(express.static(config.UI_DIR));
 
 			// Handle React routing, return all requests to React app
 			this.app.get("*", (req, res) => {
-				res.sendFile(path.join(__dirname, "..", "client/build", "index.html"));
+				res.sendFile(path.join(config.UI_DIR, "index.html"));
 			});
 		}
 	}
