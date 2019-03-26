@@ -11,7 +11,7 @@ interface IProps {
 
 class ContractView extends Component<IProps> {
 	public state = {
-		showMembers: ["constants", "functions", "events"],
+		showMembers: ["constants", "functions", "events", "logs"],
 		contract: Contract,
 		constants: [],
 		functions: [],

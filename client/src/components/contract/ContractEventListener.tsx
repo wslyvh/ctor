@@ -52,8 +52,8 @@ class ContractEventListener extends Component<IProps> {
 					{this.state.logs.map((log: IEventLog, index: any) => {
 						return (
 							<div key={index}>
-								<strong>{log.signature}</strong>
-								<i> block #{log.block} </i>
+								<strong>{log.signature}</strong> at block #{log.block}, tx <i>{log.tx}</i>
+								<br />
 								<small>{log.arguments}</small>
 							</div>
 						);
