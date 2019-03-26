@@ -72,12 +72,13 @@ class TruffleContractService implements IContractService {
 
 	private async GetContractFiles(): Promise<ITruffleContract[]> {
 		const response = await fetch("/api/files");
-		const body = await response.json();
 
 		if (response.status !== 200) {
-			throw Error(body.message);
+			console.log(response.statusText);
+			return [];
 		}
 
+		const body = await response.json();
 		return body;
 	}
 }

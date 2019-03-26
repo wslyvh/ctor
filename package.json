@@ -9,9 +9,10 @@
 		"client:test": "cd client && npm run test",
 		"client:lint-fix": "cd client && npm run lint-fix",
 		"server:run": "cd server && npm run start",
+		"server:dev": "cd server && npm run dev",
 		"server:test": "cd server && npm run test",
 		"server:lint-fix": "cd server && npm run lint-fix",
-		"dev": "concurrently --kill-others-on-fail \"npm run server:run\" \"npm run client:run\"",
+		"dev": "concurrently --kill-others-on-fail \"npm run server:dev\" \"npm run client:run\"",
 		"test": "concurrently --kill-others-on-fail \"npm run client:test\" \"npm run server:test\"",
 		"lint": "concurrently --kill-others-on-fail \"npm run client:lint-fix\" \"npm run server:lint-fix\""
 	},
