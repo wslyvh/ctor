@@ -1,12 +1,12 @@
 import fs = require("fs");
 import * as winston from "winston";
-import config from "../config/app";
+import AppConfig from "../config/App";
 
-if (!fs.existsSync(config.LOG_DIR)) {
-	fs.mkdirSync(config.LOG_DIR);
+if (!fs.existsSync(AppConfig.LOG_DIR)) {
+	fs.mkdirSync(AppConfig.LOG_DIR);
 }
 
-const level = config.LOG_LEVEL;
+const level = AppConfig.LOG_LEVEL;
 const logger = winston.createLogger({
 	level: "info",
 	format: winston.format.combine(winston.format.timestamp(), winston.format.json()),

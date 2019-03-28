@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
-import { FileController } from "../controllers/fileController";
+import { ContractController } from "../controllers/ContractController";
+import { FileController } from "../controllers/FileController";
 
 class Routes {
-
-	public fileController: FileController = new FileController();
 	private baseUri = "/api";
+
+	private fileController: FileController = new FileController();
+	private contractController: ContractController = new ContractController();
 
 	public routes(app: any): void {
 		app.route(this.baseUri).get((req: Request, res: Response) => {
@@ -13,6 +15,10 @@ class Routes {
 
 		// Files
 		app.route(this.baseUri + "/files").get(this.fileController.getFiles);
+
+		// Contracts
+		app.route(this.baseUri + "/contracts").get(this.contractController.GetContracts);
+		app.route(this.baseUri + "/contracts/:address").get(this.contractController.GetContract);
 	}
 }
 

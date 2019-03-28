@@ -1,4 +1,4 @@
-import { FileUtils } from "./fileUtils";
+import { FileUtils } from "./FileUtils";
 
 const filesInDefaultFilesDir = 1;
 

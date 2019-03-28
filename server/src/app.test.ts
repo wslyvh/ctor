@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "./app";
+import app from "./App";
 
 describe("Express Application", () => {
 	it("should return 200 on default GET", done => {

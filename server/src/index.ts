@@ -1,4 +1,4 @@
-import app from "./app";
-import config from "./config/app";
+import app from "./App";
+import AppConfig from "./config/App";
 
-app.listen(config.PORT, () => console.log(`Listening on port ${config.PORT}`));
+app.listen(AppConfig.PORT, () => console.log(`Listening on port ${AppConfig.PORT}`));
