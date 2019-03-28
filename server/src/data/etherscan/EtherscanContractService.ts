@@ -1,12 +1,12 @@
 import { Contract, ethers } from "ethers";
 import { BaseProvider } from "ethers/providers";
-import { IContract } from "../models/IContract";
-import Web3Utils from "../utils/Web3Utils";
-import Contracts from "./Etherscan/Contracts.json";
-import { EtherscanClient } from "./etherscan/EtherscanClient";
-import { IEtherscanClient } from "./etherscan/IEtherscanClient";
-import { IEtherscanSourceCodeResult } from "./etherscan/IEtherscanTypes";
-import { IContractService } from "./IContractService";
+import { IContract } from "../../models/IContract";
+import Web3Utils from "../../utils/Web3Utils";
+import { IContractService } from "../IContractService";
+import Contracts from "./Contracts.json";
+import { EtherscanClient } from "./EtherscanClient";
+import { IEtherscanClient } from "./IEtherscanClient";
+import { IEtherscanSourceCodeResult } from "./IEtherscanTypes";
 
 class EtherscanContractService implements IContractService {
 	private provider: BaseProvider;
@@ -25,13 +25,13 @@ class EtherscanContractService implements IContractService {
 
 		let contract: IEtherscanSourceCodeResult;
 		const etherscanResult = await this.client.getContractSourceCode(address);
+
 		if (etherscanResult && etherscanResult.length > 0) {
 			contract = etherscanResult[0];
 			if (contract.ABI === "Contract source code not verified") {
 				return null;
 			}
-
-			return this.MapContract(contract);
+			return this.MapContract(address, contract);
 		}
 
 		return null;
@@ -39,19 +39,19 @@ class EtherscanContractService implements IContractService {
 
 	public async GetContracts(limit: number = 10): Promise<IContract[]> {
 		return Contracts.slice(0, limit).map((contract: any) => {
-			return this.MapContract(contract);
+			return this.MapContract(contract.Address, contract);
 		});
 	}
 
-	private MapContract(contract: any): IContract {
+	private MapContract(address: string, contract: any): IContract {
 		return {
-			Address: contract.Address,
+			Address: address,
 			Name: contract.ContractName,
 			SourceCode: contract.SourceCode,
 			ABI: contract.ABI,
-			RawContract: new Contract(contract.Address, contract.ABI, this.provider)
+			RawContract: new Contract(address, contract.ABI, this.provider)
 		} as IContract;
 	}
 }
 
-export default EtherscanContractService;
+export { EtherscanContractService };

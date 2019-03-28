@@ -1,28 +1,30 @@
 import { Request, Response } from "express";
-import EtherscanContractService from "../data/EtherscanContractService";
+import ContractServiceFactory from "../data/ContractServiceFactory";
 import logger from "../utils/Logger";
 
 class ContractController {
 	public async GetContract(request: Request, response: Response) {
-		const client = new EtherscanContractService();
+		const client = ContractServiceFactory.Create();
 
 		try {
 			const contract = await client.GetContract(request.params.address);
+
+			console.log(contract);
 			response.json(contract);
-		} catch (error) {
-			logger.error(error.toString());
+		} catch (ex) {
+			logger.error(ex.toString());
 			response.status(400).send("Unable to get contract.");
 		}
 	}
 
 	public async GetContracts(request: Request, response: Response) {
-		const client = new EtherscanContractService();
+		const client = ContractServiceFactory.Create();
 
 		try {
 			const contracts = await client.GetContracts(10);
 			response.json(contracts);
-		} catch (error) {
-			logger.error(error.toString());
+		} catch (ex) {
+			logger.error(ex.toString());
 			response.status(400).send("Unable to get contracts.");
 		}
 	}

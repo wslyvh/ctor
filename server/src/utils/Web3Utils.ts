@@ -18,7 +18,9 @@ class Web3Utils {
 		if (this.isAddress(address)) {
 			try {
 				const code = await provider.getCode(address);
+
 				if (code !== "0x") {
+					logger.info(address + " is contract.");
 					return true;
 				}
 			} catch (ex) {
