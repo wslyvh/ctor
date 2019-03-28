@@ -1,6 +1,7 @@
 import AppConfig from "../../config/App";
 import { IEtherscanClient } from "./IEtherscanClient";
 import { ABIResult, IEtherscanAPIResponse, SourceCodeResult } from "./IEtherscanTypes";
+import logger from "../../utils/Logger";
 
 export class EtherscanClient implements IEtherscanClient {
 	private apiKey = AppConfig.ETHERSCAN_APIKEY;
@@ -11,7 +12,7 @@ export class EtherscanClient implements IEtherscanClient {
 		const body = await response.json();
 
 		if (response.status !== 200) {
-			console.log(response);
+			logger.error(response);
 			throw Error(body.message);
 		}
 
@@ -23,6 +24,7 @@ export class EtherscanClient implements IEtherscanClient {
 		const response = await fetch(uri);
 
 		if (response.status !== 200) {
+			logger.error(response);
 			throw new Error(`Error has occurred. ${response.status}`);
 		}
 
@@ -34,18 +36,18 @@ export class EtherscanClient implements IEtherscanClient {
 
 			if (etherscanResponse.message === "NOTOK" && etherscanResponse.status === "0") {
 				if (etherscanResponse.result.length === 1) {
-					console.log("NOTOK - " + etherscanResponse.result[0].ABI);
+					logger.error("NOTOK - " + etherscanResponse.result[0].ABI);
 				} else {
-					console.log("NOTOK - " + etherscanResponse.result);
+					logger.error("NOTOK - " + etherscanResponse.result);
 				}
 
 				return null;
 			}
 
 			return etherscanResponse.result;
-		} catch (err) {
-			console.log(err);
-			throw new Error(`Failed to parse json in response body: ${err.message}`);
+		} catch (ex) {
+			logger.error(ex.toString());
+			throw new Error(`Failed to parse json in response body: ${ex.message}`);
 		}
 	}
 }
