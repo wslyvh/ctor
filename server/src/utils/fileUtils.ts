@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-class Files {
+class FileUtils {
 	public static GetJsonFiles(path: string): any[] {
 		const exists = fs.existsSync(path);
 		if (!exists) {
@@ -41,4 +41,4 @@ class Files {
 	}
 }
 
-export { Files };
+export { FileUtils };

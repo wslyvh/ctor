@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import * as fs from "fs";
 import config from "../config/app";
-import { Files } from "../utils/files";
+import { FileUtils } from "../utils/fileUtils";
 import logger from "../utils/logger";
 
 class FileController {
@@ -16,7 +16,7 @@ class FileController {
 		}
 
 		try {
-			const files = Files.GetJsonFiles(dir);
+			const files = FileUtils.GetJsonFiles(dir);
 			response.json(files);
 		} catch (error) {
 			logger.error(error);
