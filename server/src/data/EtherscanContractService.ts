@@ -5,7 +5,7 @@ import Web3Utils from "../utils/Web3Utils";
 import Contracts from "./Etherscan/Contracts.json";
 import { EtherscanClient } from "./etherscan/EtherscanClient";
 import { IEtherscanClient } from "./etherscan/IEtherscanClient";
-import { IEtherscanSourceCodeResult } from "./Etherscan/IEtherscanTypes";
+import { IEtherscanSourceCodeResult } from "./etherscan/IEtherscanTypes";
 import { IContractService } from "./IContractService";
 
 class EtherscanContractService implements IContractService {
