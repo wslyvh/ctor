@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ContractMember from "./ContractMember";
 
-let mock: any = jest.fn();
-let member = {
+const mock: any = jest.fn();
+const member = {
 	...mock,
 	inputs: {
 		map: jest.fn()

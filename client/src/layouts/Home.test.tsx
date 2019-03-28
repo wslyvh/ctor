@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Home from "./Home";
 
-let mock: any = jest.fn();
+const mock: any = jest.fn();
 
 it("renders without crashing", () => {
 	const div = document.createElement("div");

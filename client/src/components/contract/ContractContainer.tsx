@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { ContractService } from "../../services/ContractService";
 import { IContractService } from "../../services/IContractService";
 import ContractView from "./ContractView";
-import { ContractService } from "../../services/ContractService";
 
 interface IProps {
 	address: string;

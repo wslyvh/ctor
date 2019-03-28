@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Default from "./Default";
 
-let mock: any = jest.fn();
+const mock: any = jest.fn();
 const validAddress = "0xbb9bc244d798123fde783fcc1c72d3bb8c189413";
 const invalidAddress = "0x123";
 

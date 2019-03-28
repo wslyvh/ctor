@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { IContract } from "../../model/IContract";
-import { IContractService } from "../../services/IContractService";
 import { ContractService } from "../../services/ContractService";
+import { IContractService } from "../../services/IContractService";
 
 interface IProps {
 	limit: number;

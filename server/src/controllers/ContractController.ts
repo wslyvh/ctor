@@ -4,7 +4,7 @@ import logger from "../utils/Logger";
 
 class ContractController {
 	public async GetContract(request: Request, response: Response) {
-		var client = new EtherscanContractService();
+		const client = new EtherscanContractService();
 
 		try {
 			const contract = await client.GetContract(request.params.address);
@@ -16,7 +16,7 @@ class ContractController {
 	}
 
 	public async GetContracts(request: Request, response: Response) {
-		var client = new EtherscanContractService();
+		const client = new EtherscanContractService();
 
 		try {
 			const contracts = await client.GetContracts(10);
