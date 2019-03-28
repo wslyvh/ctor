@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import ContractServiceFactory from "../../services/ContractServiceFactory";
 import { IContractService } from "../../services/IContractService";
 import ContractView from "./ContractView";
+import { ContractService } from "../../services/ContractService";
 
 interface IProps {
 	address: string;
@@ -20,7 +20,7 @@ class ContractContainer extends Component<IProps> {
 	constructor(props: IProps) {
 		super(props);
 
-		this.contractService = ContractServiceFactory.Create();
+		this.contractService = new ContractService();
 	}
 
 	public async componentDidMount() {

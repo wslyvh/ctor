@@ -1,5 +1,4 @@
 import { ethers } from "ethers";
-import { BaseProvider } from "ethers/providers";
 
 class Web3Utils {
 	public static isAddress(address: string): boolean {
@@ -11,18 +10,6 @@ class Web3Utils {
 
 			return false;
 		}
-	}
-
-	public static async isContractAddress(provider: BaseProvider, address: string): Promise<boolean> {
-		if (this.isAddress(address)) {
-			const code = await provider.getCode(address);
-			if (code !== "0x") {
-				return true;
-			}
-		}
-
-		console.log("Error: invalid contract address");
-		return false;
 	}
 }
 
