@@ -19,7 +19,7 @@ class FileController {
 			const files = FileUtils.GetJsonFiles(dir);
 			response.json(files);
 		} catch (error) {
-			logger.error(error);
+			logger.error(error.toString());
 			response.status(500).send("Unable to get files.");
 		}
 	}
