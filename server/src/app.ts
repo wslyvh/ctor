@@ -14,7 +14,6 @@ class App {
 	constructor() {
 		this.app = express();
 		this.config();
-		this.routes.routes(this.app);
 	}
 
 	private config(): void {
@@ -23,6 +22,8 @@ class App {
 		this.app.use(cors());
 		this.app.use(compression());
 		this.app.use(expressValidator());
+
+		this.routes.routes(this.app);
 
 		if (AppConfig.NODE_ENV === "production") {
 			// Serve any static files
