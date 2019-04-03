@@ -4,6 +4,7 @@ import logger from "../utils/Logger";
 
 class ContractController {
 	public async GetContract(request: Request, response: Response) {
+		logger.debug("GetContract " + request.params.address);
 		const client = ContractServiceFactory.Create();
 
 		try {
@@ -18,6 +19,7 @@ class ContractController {
 	}
 
 	public async GetContracts(request: Request, response: Response) {
+		logger.debug("GetContracts");
 		const client = ContractServiceFactory.Create();
 
 		try {

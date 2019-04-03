@@ -22,13 +22,18 @@ class ContractService implements IContractService {
 
 	public async GetContracts(limit: number = 10): Promise<IContract[]> {
 		const response = await fetch("/api/contracts");
+
 		if (response.status !== 200) {
 			console.log(response.statusText);
 			return [];
 		}
-
-		const body = await response.json();
-		return body;
+		try {
+			const body = await response.json();
+			return body;
+		} catch (ex) {
+			console.log(ex);
+		}
+		return [];
 	}
 }
 
