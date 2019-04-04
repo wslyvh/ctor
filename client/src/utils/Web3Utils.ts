@@ -2,8 +2,6 @@ import { ethers, Signer } from "ethers";
 import { BaseProvider, JsonRpcProvider } from "ethers/providers";
 
 class Web3Utils {
-	private static networkUrl: string = "http://localhost:8545";
-
 	public static isAddress(address: string): boolean {
 		try {
 			ethers.utils.getAddress(address);
@@ -26,13 +24,14 @@ class Web3Utils {
 		return ethers.getDefaultProvider();
 	}
 
-	public static canSign(): Boolean {
+	public static canSign(): boolean {
 		if (process.env.REACT_APP_SERVICE === "local") {
 			return true;
 		}
 
 		return false;
 	}
+	private static networkUrl: string = "http://localhost:8545";
 }
 
 export default Web3Utils;

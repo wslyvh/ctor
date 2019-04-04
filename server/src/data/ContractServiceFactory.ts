@@ -1,5 +1,5 @@
-import logger from "../utils/Logger";
 import AppConfig from "../config/App";
+import logger from "../utils/Logger";
 import { EtherscanContractService } from "./etherscan/EtherscanContractService";
 import { IContractService } from "./IContractService";
 import { TruffleContractService } from "./truffle/TruffleContractService";

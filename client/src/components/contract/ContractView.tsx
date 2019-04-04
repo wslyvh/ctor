@@ -2,9 +2,9 @@ import { Contract, ethers } from "ethers";
 import React, { Component } from "react";
 import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { IContract } from "../../model/IContract";
+import Web3Utils from "../../utils/Web3Utils";
 import ContractEventListener from "./ContractEventListener";
 import ContractMember from "./ContractMember";
-import Web3Utils from "../../utils/Web3Utils";
 
 interface IProps {
 	contract: IContract;
