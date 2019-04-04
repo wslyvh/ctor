@@ -1,12 +1,26 @@
 {
-  "name": "ctor-mono",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "client": "cd client && npm run start",
-    "dev": "concurrently --kill-others-on-fail \"npm run client\""
-  },
-  "devDependencies": {
-    "concurrently": "^4.1.0"
-  }
+	"name": "ctor-mono",
+	"version": "0.1.0",
+	"private": true,
+	"author": "wslyvh",
+	"license": "GPL-3.0",
+	"scripts": {
+		"prebuild": "cd client && npm run build",
+		"build": "cd server && npm run build",
+		"start": "cd server && npm run start",
+		"cli:run": "cd cli && npm run start",
+		"client:run": "cd client && npm run start",
+		"client:test": "cd client && npm run test",
+		"client:lint-fix": "cd client && npm run lint-fix",
+		"server:run": "cd server && npm run start",
+		"server:dev": "cd server && npm run dev",
+		"server:test": "cd server && npm run test",
+		"server:lint-fix": "cd server && npm run lint-fix",
+		"dev": "concurrently --kill-others-on-fail \"npm run server:dev\" \"npm run client:run\"",
+		"test": "concurrently --kill-others-on-fail \"npm run client:test\" \"npm run server:test\"",
+		"lint": "concurrently --kill-others-on-fail \"npm run client:lint-fix\" \"npm run server:lint-fix\""
+	},
+	"devDependencies": {
+		"concurrently": "^4.1.0"
+	}
 }

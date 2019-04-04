@@ -1,0 +1,12 @@
+{
+	"name": "ctor-cli",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"start": "node cli.js"
+	},
+	"dependencies": {
+		"cross-env": "^5.2.0",
+		"yargs": "^13.2.2"
+	}
+}

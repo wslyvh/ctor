@@ -41,4 +41,4 @@ class FileUtils {
 	}
 }
 
-export default FileUtils;
+export { FileUtils };

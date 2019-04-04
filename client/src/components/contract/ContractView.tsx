@@ -2,6 +2,8 @@ import { Contract, ethers } from "ethers";
 import React, { Component } from "react";
 import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { IContract } from "../../model/IContract";
+import Web3Utils from "../../utils/Web3Utils";
+import ContractEventListener from "./ContractEventListener";
 import ContractMember from "./ContractMember";
 
 interface IProps {
@@ -10,7 +12,7 @@ interface IProps {
 
 class ContractView extends Component<IProps> {
 	public state = {
-		showMembers: ["constants", "functions", "events"],
+		showMembers: ["constants", "functions", "events", "logs"],
 		contract: Contract,
 		constants: [],
 		functions: [],
@@ -29,8 +31,8 @@ class ContractView extends Component<IProps> {
 	}
 
 	public async setContractMembers(nextProps: any) {
-		if (nextProps.contract.ABI) {
-			this.etherContract = new Contract(this.props.contract.Address, nextProps.contract.ABI, ethers.getDefaultProvider());
+		if (nextProps.contract && nextProps.contract.RawContract) {
+			this.etherContract = new Contract(nextProps.contract.Address, nextProps.contract.ABI, Web3Utils.getProvider());
 			const constants = this.etherContract.interface.abi.filter((member: any) => member.constant === true);
 			const functions = this.etherContract.interface.abi.filter((member: any) => member.constant === false);
 			const events = this.etherContract.interface.abi.filter((member: any) => member.type === "event");
@@ -45,7 +47,7 @@ class ContractView extends Component<IProps> {
 	}
 
 	public render() {
-		if (!this.props.contract.Name && !this.props.contract.ABI) {
+		if (this.props.contract && !this.props.contract.ABI) {
 			return <br />;
 		}
 
@@ -84,6 +86,12 @@ class ContractView extends Component<IProps> {
 									events
 								</label>
 							</div>
+							<div className="form-check form-check-inline badge badge-dark checked-badge">
+								<input className="form-check-input" type="checkbox" id="inlineCheckbox4" value="logs" onChange={this.onFilterChecked} checked={this.state.showMembers.includes("logs")} />
+								<label className="form-check-label" htmlFor="inlineCheckbox4">
+									logs
+								</label>
+							</div>
 							<br />
 							<br />
 						</div>
@@ -114,6 +122,8 @@ class ContractView extends Component<IProps> {
 								})}
 							</div>
 						)}
+
+						{this.state.showMembers.includes("logs") && <ContractEventListener contract={this.etherContract} />}
 					</div>
 				</div>
 			</>

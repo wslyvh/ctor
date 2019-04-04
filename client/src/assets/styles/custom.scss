@@ -1,99 +1,104 @@
 @import "./colors.scss";
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 h1 {
-  font-size: 2.4em;
+	font-size: 2.4em;
 }
 
 h1 a {
-  color: #363cd2;
-  text-decoration: none;
+	color: #363cd2;
+	text-decoration: none;
 }
 h1 a:hover,
 h1 a:active,
 h1 a:visited {
-  color: #363cd2;
-  text-decoration: none;
+	color: #363cd2;
+	text-decoration: none;
 }
 
 h2 {
-  font-size: 1.6em;
-  color: #000;
+	font-size: 1.6em;
+	color: #000;
 }
 
 h3 {
-  font-size: 1.2em;
-  color: #999;
+	font-size: 1.2em;
+	color: #999;
 }
 
 h4 {
-  font-size: 1em;
-  color: #818182;
+	font-size: 1em;
+	color: #818182;
 }
 
 .container {
-  max-width: 1460px;
+	max-width: 1460px;
 }
 
 .header {
-  background: #fff;
-  border-bottom: 1px solid #dee2e6 !important;
-  padding: 12px;
-  margin-bottom: 48px;
+	background: #fff;
+	border-bottom: 1px solid #dee2e6 !important;
+	padding: 12px;
+	margin-bottom: 48px;
 }
 
 .header .logo {
-  max-width: 38px;
+	max-width: 38px;
 }
 
 .searchBox {
-  padding-top: 6px;
+	padding-top: 6px;
 }
 
 .search {
-  min-width: 900px;
+	min-width: 900px;
 }
 
 .icon-wrap {
-  position: absolute;
-  right: 0;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 60px;
-  height: 100%;
+	position: absolute;
+	right: 0;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	width: 60px;
+	height: 100%;
 }
 
 .icon-wrap path {
-  fill: #818182 !important;
+	fill: #818182 !important;
 }
 
 .panel {
-  background: #fff;
-  margin: 24px 0;
-  padding: 12px;
+	background: #fff;
+	margin: 24px 0;
+	padding: 12px;
 }
 
 .contract-summary h3 {
-  font-size: 1em;
+	font-size: 1em;
 }
 
 .contract-summary small {
-  position: relative;
-  font-size: 0.7em;
-  top: -2px;
-  margin-left: 10px;
+	position: relative;
+	font-size: 0.7em;
+	top: -2px;
+	margin-left: 10px;
 }
 
 .checked-badge {
-  padding: 5px 5px 1px 5px;
+	padding: 5px 5px 1px 5px;
 }
 .checked-badge label {
-  position: relative;
-  bottom: 4px;
+	position: relative;
+	bottom: 4px;
+}
+
+.console-log {
+	font-family: monospace;
+	overflow-y: scroll;
+	height: 300px;
 }

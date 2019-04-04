@@ -4,13 +4,14 @@
 	"private": true,
 	"scripts": {
 		"start": "react-scripts start",
+		"prebuild": "npm install && npm install --only=dev --no-shrinkwrap",
 		"build": "react-scripts build",
 		"test": "react-scripts test --coverage --verbose --detectOpenHandles --forceExit",
 		"eject": "react-scripts eject",
-		"dev": "npm run start",
 		"lint": "tslint -c tslint.json -p tsconfig.json",
 		"lint-fix": "tslint --fix -c tslint.json -p tsconfig.json"
 	},
+	"proxy": "http://localhost:5000/",
 	"eslintConfig": {
 		"extends": "react-app"
 	},
@@ -24,19 +25,21 @@
 		"bootstrap": "^4.3.1",
 		"ethers": "^4.0.26",
 		"node-sass": "^4.11.0",
-		"react": "^16.8.2",
+		"react": "^16.8.6",
 		"react-bootstrap": "^1.0.0-beta.5",
-		"react-dom": "^16.8.2",
+		"react-dom": "^16.8.6",
 		"react-icons": "^3.4.0",
 		"react-router-dom": "^4.3.1",
-		"react-scripts": "2.1.5"
+		"react-scripts": "^2.1.8"
 	},
 	"devDependencies": {
 		"@types/jest": "^24.0.6",
-		"@types/node": "^11.9.4",
-		"@types/react": "^16.8.4",
+		"@types/node": "^11.12.0",
+		"@types/react": "^16.8.10",
 		"@types/react-dom": "^16.8.2",
 		"@types/react-router-dom": "^4.3.1",
+		"create-react-app": "^2.1.8",
+		"cross-env": "^5.2.0",
 		"prettier": "^1.16.4",
 		"tslint": "^5.13.0",
 		"tslint-config-prettier": "^1.18.0",

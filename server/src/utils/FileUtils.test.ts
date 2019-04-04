@@ -1,6 +1,6 @@
-import FileUtils from "./FileUtils";
+import { FileUtils } from "./FileUtils";
 
-const filesInDefaultDirectory = 1;
+const filesInDefaultFilesDir = 1;
 
 describe("FileUtils", () => {
 	it("should initialize a new instance", () => {
@@ -13,15 +13,15 @@ describe("FileUtils", () => {
 
 describe("Directories", () => {
 	it("should get all files, from directory path, with trailing slash", () => {
-		const files = FileUtils.GetJsonFiles("./tests/contracts/");
+		const files = FileUtils.GetJsonFiles("./src/tests/data");
 
-		expect(files.length).toEqual(filesInDefaultDirectory);
+		expect(files.length).toEqual(filesInDefaultFilesDir);
 	});
 
 	it("should get all files, from directory path, without trailing slash", () => {
-		const files = FileUtils.GetJsonFiles("./tests/contracts");
+		const files = FileUtils.GetJsonFiles("./src/tests/data/");
 
-		expect(files.length).toEqual(filesInDefaultDirectory);
+		expect(files.length).toEqual(filesInDefaultFilesDir);
 	});
 
 	it("should throw if path doesn't exist", () => {
@@ -31,14 +31,14 @@ describe("Directories", () => {
 
 describe("Files", () => {
 	it("should get a single file", () => {
-		const files = FileUtils.GetJsonFiles("./tests/contracts/MetaCoin.json");
+		const files = FileUtils.GetJsonFiles("./src/tests/data/MetaCoin.json");
 
 		expect(files).toBeDefined();
 		expect(files.length).toEqual(1);
 	});
 
 	it("should ignore non-json files", () => {
-		const files = FileUtils.GetJsonFiles("./tests/contracts/InvalidFile.contract");
+		const files = FileUtils.GetJsonFiles("./src/tests/data/InvalidFile.contract");
 
 		expect(files).toBeDefined();
 		expect(files.length).toEqual(0);
