@@ -6,12 +6,14 @@ import expressValidator from "express-validator";
 import path from "path";
 import AppConfig from "./config/App";
 import { Routes } from "./config/Routes";
+import logger from "./utils/Logger";
 
 class App {
 	public app: express.Application;
 	public routes: Routes = new Routes();
 
 	constructor() {
+		logger.info(`Configuring Express App. ${AppConfig.NODE_ENV} mode`);
 		this.app = express();
 		this.config();
 	}
@@ -26,6 +28,7 @@ class App {
 		this.routes.routes(this.app);
 
 		if (AppConfig.NODE_ENV === "production") {
+			logger.info(`Setting up Static UI at: ${AppConfig.UI_DIR}. Current dir: ${__dirname}`);
 			// Serve any static files
 			this.app.use(express.static(AppConfig.UI_DIR));
 

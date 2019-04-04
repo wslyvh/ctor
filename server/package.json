@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"start": "cross-env NODE_ENV=production nodemon --exec ts-node -- src/Index.ts",
+		"start": "node ./build/Index.js",
 		"dev": "nodemon --exec ts-node -- src/Index.ts",
 		"prebuild": "npm install && npm install --only=dev --no-shrinkwrap",
 		"build": "tsc",
