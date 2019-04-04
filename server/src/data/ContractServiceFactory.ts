@@ -1,11 +1,12 @@
 import logger from "../utils/Logger";
+import AppConfig from "../config/App";
 import { EtherscanContractService } from "./etherscan/EtherscanContractService";
 import { IContractService } from "./IContractService";
 import { TruffleContractService } from "./truffle/TruffleContractService";
 
 class ContractServiceFactory {
 	public static Create(): IContractService {
-		if (this.local) {
+		if (AppConfig.CONTRACT_SERVICE === "local") {
 			logger.info("Creating local TruffleContractService...");
 			return new TruffleContractService();
 		}
@@ -13,7 +14,6 @@ class ContractServiceFactory {
 		logger.info("Creating default EtherscanContractService...");
 		return new EtherscanContractService();
 	}
-	private static local: boolean = process.env.CONTRACT_SERVICE ? process.env.CONTRACT_SERVICE === "local" : false;
 }
 
 export default ContractServiceFactory;

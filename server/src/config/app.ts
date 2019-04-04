@@ -14,6 +14,8 @@ const AppConfig = {
 	CONTRACTS_BUILD_DIR: process.env.contracts_build_directory ? process.env.contracts_build_directory : "./build/contracts",
 	UI_DIR: process.env.ui_directory ? path.join(projectRoot, process.env.ui_directory) : path.join(projectRoot, "client/build"),
 
+	CONTRACT_SERVICE: process.env.CONTRACT_SERVICE || "local",
+
 	ETHERSCAN_APIKEY: process.env.ETHERSCAN_APIKEY
 };
 
