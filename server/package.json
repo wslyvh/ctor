@@ -5,6 +5,7 @@
 	"scripts": {
 		"start": "cross-env NODE_ENV=production nodemon --exec ts-node -- src/index.ts",
 		"dev": "nodemon --exec ts-node -- src/index.ts",
+		"prebuild": "npm install --only=dev --no-shrinkwrap",
 		"build": "tsc",
 		"test": "jest --coverage --verbose --detectOpenHandles --forceExit",
 		"lint": "tslint -c tslint.json -p tsconfig.json",

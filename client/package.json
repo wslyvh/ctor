@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"start": "react-scripts start",
+		"prebuild": "npm install --only=dev --no-shrinkwrap",
 		"build": "react-scripts build",
 		"test": "react-scripts test --coverage --verbose --detectOpenHandles --forceExit",
 		"eject": "react-scripts eject",
