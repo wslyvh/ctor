@@ -4,6 +4,7 @@ import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { IContract } from "../../model/IContract";
 import ContractEventListener from "./ContractEventListener";
 import ContractMember from "./ContractMember";
+import Web3Utils from "../../utils/Web3Utils";
 
 interface IProps {
 	contract: IContract;
@@ -31,8 +32,7 @@ class ContractView extends Component<IProps> {
 
 	public async setContractMembers(nextProps: any) {
 		if (nextProps.contract && nextProps.contract.RawContract) {
-			this.etherContract = new Contract(nextProps.contract.Address, nextProps.contract.ABI, ethers.getDefaultProvider());
-
+			this.etherContract = new Contract(nextProps.contract.Address, nextProps.contract.ABI, Web3Utils.getProvider());
 			const constants = this.etherContract.interface.abi.filter((member: any) => member.constant === true);
 			const functions = this.etherContract.interface.abi.filter((member: any) => member.constant === false);
 			const events = this.etherContract.interface.abi.filter((member: any) => member.type === "event");

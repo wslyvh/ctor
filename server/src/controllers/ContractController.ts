@@ -10,7 +10,6 @@ class ContractController {
 		try {
 			const contract = await client.GetContract(request.params.address);
 
-			console.log(contract);
 			response.json(contract);
 		} catch (ex) {
 			logger.error(ex.toString());

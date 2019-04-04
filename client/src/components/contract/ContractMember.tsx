@@ -1,6 +1,7 @@
 import { Contract } from "ethers";
 import React, { Component } from "react";
 import { Collapse } from "react-bootstrap";
+import Web3Utils from "../../utils/Web3Utils";
 
 interface IProps {
 	name: string;
@@ -31,6 +32,7 @@ class ContractMember extends Component<IProps> {
 	public render() {
 		const { open, output } = this.state;
 		const id = "collapse-" + this.props.name;
+		const canSign = this.props.type === "function" ? Web3Utils.canSign() : true;
 
 		return (
 			<>
@@ -73,14 +75,16 @@ class ContractMember extends Component<IProps> {
 										);
 									})}
 
-									<div className="form-group row">
-										<label className="col-sm-2 col-form-label" />
-										<div className="col-sm-10">
-											<button type="button" className="btn btn-primary btn-sm" onClick={this.onExecuteMember}>
-												execute
-											</button>
+									{canSign && (
+										<div className="form-group row">
+											<label className="col-sm-2 col-form-label" />
+											<div className="col-sm-10">
+												<button type="button" className="btn btn-primary btn-sm" onClick={this.onExecuteMember}>
+													execute
+												</button>
+											</div>
 										</div>
-									</div>
+									)}
 								</div>
 
 								{output && (
@@ -113,7 +117,6 @@ class ContractMember extends Component<IProps> {
 			result = response;
 
 			if (this.props.type === "function") {
-				console.log(response); // TODO: Handle TX
 				result = "Transaction successfully sent.";
 			} else {
 				if (response._ethersType === "BigNumber" || response.length) {
