@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"start": "cross-env NODE_ENV=production contracts_build_directory=..\\truffle\\build\\contracts\\ CONTRACT_SERVICE=local node cli.js"
+		"start": "node cli.js"
 	},
 	"dependencies": {
 		"cross-env": "^5.2.0",

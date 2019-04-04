@@ -8,6 +8,7 @@
 		"prebuild": "cd client && npm run build",
 		"build": "cd server && npm run build",
 		"start": "node ./server/build/index.js",
+		"cli:run": "cd cli && npm run start",
 		"client:run": "cd client && npm run start",
 		"client:test": "cd client && npm run test",
 		"client:lint-fix": "cd client && npm run lint-fix",
