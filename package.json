@@ -7,7 +7,7 @@
 	"scripts": {
 		"prebuild": "cd client && npm run build",
 		"build": "cd server && npm run build",
-		"start": "cd server && npm run start",
+		"start": "node ./server/build/Index.js",
 		"cli:run": "cd cli && npm run start",
 		"client:run": "cd client && npm run start",
 		"client:test": "cd client && npm run test",
