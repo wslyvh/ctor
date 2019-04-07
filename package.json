@@ -15,6 +15,9 @@
 		"url": "https://github.com/wslyvh/ctor/issues"
 	},
 	"homepage": "https://github.com/wslyvh/ctor#readme",
+	"bin": {
+		"ctor": "./cli/cli.js"
+	},
 	"scripts": {
 		"prebuild": "cd client && npm run build",
 		"build": "cd server && npm run build",

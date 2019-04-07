@@ -5,11 +5,11 @@
 	"version": "0.1.0",
 	"author": "wslyvh",
 	"license": "GPL-3.0",
-	"scripts": {
-		"start": "node cli.js"
-	},
 	"bin": {
 		"ctor": "./cli.js"
+	},
+	"scripts": {
+		"start": "node cli.js"
 	},
 	"dependencies": {
 		"cross-env": "^5.2.0",
