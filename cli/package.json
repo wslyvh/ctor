@@ -1,9 +1,15 @@
 {
-	"name": "ctor-cli",
-	"version": "0.1.0",
 	"private": true,
+	"name": "@ctor/cli",
+	"description": "The command line interface to run Ctor UI",
+	"version": "0.1.0",
+	"author": "wslyvh",
+	"license": "GPL-3.0",
 	"scripts": {
 		"start": "node cli.js"
+	},
+	"bin": {
+		"ctor": "./cli.js"
 	},
 	"dependencies": {
 		"cross-env": "^5.2.0",

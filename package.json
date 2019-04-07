@@ -1,9 +1,20 @@
 {
-	"name": "ctor-mono",
+	"name": "@ctor/ui",
+	"description": "Ctor UI - to visualize and interact with a smart contract's resources",
 	"version": "0.1.0",
-	"private": true,
 	"author": "wslyvh",
 	"license": "GPL-3.0",
+	"keywords": [
+		"ethereum"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/wslyvh/ctor.git"
+	},
+	"bugs": {
+		"url": "https://github.com/wslyvh/ctor/issues"
+	},
+	"homepage": "https://github.com/wslyvh/ctor#readme",
 	"scripts": {
 		"prebuild": "cd client && npm run build",
 		"build": "cd server && npm run build",
