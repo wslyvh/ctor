@@ -74,7 +74,7 @@ class TruffleContractService implements IContractService {
 	}
 
 	private async GetContractFiles(): Promise<ITruffleContract[]> {
-		const dir = AppConfig.CONTRACTS_BUILD_DIR;
+		const dir = AppConfig.CONTRACT_BUILD_DIR;
 		logger.info("Fetching files from: " + dir);
 
 		try {
