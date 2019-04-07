@@ -5,19 +5,18 @@ var pkg = require("./package.json");
 console.info(`${pkg.name} v${pkg.version}`);
 
 process.env.NODE_ENV = "production";
-process.env.PORT = 5500;
-process.env.contracts_build_directory = "..\\truffle\\build\\contracts\\";
 process.env.CONTRACT_SERVICE = "local";
 
-var server = require("../server/build/Index");
-serve(process.env.PORT);
+// Get from Args
+process.env.PORT = 5500;
+process.env.CONTRACT_BUILD_DIR = ".\\build\\contracts\\";
+// JsonRPC server url
 
-function serve(port) {
+var server = require("../server/build/Index");
+try {
 	console.info(`Serving application..`);
-	try {
-		server;
-	} catch (ex) {
-		console.log("Failed to start service..");
-		return;
-	}
+	server;
+} catch (ex) {
+	console.log("Failed to start service..");
+	return;
 }
