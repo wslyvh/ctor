@@ -17,9 +17,14 @@ Install the NPM package, within your Truffle smart contract project.
 $ npm install @ctor/ui
 ```
 
+## Quickstart
+
+Follow the Truffle documentation for the basics of a Truffle project and deploying your first smart contract.
+https://www.truffleframework.com/docs/truffle/quickstart
+
 ## Usage
 
-Ctor is configured with default settings to run out of the box.
+Ctor is configured with default settings to run out of the box (see Quickstart).
 
 ```
 ctor [-p port] [-b build_dir] [-h host]
