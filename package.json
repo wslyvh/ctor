@@ -1,7 +1,7 @@
 {
 	"name": "@ctor/ui",
 	"description": "Ctor UI - to visualize and interact with a smart contract's resources",
-	"version": "0.1.0",
+	"version": "0.1.0-beta",
 	"author": "wslyvh",
 	"license": "GPL-3.0",
 	"keywords": [
