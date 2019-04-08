@@ -9,7 +9,7 @@ import { IContractService } from "../IContractService";
 import { ITruffleContract } from "./ITruffleTypes";
 
 class TruffleContractService implements IContractService {
-	private networkUrl: string = "http://localhost:8545";
+	private networkUrl: string = AppConfig.CONTRACT_SERVICE;
 	private provider: BaseProvider;
 	private signer: Signer;
 

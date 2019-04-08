@@ -13,9 +13,17 @@ class Web3Utils {
 		}
 	}
 
-	public static getProvider(): BaseProvider | Signer {
+	public static async getProvider(): Promise<BaseProvider | Signer> {
 		if (process.env.REACT_APP_SERVICE === "local") {
-			const provider = new JsonRpcProvider(this.networkUrl);
+			const response = await fetch("/api/provider");
+
+			if (response.status !== 200) {
+				console.log(response.statusText);
+				return ethers.getDefaultProvider();
+			}
+
+			const body = await response.json();
+			const provider = new JsonRpcProvider(body);
 			const signer = provider.getSigner(0);
 
 			return signer;
@@ -31,7 +39,6 @@ class Web3Utils {
 
 		return false;
 	}
-	private static networkUrl: string = "http://localhost:8545";
 }
 
 export default Web3Utils;
