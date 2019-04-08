@@ -8,9 +8,9 @@ class NetworkController {
 
 		if (AppConfig.CONTRACT_SERVICE === "local") {
 			response.json(AppConfig.PROVIDER_URI);
+		} else {
+			response.json("default");
 		}
-
-		response.json("default");
 	}
 }
 
