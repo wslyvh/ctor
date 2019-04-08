@@ -1,16 +1,23 @@
 #!/usr/bin/env node
-var yargs = require("yargs");
+
+let prog = require("commander");
 var pkg = require("./package.json");
 
-console.info(`${pkg.name} v${pkg.version}`);
-
+// Defaults
 process.env.NODE_ENV = "production";
 process.env.CONTRACT_SERVICE = "local";
 
-// Get from Args
-process.env.PORT = 5500;
-process.env.CONTRACT_BUILD_DIR = ".\\build\\contracts\\";
-// JsonRPC server url
+prog
+	.version(`${pkg.name} v${pkg.version}`, "-v, --version")
+	.option("-p, --port [port]", "port to serve from")
+	.option("-b, --build_dir [build_dir]", "truffle contracts build directory")
+	.option("-h, --host [host]", "rpc provider host")
+	.parse(process.argv);
+
+// Args
+process.env.PORT = prog.port || 5500;
+process.env.CONTRACT_BUILD_DIR = prog.build_dir || ".\\build\\contracts\\";
+process.env.PROVIDER_URI = prog.host || "http://localhost:8545";
 
 var server = require("../server/build/Index");
 try {

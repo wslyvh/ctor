@@ -9,10 +9,10 @@
 		"ctor": "./cli.js"
 	},
 	"scripts": {
-		"start": "node cli.js"
+		"start": "node cli.js -p 5500 -b ..\\truffle\\build\\contracts -h http://localhost:9545/"
 	},
 	"dependencies": {
-		"cross-env": "^5.2.0",
-		"yargs": "^13.2.2"
+		"commander": "^2.20.0",
+		"cross-env": "^5.2.0"
 	}
 }
