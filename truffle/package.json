@@ -1,7 +1,8 @@
 {
-	"name": "ctor-truffle",
-	"version": "0.1.0",
 	"private": true,
+	"name": "@ctor/truffle",
+	"description": "Ctor UI Truffle example project",
+	"version": "0.1.0",
 	"author": "wslyvh",
 	"license": "GPL-3.0",
 	"scripts": {

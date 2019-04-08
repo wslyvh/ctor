@@ -1,0 +1,11 @@
+*
+
+!/client/build
+!/client/build/**
+/client/build/**/*.map
+/client/build/**/*.test.js
+
+!/server/build
+!/server/build/**
+/server/build/**/*.map
+/server/build/**/*.test.js

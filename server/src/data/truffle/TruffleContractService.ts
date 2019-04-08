@@ -9,7 +9,7 @@ import { IContractService } from "../IContractService";
 import { ITruffleContract } from "./ITruffleTypes";
 
 class TruffleContractService implements IContractService {
-	private networkUrl: string = "http://localhost:8545";
+	private networkUrl: string = AppConfig.PROVIDER_URI;
 	private provider: BaseProvider;
 	private signer: Signer;
 
@@ -74,7 +74,7 @@ class TruffleContractService implements IContractService {
 	}
 
 	private async GetContractFiles(): Promise<ITruffleContract[]> {
-		const dir = AppConfig.CONTRACTS_BUILD_DIR;
+		const dir = AppConfig.CONTRACT_BUILD_DIR;
 		logger.info("Fetching files from: " + dir);
 
 		try {

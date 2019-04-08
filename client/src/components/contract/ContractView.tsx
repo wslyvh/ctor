@@ -32,7 +32,8 @@ class ContractView extends Component<IProps> {
 
 	public async setContractMembers(nextProps: any) {
 		if (nextProps.contract && nextProps.contract.RawContract) {
-			this.etherContract = new Contract(nextProps.contract.Address, nextProps.contract.ABI, Web3Utils.getProvider());
+			const providerOrSigner = await Web3Utils.getProvider();
+			this.etherContract = new Contract(nextProps.contract.Address, nextProps.contract.ABI, providerOrSigner);
 			const constants = this.etherContract.interface.abi.filter((member: any) => member.constant === true);
 			const functions = this.etherContract.interface.abi.filter((member: any) => member.constant === false);
 			const events = this.etherContract.interface.abi.filter((member: any) => member.type === "event");
