@@ -1,5 +1,6 @@
 {
-	"name": "@ctor/ui",
+	"private": false,
+	"name": "ctor-ui",
 	"description": "Ctor UI - to visualize and interact with a smart contract's resources",
 	"version": "0.1.0-beta",
 	"author": "wslyvh",
