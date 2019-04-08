@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-
-let prog = require("commander");
+var open = require("open");
+var prog = require("commander");
 var pkg = require("./package.json");
 
 // Defaults
@@ -17,12 +17,16 @@ prog
 // Args
 process.env.PORT = prog.port || 5500;
 process.env.CONTRACT_BUILD_DIR = prog.build_dir || ".\\build\\contracts\\";
-process.env.PROVIDER_URI = prog.host || "http://localhost:8545";
+process.env.PROVIDER_URI = prog.host || "http://localhost:7545";
 
 var server = require("../server/build/Index");
 try {
 	console.info(`Serving application..`);
 	server;
+
+	(async () => {
+		await open("http://localhost:" + process.env.PORT);
+	})();
 } catch (ex) {
 	console.log("Failed to start service..");
 	return;
