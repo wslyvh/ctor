@@ -1,5 +1,8 @@
 *
 
+!/cli/**
+/cli/logs
+
 !/client/build
 !/client/build/**
 /client/build/**/*.map
