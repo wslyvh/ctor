@@ -3,6 +3,7 @@ import { RouteComponentProps } from "react-router";
 import logo from "../assets/logo/logo.png";
 import "../assets/styles/main.scss";
 import ContractOverview from "../components/contract/ContractOverview";
+import FeedbackButton from "../components/layoutComponents/FeedbackButton";
 
 class Home extends Component<RouteComponentProps> {
 	public state = {
@@ -43,6 +44,8 @@ class Home extends Component<RouteComponentProps> {
 						</div>
 
 						<ContractOverview limit={10} />
+
+						<FeedbackButton />
 					</div>
 				</form>
 			</div>
