@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 var open = require("open");
 var prog = require("commander");
-var pkg = require("./package.json");
+var pkg = require("../package.json");
 
 // Defaults
 process.env.NODE_ENV = "production";

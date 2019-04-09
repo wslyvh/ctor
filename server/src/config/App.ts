@@ -9,7 +9,7 @@ const AppConfig = {
 	PORT: process.env.PORT ? parseInt(process.env.PORT, 10) : 5000,
 
 	LOG_DIR: process.env.LOG_DIR || "logs",
-	LOG_LEVEL: process.env.LOG_LEVEL === "production" ? "error" : "debug",
+	LOG_LEVEL: process.env.NODE_ENV === "production" ? "error" : "debug",
 
 	ETHERSCAN_APIKEY: process.env.ETHERSCAN_APIKEY,
 	PROVIDER_URI: process.env.PROVIDER_URI || "http://localhost:7545",

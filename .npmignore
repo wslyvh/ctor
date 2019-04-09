@@ -1,7 +1,6 @@
 *
 
-!/cli/**
-/cli/logs
+!/cli/cli.js
 
 !/client/build
 !/client/build/**
