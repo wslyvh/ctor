@@ -2,7 +2,7 @@
 	"private": false,
 	"name": "ctor-ui",
 	"description": "Ctor UI - to visualize and interact with a smart contract's resources",
-	"version": "0.1.0-beta",
+	"version": "0.1.4-beta",
 	"author": "wslyvh",
 	"license": "GPL-3.0",
 	"keywords": [
@@ -35,7 +35,20 @@
 		"test": "concurrently --kill-others-on-fail \"npm run client:test\" \"npm run server:test\"",
 		"lint": "concurrently --kill-others-on-fail \"npm run client:lint-fix\" \"npm run server:lint-fix\""
 	},
-	"devDependencies": {
-		"concurrently": "^4.1.0"
+	"dependencies": {
+		"axios": "^0.18.0",
+		"body-parser": "^1.18.3",
+		"commander": "^2.20.0",
+		"compression": "^1.7.4",
+		"concurrently": "^4.1.0",
+		"cors": "^2.8.5",
+		"cross-env": "^5.2.0",
+		"dotenv": "^7.0.0",
+		"ethers": "^4.0.27",
+		"express": "^4.16.4",
+		"express-validator": "^5.3.1",
+		"open": "^6.1.0",
+		"ts-node": "^8.0.3",
+		"winston": "^3.2.1"
 	}
 }

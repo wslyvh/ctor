@@ -1,5 +1,7 @@
 *
 
+!/cli/cli.js
+
 !/client/build
 !/client/build/**
 /client/build/**/*.map

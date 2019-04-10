@@ -9,8 +9,14 @@ class Footer extends Component {
 					<small>A smart contract management toolkit.</small>
 					<p>
 						<small className="text-muted">
-							<FaGithub /> &nbsp;
-							<FaTwitter /> &nbsp; @wslyvh
+							<a href="https://github.com/wslyvh/ctor" target="_blank" className="text-reset">
+								<FaGithub />
+							</a>
+							&nbsp;&nbsp;
+							<a href="https://twitter.com/wslyvh" target="_blank" className="text-reset">
+								<FaTwitter />
+							</a>
+							&nbsp; @wslyvh
 						</small>
 					</p>
 				</div>
