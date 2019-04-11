@@ -13,10 +13,10 @@ A smart contract management toolkit.
 
 ## Installation
 
-Install the [NPM package](https://www.npmjs.com/package/ctor-ui), within your Truffle smart contract project.
+Install the [NPM package](https://www.npmjs.com/package/ctor-ui) globally.
 
 ```
-$ npm install ctor-ui
+$ npm install ctor-ui -g
 ```
 
 ## Quickstart
