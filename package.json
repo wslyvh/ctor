@@ -15,7 +15,7 @@
 	"bugs": {
 		"url": "https://github.com/wslyvh/ctor/issues"
 	},
-	"homepage": "https://github.com/wslyvh/ctor#readme",
+	"homepage": "https://www.ctor.nl/",
 	"bin": {
 		"ctor": "./cli/cli.js"
 	},
