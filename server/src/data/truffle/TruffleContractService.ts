@@ -28,7 +28,7 @@ class TruffleContractService implements IContractService {
 		}
 
 		const contracts = await this.GetContractFiles();
-		const contract = contracts.filter((c: any) => c.networks["5777"].address === address)[0];
+		const contract = contracts.filter((c: any) => c.networks && c.networks["5777"] && c.networks["5777"].address === address)[0];
 		const result: IContract | null = null;
 
 		if (contract) {
@@ -41,9 +41,14 @@ class TruffleContractService implements IContractService {
 	public async GetContracts(limit: number = 10): Promise<IContract[]> {
 		const contracts = await this.GetContractFiles();
 
-		return contracts.slice(0, limit).map((contract: ITruffleContract) => {
-			return this.MapContract(contract);
-		});
+		return contracts
+			.filter(function(contract) {
+				return contract.networks && (contract.networks["1"] || contract.networks["3"] || contract.networks["4"] || contract.networks["5777"]);
+			})
+			.slice(0, limit)
+			.map((contract: ITruffleContract) => {
+				return this.MapContract(contract);
+			});
 	}
 
 	private MapContract(contract: ITruffleContract): IContract {
