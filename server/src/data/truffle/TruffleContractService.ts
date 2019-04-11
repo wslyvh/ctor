@@ -42,7 +42,7 @@ class TruffleContractService implements IContractService {
 		const contracts = await this.GetContractFiles();
 
 		return contracts
-			.filter(function(contract) {
+			.filter((contract: any) => {
 				return contract.networks && (contract.networks["1"] || contract.networks["3"] || contract.networks["4"] || contract.networks["5777"]);
 			})
 			.slice(0, limit)
