@@ -10,6 +10,7 @@
 A smart contract management toolkit.
 
 - **Ctor UI** - lets you visualize and interact with a smart contract's resources
+- **Online demo** - https://ctor-ui.herokuapp.com/
 
 ## Installation
 
