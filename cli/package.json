@@ -4,7 +4,7 @@
 	"description": "The command line interface to run Ctor UI",
 	"version": "0.1.0",
 	"author": "wslyvh",
-	"license": "GPL-3.0",
+	"license": "Apache-2.0",
 	"bin": {
 		"ctor": "./cli.js"
 	},

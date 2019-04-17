@@ -2,9 +2,9 @@
 	"private": false,
 	"name": "ctor-ui",
 	"description": "Ctor UI - to visualize and interact with a smart contract's resources",
-	"version": "0.1.6-beta",
+	"version": "0.1.7-beta",
 	"author": "wslyvh",
-	"license": "GPL-3.0",
+	"license": "Apache-2.0",
 	"keywords": [
 		"ethereum"
 	],

@@ -7,7 +7,7 @@ class NetworkController {
 		logger.debug("GetProvider");
 
 		if (AppConfig.CONTRACT_SERVICE === "local") {
-			response.json(AppConfig.PROVIDER_URI);
+			response.json(AppConfig.NETWORK_HOST);
 		} else {
 			response.json("default");
 		}

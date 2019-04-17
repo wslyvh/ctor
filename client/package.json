@@ -4,7 +4,7 @@
 	"description": "Ctor UI client",
 	"version": "0.1.0",
 	"author": "wslyvh",
-	"license": "GPL-3.0",
+	"license": "Apache-2.0",
 	"scripts": {
 		"start": "react-scripts start",
 		"prebuild": "npm install && npm install --only=dev --no-shrinkwrap",

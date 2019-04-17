@@ -9,7 +9,8 @@ import { IContractService } from "../IContractService";
 import { ITruffleContract } from "./ITruffleTypes";
 
 class TruffleContractService implements IContractService {
-	private networkUrl: string = AppConfig.PROVIDER_URI;
+	private networkUrl: string = AppConfig.NETWORK_HOST;
+	private networkId: string = AppConfig.NETWORK_ID;
 	private provider: BaseProvider;
 	private signer: Signer;
 
@@ -28,7 +29,7 @@ class TruffleContractService implements IContractService {
 		}
 
 		const contracts = await this.GetContractFiles();
-		const contract = contracts.filter((c: any) => c.networks && c.networks["5777"] && c.networks["5777"].address === address)[0];
+		const contract = contracts.filter((c: any) => c.networks && c.networks[this.networkId] && c.networks[this.networkId].address === address)[0];
 		const result: IContract | null = null;
 
 		if (contract) {
@@ -42,9 +43,7 @@ class TruffleContractService implements IContractService {
 		const contracts = await this.GetContractFiles();
 
 		return contracts
-			.filter((contract: any) => {
-				return contract.networks && (contract.networks["1"] || contract.networks["3"] || contract.networks["4"] || contract.networks["5777"]);
-			})
+			.filter((c: any) => c.networks && c.networks[this.networkId])
 			.slice(0, limit)
 			.map((contract: ITruffleContract) => {
 				return this.MapContract(contract);
@@ -53,17 +52,8 @@ class TruffleContractService implements IContractService {
 
 	private MapContract(contract: ITruffleContract): IContract {
 		let address = "";
-		if (contract.networks["1"]) {
-			address = contract.networks["1"].address;
-		}
-		if (contract.networks["3"]) {
-			address = contract.networks["3"].address;
-		}
-		if (contract.networks["4"]) {
-			address = contract.networks["4"].address;
-		}
-		if (contract.networks["5777"]) {
-			address = contract.networks["5777"].address;
+		if (contract.networks[this.networkId]) {
+			address = contract.networks[this.networkId].address;
 		}
 
 		const abi = JSON.stringify(contract.abi);
