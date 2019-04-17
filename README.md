@@ -41,6 +41,7 @@ ctor [-p port] [-b build_dir] [-h host]
 | port      | -p   | port to serve Ctor from | 5500                   |
 | build_dir | -b   | truffle build directory | ./build/contracts/     |
 | host      | -h   | rpc server url          | http://localhost:7545/ |
+| networkId | -i   | network id              | 5777                   |
 
 ## Github Project structure
 
