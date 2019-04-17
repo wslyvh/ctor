@@ -4,7 +4,7 @@
 	"description": "Ctor UI Express server",
 	"version": "0.1.0",
 	"author": "wslyvh",
-	"license": "GPL-3.0",
+	"license": "Apache-2.0",
 	"scripts": {
 		"start": "node ./build/Index.js",
 		"dev": "nodemon --exec ts-node -- src/Index.ts",

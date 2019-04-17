@@ -59,4 +59,4 @@ Feel free to post them [here](https://github.com/wslyvh/ctor/issues/new).
 
 ## License
 
-Ctor is released under the GNU General Public License. See [LICENSE](LICENSE).
+Ctor is released under the Apache License 2.0. See [LICENSE](LICENSE).
