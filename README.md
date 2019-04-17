@@ -2,8 +2,9 @@
 
 [![Build Status](https://travis-ci.org/wslyvh/ctor.svg?branch=master)](https://travis-ci.org/wslyvh/ctor)
 [![codecov](https://codecov.io/gh/wslyvh/ctor/branch/master/graph/badge.svg)](https://codecov.io/gh/wslyvh/ctor)
-![npm](https://img.shields.io/npm/v/ctor-ui.svg)
-![npm](https://img.shields.io/npm/dt/ctor-ui.svg)
+[![NPM](https://img.shields.io/npm/v/ctor-ui.svg)](https://www.npmjs.com/package/ctor-ui)
+[![NPM](https://img.shields.io/npm/l/ctor-ui.svg)](https://www.npmjs.com/package/ctor-ui)
+[![NPM](https://img.shields.io/npm/dt/ctor-ui.svg)](https://www.npmjs.com/package/ctor-ui)
 
 ## Overview
 
