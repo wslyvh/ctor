@@ -1,60 +1,104 @@
 import React, { Component } from "react";
 import { RouteComponentProps } from "react-router";
-import logo from "../assets/logo/logo.png";
-import "../assets/styles/main.scss";
-import ContractOverview from "../components/contract/ContractOverview";
-import FeedbackButton from "../components/layoutComponents/FeedbackButton";
+import "../assets/styles/default.scss";
 
 class Home extends Component<RouteComponentProps> {
-	public state = {
-		searchValue: ""
-	};
-
 	public render() {
 		return (
-			<div className="home">
-				<form>
-					<div className="main-logo text-center">
-						<img alt="Ctor" src={logo} />
-					</div>
+			<>
+				<nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+					<a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
+						Ctor
+					</a>
+					<ul className="navbar-nav px-3">
+						<li className="nav-item text-nowrap">
+							<a className="nav-link" href="#">
+								Sign out
+							</a>
+						</li>
+					</ul>
+				</nav>
 
-					<div className="inner-form">
-						<div className="basic-search">
-							<div className="input-field">
-								<input
-									id="search"
-									type="text"
-									value={this.state.searchValue}
-									onChange={event => {
-										this.setState({ searchValue: event.target.value });
-									}}
-									onKeyPress={event => {
-										if (event.key === "Enter") {
-											this.search();
-										}
-									}}
-									placeholder="Search for a contract address..."
-								/>
-								<div className="icon-wrap">
-									<svg version="1.1" xmlBase="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
-										<path d="M18.869 19.162l-5.943-6.484c1.339-1.401 2.075-3.233 2.075-5.178 0-2.003-0.78-3.887-2.197-5.303s-3.3-2.197-5.303-2.197-3.887 0.78-5.303 2.197-2.197 3.3-2.197 5.303 0.78 3.887 2.197 5.303 3.3 2.197 5.303 2.197c1.726 0 3.362-0.579 4.688-1.645l5.943 6.483c0.099 0.108 0.233 0.162 0.369 0.162 0.121 0 0.242-0.043 0.338-0.131 0.204-0.187 0.217-0.503 0.031-0.706zM1 7.5c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5-6.5-2.916-6.5-6.5z" />
-									</svg>
-								</div>
+				<div className="container-fluid">
+					<div className="row">
+						<nav className="col-md-2 d-none d-md-block bg-light sidebar">
+							<div className="sidebar-sticky">
+								<ul className="nav flex-column">
+									<li className="nav-item">
+										<a className="nav-link active" href="#">
+											<span data-feather="home" />
+											Dashboard <span className="sr-only">(current)</span>
+										</a>
+									</li>
+									<li className="nav-item">
+										<a className="nav-link" href="#">
+											<span data-feather="file" />
+											My Contracts
+										</a>
+									</li>
+									<li className="nav-item">
+										<a className="nav-link" href="#">
+											<span data-feather="shopping-cart" />
+											Verify
+										</a>
+									</li>
+									<li className="nav-item">
+										<a className="nav-link" href="#">
+											<span data-feather="users" />
+											Deploy
+										</a>
+									</li>
+								</ul>
 							</div>
-						</div>
+						</nav>
 
-						<ContractOverview limit={10} />
+						<main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+							<div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+								<h1 className="h2">Dashboard</h1>
+							</div>
 
-						<FeedbackButton />
+							<h2>Section title</h2>
+							<div className="table-responsive">
+								<table className="table table-striped table-sm">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Header</th>
+											<th>Header</th>
+											<th>Header</th>
+											<th>Header</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1,001</td>
+											<td>Lorem</td>
+											<td>ipsum</td>
+											<td>dolor</td>
+											<td>sit</td>
+										</tr>
+										<tr>
+											<td>1,002</td>
+											<td>amet</td>
+											<td>consectetur</td>
+											<td>adipiscing</td>
+											<td>elit</td>
+										</tr>
+										<tr>
+											<td>1,003</td>
+											<td>Integer</td>
+											<td>nec</td>
+											<td>odio</td>
+											<td>Praesent</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</main>
 					</div>
-				</form>
-			</div>
+				</div>
+			</>
 		);
-	}
-
-	public search() {
-		this.props.history.push("/contract/" + this.state.searchValue);
-		return false;
 	}
 }
 
