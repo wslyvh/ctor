@@ -4,7 +4,7 @@ class Dashboard extends Component {
 	public render() {
 		return (
 			<>
-				<p>...</p>
+				<p>A smart contract management toolkit.</p>
 			</>
 		);
 	}
