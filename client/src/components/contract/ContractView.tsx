@@ -60,7 +60,7 @@ class ContractView extends Component<IProps> {
 						<h3>
 							{this.props.contract.Address}
 							<small>
-								<a href={"https://etherscan.io/address/" + this.props.contract.Address} className="text-secondary" target="_blank">
+								<a href={"https://etherscan.io/address/" + this.props.contract.Address} className="text-secondary" target="_blank" rel="noopener noreferrer">
 									<FaExternalLinkSquareAlt />
 								</a>
 							</small>
