@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ContractOverview from "./contract/ContractOverview";
+import ContractOverview from "../components/contract/ContractOverview";
 
 class Contracts extends Component {
 	public render() {

@@ -49,7 +49,7 @@ class ContractOverview extends Component<IProps> {
 									<tr key={index}>
 										<td>{contract.Name}</td>
 										<td>
-											<a href={"/contract/" + contract.Address}>{contract.Address}</a>
+											<a href={"/contracts/" + contract.Address}>{contract.Address}</a>
 										</td>
 									</tr>
 								);
