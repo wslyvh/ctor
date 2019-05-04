@@ -15,6 +15,7 @@ class Routes {
 
 		// Network
 		app.route(this.baseUri + "/provider").get(this.networkController.GetProvider);
+		app.route(this.baseUri + "/accounts").get(this.networkController.GetAccounts);
 
 		// Contracts
 		app.route(this.baseUri + "/contracts").get(this.contractController.GetContracts);

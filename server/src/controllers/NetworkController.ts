@@ -1,3 +1,4 @@
+import { ethers } from "ethers";
 import { Request, Response } from "express";
 import AppConfig from "../config/App";
 import logger from "../utils/Logger";
@@ -11,6 +12,18 @@ class NetworkController {
 		} else {
 			response.json("default");
 		}
+	}
+
+	public async GetAccounts(request: Request, response: Response) {
+		logger.debug("GetAccounts");
+		let accounts = new Array<string>();
+
+		if (AppConfig.CONTRACT_SERVICE === "local") {
+			const provider = new ethers.providers.JsonRpcProvider(AppConfig.NETWORK_HOST);
+			accounts = await provider.listAccounts();
+		}
+
+		response.json(accounts);
 	}
 }
 
