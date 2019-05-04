@@ -35,20 +35,27 @@ class ContractOverview extends Component<IProps> {
 	public render() {
 		return (
 			<>
-				<div className="advance-search">
-					<h2>Contracts overview</h2>
-					<div className="row">
-						<ul className="results">
+				<div className="table-responsive">
+					<table className="table table-striped table-sm">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Address</th>
+							</tr>
+						</thead>
+						<tbody>
 							{this.state.contracts.map((contract, index) => {
 								return (
-									<li key={index}>
-										<a href={"/contract/" + contract.Address}>{contract.Address}</a>
-										<small>{contract.Name}</small>
-									</li>
+									<tr key={index}>
+										<td>{contract.Name}</td>
+										<td>
+											<a href={"/contracts/" + contract.Address}>{contract.Address}</a>
+										</td>
+									</tr>
 								);
 							})}
-						</ul>
-					</div>
+						</tbody>
+					</table>
 				</div>
 			</>
 		);
