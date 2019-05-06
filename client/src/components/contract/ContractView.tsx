@@ -1,10 +1,12 @@
-import { Icon } from "antd";
+import { Typography } from "antd";
 import { Contract, ethers } from "ethers";
 import React, { Component } from "react";
 import { IContract } from "../../model/IContract";
 import Web3Utils from "../../utils/Web3Utils";
 import ContractEventListener from "./ContractEventListener";
 import ContractMember from "./ContractMember";
+
+const { Paragraph } = Typography;
 
 interface IProps {
 	contract: IContract;
@@ -55,16 +57,9 @@ class ContractView extends Component<IProps> {
 		return (
 			<>
 				<div>
-					<div className="contract-summary">
+					<div>
 						<h2>{this.props.contract.Name}</h2>
-						<h3>
-							{this.props.contract.Address}
-							<small>
-								<a href={"https://etherscan.io/address/" + this.props.contract.Address} className="text-secondary" target="_blank" rel="noopener noreferrer">
-									<Icon type="link" />
-								</a>
-							</small>
-						</h3>
+						<Paragraph copyable={{ text: this.props.contract.Address }}>{this.props.contract.Address}</Paragraph>
 					</div>
 
 					<div className="panel">

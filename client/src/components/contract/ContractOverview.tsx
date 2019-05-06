@@ -1,9 +1,11 @@
-import { Table } from "antd";
+import { Table, Typography } from "antd";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { IContract } from "../../model/IContract";
 import { ContractService } from "../../services/ContractService";
 import { IContractService } from "../../services/IContractService";
+
+const { Paragraph } = Typography;
 
 interface IProps {
 	limit: number;
@@ -25,6 +27,12 @@ class ContractOverview extends Component<IProps> {
 			dataIndex: "Address",
 			key: "Address",
 			render: (value: string) => <Link to={"/contracts/" + value}>{value}</Link>
+		},
+		{
+			title: "",
+			dataIndex: "Address",
+			key: "actions",
+			render: (value: string) => <Paragraph copyable={{ text: value }} />
 		}
 	];
 
