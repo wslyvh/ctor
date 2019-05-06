@@ -1,4 +1,6 @@
+import { Table } from "antd";
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { IContract } from "../../model/IContract";
 import { ContractService } from "../../services/ContractService";
 import { IContractService } from "../../services/IContractService";
@@ -11,6 +13,20 @@ class ContractOverview extends Component<IProps> {
 	public static defaultProps = {
 		limit: 10
 	};
+
+	public columns = [
+		{
+			title: "Name",
+			dataIndex: "Name",
+			key: "Name"
+		},
+		{
+			title: "Address",
+			dataIndex: "Address",
+			key: "Address",
+			render: (value: string) => <Link to={"/contracts/" + value}>{value}</Link>
+		}
+	];
 
 	public state = {
 		contracts: new Array<IContract>()
@@ -35,28 +51,7 @@ class ContractOverview extends Component<IProps> {
 	public render() {
 		return (
 			<>
-				<div className="table-responsive">
-					<table className="table table-striped table-sm">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Address</th>
-							</tr>
-						</thead>
-						<tbody>
-							{this.state.contracts.map((contract, index) => {
-								return (
-									<tr key={index}>
-										<td>{contract.Name}</td>
-										<td>
-											<a href={"/contracts/" + contract.Address}>{contract.Address}</a>
-										</td>
-									</tr>
-								);
-							})}
-						</tbody>
-					</table>
-				</div>
+				<Table dataSource={this.state.contracts} columns={this.columns} rowKey={item => item.Address} />
 			</>
 		);
 	}

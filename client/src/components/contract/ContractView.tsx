@@ -1,10 +1,10 @@
+import { Icon } from "antd";
 import { Contract, ethers } from "ethers";
 import React, { Component } from "react";
 import { IContract } from "../../model/IContract";
 import Web3Utils from "../../utils/Web3Utils";
 import ContractEventListener from "./ContractEventListener";
 import ContractMember from "./ContractMember";
-import { Icon } from "antd";
 
 interface IProps {
 	contract: IContract;
