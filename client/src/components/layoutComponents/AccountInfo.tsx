@@ -1,3 +1,4 @@
+import { Avatar } from "antd";
 import React, { Component } from "react";
 import { INetworkService } from "../../services/INetworkService";
 import { NetworkService } from "../../services/NetworkService";
@@ -19,9 +20,13 @@ class AccountInfo extends Component {
 
 	public render() {
 		return (
-			<a className="nav-link" href="/">
-				{this.state.accounts[0]}
-			</a>
+			<>
+				<div style={{ margin: "0 24px" }}>
+					<small style={{ margin: "0 12px" }}>{this.state.accounts[0]}</small>
+					&nbsp;
+					<Avatar shape="square" icon="user" />
+				</div>
+			</>
 		);
 	}
 }

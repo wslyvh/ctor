@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../../assets/styles/custom.scss";
 import { ContractService } from "../../services/ContractService";
 import { IContractService } from "../../services/IContractService";
 import ContractView from "./ContractView";
