@@ -1,10 +1,10 @@
 import { Contract, ethers } from "ethers";
 import React, { Component } from "react";
-import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { IContract } from "../../model/IContract";
 import Web3Utils from "../../utils/Web3Utils";
 import ContractEventListener from "./ContractEventListener";
 import ContractMember from "./ContractMember";
+import { Icon } from "antd";
 
 interface IProps {
 	contract: IContract;
@@ -61,7 +61,7 @@ class ContractView extends Component<IProps> {
 							{this.props.contract.Address}
 							<small>
 								<a href={"https://etherscan.io/address/" + this.props.contract.Address} className="text-secondary" target="_blank" rel="noopener noreferrer">
-									<FaExternalLinkSquareAlt />
+									<Icon type="link" />
 								</a>
 							</small>
 						</h3>
