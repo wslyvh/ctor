@@ -44,6 +44,13 @@ class Sidebar extends Component<RouteProps> {
 								<span>Contracts</span>
 							</Link>
 						</Menu.Item>
+
+						<Menu.Item key="/settings" style={{ position: "absolute", bottom: 45 }}>
+							<Link to="/settings">
+								<Icon type="setting" />
+								<span>Settings</span>
+							</Link>
+						</Menu.Item>
 					</Menu>
 				</Sider>
 			</>
