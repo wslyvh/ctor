@@ -1,7 +1,7 @@
 Thank you for contributing to Ctor.
 Before submitting this PR, please make sure that:
 
-- [ ] You've read our CONTRIBUTING guide
+- [ ] You've read our [CONTRIBUTING](./CONTRIBUTING.md) guide
 - [ ] Your code builds, without errors or warnings
 - [ ] You are using our coding guidelines 
 - [ ] You have added unit tests 

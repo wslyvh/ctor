@@ -4,15 +4,7 @@ We really appreciate and value contributions. Contributing is a great way to lea
 
 
 ## Report feedback
-All bugs, feature requests, questions, feedback, etc., is welcome. Feel free to post them [here](https://github.com/wslyvh/ctor/issues/new) and state:
-
-- What's your Ctor version?
-- What's your operating system and version?
-- What's your truffle and ganache version?
-- How did you install the tools?
-- How are you using the tools?
-
-Please make sure no similar issues have been reported https://github.com/wslyvh/ctor/issues. You might find your answer there.
+All bugs, feature requests, questions, feedback, etc., is welcome. Feel free to post them [here](https://github.com/wslyvh/ctor/issues/) and use one of the templates provided. Before you do, please make sure no similar issues have been reported. You might find your answer there.
 
 
 ## Create Pull Requests (PRs)
