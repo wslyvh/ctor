@@ -1,4 +1,4 @@
-import { Table, Typography } from "antd";
+import { Icon, Table, Typography } from "antd";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { IContract } from "../../model/IContract";
@@ -32,7 +32,17 @@ class ContractOverview extends Component<IProps> {
 			title: "",
 			dataIndex: "Address",
 			key: "actions",
-			render: (value: string) => <Paragraph copyable={{ text: value }} />
+			render: (value: string) => {
+				return (
+					<>
+						<Paragraph copyable={{ text: value }}>
+							<a href={"https://etherscan.io/address/" + value} target="_blank" rel="noopener noreferrer">
+								<Icon type="link" />
+							</a>
+						</Paragraph>
+					</>
+				);
+			}
 		}
 	];
 
