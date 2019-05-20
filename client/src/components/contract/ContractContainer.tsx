@@ -32,7 +32,7 @@ class ContractContainer extends Component<IProps> {
 		if (!Web3Utils.isAddress(address)) {
 			this.setState({
 				error: true,
-				errorMessage: "Invalid address"
+				errorMessage: "Invalid contract address"
 			});
 
 			return;
