@@ -1,7 +1,9 @@
+import { Alert } from "antd";
 import React, { Component } from "react";
 import "../../assets/styles/custom.scss";
 import { ContractService } from "../../services/ContractService";
 import { IContractService } from "../../services/IContractService";
+import Web3Utils from "../../utils/Web3Utils";
 import ContractView from "./ContractView";
 
 interface IProps {
@@ -11,6 +13,7 @@ interface IProps {
 class ContractContainer extends Component<IProps> {
 	public state = {
 		error: false,
+		errorMessage: "",
 		contract: {
 			Address: this.props.address
 		}
@@ -26,10 +29,26 @@ class ContractContainer extends Component<IProps> {
 
 	public async componentDidMount() {
 		const address = this.props.address;
+		if (!Web3Utils.isAddress(address)) {
+			this.setState({
+				error: true,
+				errorMessage: "Invalid address"
+			});
+
+			return;
+		}
+
 		const contract = await this.contractService.GetContract(address);
+		if (!contract) {
+			this.setState({
+				error: true,
+				errorMessage: "Unable to retrieve contract"
+			});
+
+			return;
+		}
 
 		this.setState({
-			error: false,
 			contract
 		});
 	}
@@ -37,7 +56,7 @@ class ContractContainer extends Component<IProps> {
 	public render() {
 		return (
 			<>
-				{this.state.error && <div>Error</div>}
+				{this.state.error && <Alert message="Error" description={this.state.errorMessage} type="error" showIcon />}
 
 				<div>
 					<ContractView contract={this.state.contract} />
