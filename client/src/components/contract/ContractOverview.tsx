@@ -1,9 +1,10 @@
-import { Icon, Table, Typography } from "antd";
+import { Alert, Icon, Table, Typography } from "antd";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { IContract } from "../../model/IContract";
 import { ContractService } from "../../services/ContractService";
 import { IContractService } from "../../services/IContractService";
+import Loader from "../layoutComponents/Loader";
 
 const { Paragraph } = Typography;
 
@@ -47,6 +48,9 @@ class ContractOverview extends Component<IProps> {
 	];
 
 	public state = {
+		loading: true,
+		error: false,
+		errorMessage: "",
 		contracts: new Array<IContract>()
 	};
 
@@ -59,17 +63,31 @@ class ContractOverview extends Component<IProps> {
 	}
 
 	public async componentDidMount() {
-		const contracts = await this.contractService.GetContracts(this.props.limit);
+		try {
+			const contracts = await this.contractService.GetContracts(this.props.limit);
 
-		this.setState({
-			contracts
-		});
+			this.setState({
+				loading: false,
+				error: false,
+				contracts
+			});
+		} catch (ex) {
+			this.setState({
+				loading: false,
+				error: false,
+				errorMessage: "Unable to retrieve contracts"
+			});
+		}
 	}
 
 	public render() {
 		return (
 			<>
-				<Table dataSource={this.state.contracts} columns={this.columns} rowKey={item => item.Address} />
+				{this.state.error && <Alert message="Error" description={this.state.errorMessage} type="error" showIcon />}
+
+				{this.state.loading && <Loader />}
+
+				{!this.state.error && !this.state.loading && <Table dataSource={this.state.contracts} columns={this.columns} rowKey={item => item.Address} />}
 			</>
 		);
 	}

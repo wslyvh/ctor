@@ -26,7 +26,7 @@ class Main extends Component<ILayoutProps> {
 							<Breadcrumb style={{ margin: "16px 0" }}>
 								<Breadcrumb.Item>{this.props.title}</Breadcrumb.Item>
 							</Breadcrumb>
-							<div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
+							<div style={{ padding: 24, background: "#fff" }}>
 								<Route {...this.props} />
 							</div>
 						</Content>
