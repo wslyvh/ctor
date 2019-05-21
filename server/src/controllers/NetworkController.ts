@@ -20,7 +20,11 @@ class NetworkController {
 
 		if (AppConfig.CONTRACT_SERVICE === "local") {
 			const provider = new ethers.providers.JsonRpcProvider(AppConfig.NETWORK_HOST);
-			accounts = await provider.listAccounts();
+			try {
+				accounts = await provider.listAccounts();
+			} catch (ex) {
+				logger.error("Unable to list account(s)");
+			}
 		}
 
 		response.json(accounts);

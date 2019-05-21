@@ -21,11 +21,13 @@ class AccountInfo extends Component {
 	public render() {
 		return (
 			<>
-				<div style={{ margin: "0 24px" }}>
-					<small style={{ margin: "0 12px" }}>{this.state.accounts[0]}</small>
-					&nbsp;
-					<Avatar shape="square" icon="user" />
-				</div>
+				{this.state.accounts[0] && (
+					<div style={{ margin: "0 24px" }}>
+						<small style={{ margin: "0 12px" }}>{this.state.accounts[0]}</small>
+						&nbsp;
+						<Avatar shape="square" icon="user" />
+					</div>
+				)}
 			</>
 		);
 	}
