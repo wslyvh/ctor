@@ -1,7 +1,6 @@
 import { Contract } from "ethers";
 import React, { Component } from "react";
 import { Collapse } from "react-bootstrap";
-import Web3Utils from "../../utils/Web3Utils";
 
 interface IProps {
 	name: string;
@@ -10,12 +9,14 @@ interface IProps {
 	contract: Contract;
 	classType: string;
 	badgeType: string;
+	canSign: boolean;
 }
 
 class ContractMember extends Component<IProps> {
 	public static defaultProps = {
 		classType: "alert property-alert alert-primary",
-		badgeType: "badge badge-primary"
+		badgeType: "badge badge-primary",
+		canSign: false
 	};
 
 	public state = {
@@ -32,7 +33,7 @@ class ContractMember extends Component<IProps> {
 	public render() {
 		const { open, output } = this.state;
 		const id = "collapse-" + this.props.name;
-		const canSign = this.props.type === "function" ? Web3Utils.canSign() : true;
+		const canSign = this.props.type === "function" ? this.props.canSign : true;
 
 		return (
 			<>

@@ -6,7 +6,7 @@ import { TruffleContractService } from "./truffle/TruffleContractService";
 
 class ContractServiceFactory {
 	public static Create(): IContractService {
-		if (AppConfig.CONTRACT_SERVICE === "local") {
+		if (AppConfig.NETWORK_HOST.includes("localhost") || AppConfig.NETWORK_HOST.includes("127.0.0.1")) {
 			logger.info("Creating local TruffleContractService...");
 			return new TruffleContractService();
 		}
