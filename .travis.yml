@@ -12,6 +12,8 @@ cache:
 addons:
   sonarcloud:
     organization: "wslyvh-github"
+    token:
+      secure: ${SONAR_TOKEN}
 before_install:
 - npm update
 - cd client
