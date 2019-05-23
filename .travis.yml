@@ -24,6 +24,7 @@ install:
 script:
 - npm run lint
 - npm run test
-- sonar-scanner
 after_success:
   - codecov
+  - cd ..
+  - sonar-scanner
