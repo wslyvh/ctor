@@ -3,6 +3,8 @@ sudo: false
 language: node_js
 node_js:
 - '8'
+git:
+  depth: false
 branches:
   only:
   - develop
@@ -24,6 +26,6 @@ install:
 script:
 - npm run lint
 - npm run test
-- sonar-scanner
 after_success:
   - codecov
+  - sonar-scanner
