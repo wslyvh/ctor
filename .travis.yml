@@ -24,6 +24,6 @@ install:
 script:
 - npm run lint
 - npm run test
-- sonar-scanner -Dproject.settings=../sonar-project.properties
+- sonar-scanner
 after_success:
   - codecov
