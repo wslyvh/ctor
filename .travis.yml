@@ -9,6 +9,9 @@ branches:
 cache:
   directories:
   - node_modules
+addons:
+  sonarcloud:
+    organization: "wslyvh-github"
 before_install:
 - npm update
 - cd client
@@ -20,3 +23,4 @@ script:
 - npm run test
 after_success:
   - codecov
+  - sonar-scanner
