@@ -62,7 +62,9 @@ class ContractView extends Component<IProps> {
 				<div>
 					<div>
 						<h2>{this.props.contract.Name}</h2>
-						<Paragraph copyable={{ text: this.props.contract.Address }}>{this.props.contract.Address}</Paragraph>
+            <Paragraph ellipsis copyable>
+              {this.props.contract.Address}
+            </Paragraph>
 					</div>
 
 					<div className="panel">

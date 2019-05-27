@@ -1,7 +1,9 @@
-import { Avatar } from "antd";
+import { Avatar, Typography } from "antd";
 import React, { Component } from "react";
 import { INetworkService } from "../../services/INetworkService";
 import { NetworkService } from "../../services/NetworkService";
+
+const { Paragraph } = Typography;
 
 class AccountInfo extends Component {
   public state = {
@@ -22,11 +24,11 @@ class AccountInfo extends Component {
     return (
       <>
         {this.state.accounts[0] && (
-          <div>
+          <Paragraph ellipsis>
             <small style={{ margin: "0 12px" }}>{this.state.accounts[0]}</small>
             &nbsp;
             <Avatar shape="square" icon="user" />
-          </div>
+          </Paragraph>
         )}
       </>
     );

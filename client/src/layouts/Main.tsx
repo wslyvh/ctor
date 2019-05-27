@@ -22,10 +22,10 @@ class Main extends Component<ILayoutProps> {
           <Layout>
             <Header style={{ background: "#fff", padding: 0 }}>
               <Row>
-                <Col span={12} style={{ textAlign: "left", padding: "0 24px" }}>
+                <Col span={16} style={{ textAlign: "left", padding: "0 24px" }}>
                   <SearchBar />
                 </Col>
-                <Col span={12} style={{ textAlign: "right", padding: "0 24px" }}>
+                <Col span={8} style={{ textAlign: "right", padding: "0 24px" }}>
                   <AccountInfo />
                 </Col>
               </Row>
