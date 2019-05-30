@@ -1,10 +1,12 @@
+import { Typography } from "antd";
 import { Contract, ethers } from "ethers";
 import React, { Component } from "react";
-import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { IContract } from "../../model/IContract";
 import Web3Utils from "../../utils/Web3Utils";
 import ContractEventListener from "./ContractEventListener";
 import ContractMember from "./ContractMember";
+
+const { Paragraph } = Typography;
 
 interface IProps {
 	contract: IContract;
@@ -16,7 +18,8 @@ class ContractView extends Component<IProps> {
 		contract: Contract,
 		constants: [],
 		functions: [],
-		events: []
+		events: [],
+		canSign: false
 	};
 	private etherContract!: ethers.Contract;
 
@@ -33,6 +36,7 @@ class ContractView extends Component<IProps> {
 	public async setContractMembers(nextProps: any) {
 		if (nextProps.contract && nextProps.contract.RawContract) {
 			const providerOrSigner = await Web3Utils.getProvider();
+			const canSign = await Web3Utils.canSign();
 			this.etherContract = new Contract(nextProps.contract.Address, nextProps.contract.ABI, providerOrSigner);
 			const constants = this.etherContract.interface.abi.filter((member: any) => member.constant === true);
 			const functions = this.etherContract.interface.abi.filter((member: any) => member.constant === false);
@@ -42,7 +46,8 @@ class ContractView extends Component<IProps> {
 				contract: this.etherContract,
 				constants,
 				functions,
-				events
+				events,
+				canSign
 			});
 		}
 	}
@@ -55,16 +60,11 @@ class ContractView extends Component<IProps> {
 		return (
 			<>
 				<div>
-					<div className="contract-summary">
+					<div>
 						<h2>{this.props.contract.Name}</h2>
-						<h3>
-							{this.props.contract.Address}
-							<small>
-								<a href={"https://etherscan.io/address/" + this.props.contract.Address} className="text-secondary" target="_blank">
-									<FaExternalLinkSquareAlt />
-								</a>
-							</small>
-						</h3>
+            <Paragraph ellipsis copyable>
+              {this.props.contract.Address}
+            </Paragraph>
 					</div>
 
 					<div className="panel">
@@ -110,7 +110,7 @@ class ContractView extends Component<IProps> {
 							<div>
 								<h4>Functions</h4>
 								{this.state.functions.map((member: any, index: any) => {
-									return <ContractMember key={index} member={member} name={member.name} type={member.type} contract={this.etherContract} classType="alert alert-success" badgeType="badge badge-success" />;
+									return <ContractMember key={index} member={member} name={member.name} type={member.type} contract={this.etherContract} classType="alert alert-success" badgeType="badge badge-success" canSign={this.state.canSign} />;
 								})}
 							</div>
 						)}

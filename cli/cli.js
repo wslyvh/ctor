@@ -5,7 +5,6 @@ var pkg = require("../package.json");
 
 // Defaults
 process.env.NODE_ENV = "production";
-process.env.CONTRACT_SERVICE = "local";
 
 prog
 	.version(`${pkg.name} v${pkg.version}`, "-v, --version")

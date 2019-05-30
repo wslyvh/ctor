@@ -1,5 +1,6 @@
 import { ethers, Signer } from "ethers";
 import { BaseProvider, JsonRpcProvider } from "ethers/providers";
+import { NetworkService } from "../services/NetworkService";
 
 class Web3Utils {
 	public static isAddress(address: string): boolean {
@@ -14,30 +15,25 @@ class Web3Utils {
 	}
 
 	public static async getProvider(): Promise<BaseProvider | Signer> {
-		if (process.env.REACT_APP_SERVICE === "local") {
-			const response = await fetch("/api/provider");
+		const service = new NetworkService();
+		const providerHost = await service.GetProvider();
 
-			if (response.status !== 200) {
-				console.log(response.statusText);
-				return ethers.getDefaultProvider();
+		if (providerHost) {
+			const provider = new JsonRpcProvider(providerHost);
+			const accounts = await service.GetAccounts();
+			if (accounts[0]) {
+				const signer = provider.getSigner(accounts[0]);
+				return signer;
 			}
-
-			const body = await response.json();
-			const provider = new JsonRpcProvider(body);
-			const signer = provider.getSigner(0);
-
-			return signer;
+			return provider;
 		}
 
 		return ethers.getDefaultProvider();
 	}
 
-	public static canSign(): boolean {
-		if (process.env.REACT_APP_SERVICE === "local") {
-			return true;
-		}
-
-		return false;
+	public static async canSign(): Promise<boolean> {
+		const providerOrSigner = await this.getProvider();
+		return Signer.isSigner(providerOrSigner);
 	}
 }
 

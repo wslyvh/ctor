@@ -1,7 +1,10 @@
+dist: trusty
 sudo: false
 language: node_js
 node_js:
 - '8'
+git:
+  depth: false
 branches:
   only:
   - develop
@@ -9,6 +12,11 @@ branches:
 cache:
   directories:
   - node_modules
+addons:
+  sonarcloud:
+    organization: "wslyvh-github"
+    token:
+      secure: ${SONAR_TOKEN}
 before_install:
 - npm update
 - cd client
@@ -20,3 +28,4 @@ script:
 - npm run test
 after_success:
   - codecov
+  - sonar-scanner

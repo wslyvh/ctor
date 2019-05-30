@@ -1,0 +1,20 @@
+@import "~antd/dist/antd.css";
+
+.logo {
+	text-align: center;
+}
+
+.logo img {
+	height: 24px;
+}
+
+.account-address {
+	margin: "0 12px";
+}
+
+@media (max-width: 765px) {
+	.account-address {
+		margin: "0 12px";
+		display: none;
+	}
+}
