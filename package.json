@@ -2,7 +2,7 @@
 	"private": false,
 	"name": "ctor-ui",
 	"description": "Ctor UI - to visualize and interact with a smart contract's resources",
-	"version": "0.1.7-beta",
+	"version": "0.1.8-beta",
 	"author": "wslyvh",
 	"license": "Apache-2.0",
 	"keywords": [
