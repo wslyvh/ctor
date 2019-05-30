@@ -1,6 +1,7 @@
 import { Breadcrumb, Col, Icon, Layout, Row } from "antd";
 import React, { Component } from "react";
 import { Route, RouteProps } from "react-router-dom";
+import AppContext from "../AppContext";
 import "../assets/styles/app.scss";
 import AccountInfo from "../components/layoutComponents/AccountInfo";
 import SearchBar from "../components/layoutComponents/SearchBar";
@@ -13,12 +14,12 @@ interface ILayoutProps extends RouteProps {
 }
 
 class Main extends Component<ILayoutProps> {
+  public static contextType = AppContext;
   public render() {
     return (
       <>
         <Layout style={{ minHeight: "100vh" }}>
-          <Sidebar {...this.props} />
-
+          {this.context.sidebar && <Sidebar {...this.props} />}
           <Layout>
             <Header style={{ background: "#fff", padding: 0 }}>
               <Row>
@@ -31,9 +32,12 @@ class Main extends Component<ILayoutProps> {
               </Row>
             </Header>
             <Content style={{ margin: "0 16px" }}>
-              <Breadcrumb style={{ margin: "16px 0" }}>
-                <Breadcrumb.Item>{this.props.title}</Breadcrumb.Item>
-              </Breadcrumb>
+              {this.context.sidebar && (
+                <Breadcrumb style={{ margin: "16px 0" }}>
+                  <Breadcrumb.Item>{this.props.title}</Breadcrumb.Item>
+                </Breadcrumb>
+              )}
+              {!this.context.sidebar && <br />}
               <div style={{ padding: 24, background: "#fff" }}>
                 <Route {...this.props} />
               </div>
