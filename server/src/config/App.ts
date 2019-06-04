@@ -14,7 +14,7 @@ const AppConfig = {
 	ETHERSCAN_APIKEY: process.env.ETHERSCAN_APIKEY,
 	NETWORK_HOST: process.env.NETWORK_HOST || "http://localhost:7545",
 	NETWORK_ID: process.env.NETWORK_ID || "5777",
-	CONTRACT_BUILD_DIR: process.env.CONTRACT_BUILD_DIR ? process.env.CONTRACT_BUILD_DIR : "./build/contracts",
+	CONTRACT_BUILD_DIR: process.env.CONTRACT_BUILD_DIR ? process.env.CONTRACT_BUILD_DIR : path.join('.', 'build', 'contracts'),
 	UI_DIR: process.env.ui_directory ? path.join(projectRoot, process.env.ui_directory) : path.join(projectRoot, "client/build")
 };
 
