@@ -1,17 +1,17 @@
 {
-	"private": true,
-	"name": "@ctor/truffle",
-	"description": "Ctor UI Truffle example project",
-	"version": "0.1.0",
-	"author": "wslyvh",
-	"license": "Apache-2.0",
-	"scripts": {
-		"build": "truffle compile",
-		"test": "truffle test"
-	},
-	"devDependencies": {
-		"dotenv": "^6.2.0",
-		"truffle": "^5.0.0",
-		"truffle-hdwallet-provider": "^1.0.1"
-	}
+  "private": true,
+  "name": "@ctor/truffle",
+  "description": "Ctor UI Truffle example project",
+  "version": "0.1.0",
+  "author": "wslyvh",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "truffle compile",
+    "test": "truffle test"
+  },
+  "devDependencies": {
+    "dotenv": "^6.2.0",
+    "truffle": "^5.0.30",
+    "truffle-hdwallet-provider": "^1.0.15"
+  }
 }
